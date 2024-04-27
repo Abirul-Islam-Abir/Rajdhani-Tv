@@ -91,8 +91,7 @@ class _VideoPlayState extends State<VideoPlay> {
 }
 
 void pushFullScreenVideo(context, controller) {
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.landscapeLeft,
@@ -156,7 +155,10 @@ void pushFullScreenVideo(context, controller) {
                                   onPressed: () {
                                     SystemChrome.setEnabledSystemUIMode(
                                         SystemUiMode.manual,
-                                        overlays: []);
+                                        overlays: [
+                                          SystemUiOverlay.top,
+                                          SystemUiOverlay.bottom
+                                        ]);
                                     SystemChrome.setPreferredOrientations(
                                       [
                                         DeviceOrientation.portraitUp,
