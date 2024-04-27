@@ -13,19 +13,21 @@ class SuggestedVideos extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-              height: 180,
-              width: width / 1.2,
-              child: Image.asset(
-                'assets/images/news.jpg',
-                fit: BoxFit.cover,
-              )),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+                height: 200,
+                width: width / 1.2,
+                child: Image.asset(
+                  'assets/images/news.jpg',
+                  fit: BoxFit.cover,
+                )),
+          ),
         ),
         Positioned(
           top: 0,
-          left: 10,
+          left: 30,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +84,22 @@ class SuggestedVideos extends StatelessWidget {
               ),
             ],
           ),
-        ),
+        ), Positioned(
+          bottom: 0,
+          right: 30,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+              },
+              icon: Icon(
+                Icons.fullscreen_rounded,
+                size: 35,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
       ],
     );
   }

@@ -13,6 +13,7 @@ import 'app/modules/home_screen/component/rajdhani_logo.dart';
 import 'app/modules/home_screen/component/social_btn.dart';
 import 'app/modules/home_screen/component/suggested_video.dart';
 import 'app/modules/home_screen/component/videos_btn.dart';
+import 'app/modules/home_screen/view/home_screen.dart';
 import 'app/modules/widgets/responsive.dart';
 import 'app/modules/widgets/secondary_btn.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,53 +55,5 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
         home: HomeScreen(),
       );
     });
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-
-  ScrollController controller = ScrollController();
-//
-  @override
-  Widget build(BuildContext context) {
-    print('bui.d');
-    final width = MediaQuery.of(context).size.width;
-    return   Scaffold(
-      drawer: Drawer(),
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Image.asset(AppImage.appLogo),
-          ),
-        ],
-      ),
-      body: ListView(
-        controller: controller,
-        children: [
-          VideoPlay(),
-          SizedBox(height: 10),
-          ArchiveAndPremiumButton(archiveTap: () {}, premiumTap: () {}),
-          SizedBox(height: 10),
-          videosButton(text: 'Videos', tap: () {}),
-          SizedBox(height: 10),
-          SuggestedVideos(),
-          SizedBox(height: 10),
-          SecondaryButton(text: 'All Videos', onTap: () {}),
-          RajdhaniLogo(img: AppImage.appLogo),
-          PrimaryText(text: 'About Us', onTap: () {}),
-          PrimaryText(text: 'Privacy Policy', onTap: () {}),
-          PrimaryText(text: 'Terms', onTap: () {}),
-          SizedBox(height: 10),
-          SocialButton(fbTap: () {}, instaTap: () {}, ytTap: () {}),
-          DownloadButton(onTap: () {}, text: 'Download'),
-          MultiPlatformButton(
-              apple: () {}, google: () {}, windows: () {}),
-          SizedBox(height: 10),
-          Certification()
-        ],
-      ))
-    ;
   }
 }
