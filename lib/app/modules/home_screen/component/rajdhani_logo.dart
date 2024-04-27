@@ -17,7 +17,6 @@ class RajdhaniLogo extends StatelessWidget {
             width: 100,
             child: Image.asset(
               img,
-              fit: BoxFit.cover,
             )));
   }
 }

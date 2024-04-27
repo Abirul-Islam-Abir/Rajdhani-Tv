@@ -14,9 +14,11 @@ class DownloadButton extends StatelessWidget {
       padding: const EdgeInsets.only(top: 15),
       child: InkWell(
         onTap: onTap,
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.labelLarge,
+        child: Center(
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
         ),
       ),
     );

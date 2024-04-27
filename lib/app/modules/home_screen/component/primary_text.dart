@@ -12,6 +12,6 @@ class PrimaryText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(onTap: onTap, child: Text(text));
+    return InkWell(onTap: onTap, child: Center(child: Text(text)));
   }
 }
