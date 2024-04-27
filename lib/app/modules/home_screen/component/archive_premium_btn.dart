@@ -5,24 +5,23 @@ import '../../widgets/primary_btn.dart';
 class ArchiveAndPremiumButton extends StatelessWidget {
   const ArchiveAndPremiumButton({
     super.key,
-    required this.archive,
-    required this.premium, required this.archiveTxt, required this.premiumTxt,
+    required this.archiveTap,
+    required this.premiumTap,
   });
 
-  final Function() archive, premium;
-  final String  archiveTxt,premiumTxt;
+  final Function() archiveTap, premiumTap;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         PrimaryButton(
-          onTap: archive,
-          text: archiveTxt,
+          onTap: archiveTap,
+          text: 'Archives',
         ),
         PrimaryButton(
-          onTap: premium,
-          text: premiumTxt,
+          onTap: premiumTap,
+          text: 'Premium',
         ),
       ],
     );
