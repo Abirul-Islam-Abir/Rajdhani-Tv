@@ -39,7 +39,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   social_login_buttons: ^1.0.7
   sizer: ^2.0.15
-  youtube_player_flutter: ^9.0.1
+  video_player: ^2.8.6
 
 dev_dependencies:
   flutter_test:

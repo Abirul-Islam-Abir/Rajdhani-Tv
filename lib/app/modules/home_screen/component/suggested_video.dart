@@ -16,8 +16,8 @@ class SuggestedVideos extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: SizedBox(
-              height: 160,
-              width: width / 1.0,
+              height: 180,
+              width: width / 1.2,
               child: Image.asset(
                 'assets/images/news.jpg',
                 fit: BoxFit.cover,
