@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/data/constant.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 import '../../../data/app_image.dart';
+import '../../../data/method.dart';
+import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
 import '../../widgets/secondary_btn.dart';
 import '../../widgets/video_player.dart';
 import '../component/archive_premium_btn.dart';
@@ -14,45 +20,49 @@ import '../component/social_btn.dart';
 import '../component/suggested_video.dart';
 import '../component/videos_btn.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
 
-class _HomeScreenState extends State<HomeScreen> {
+  final bottomController = Get.put(BottomNavController());
+
+  void archive() => bottomController.changeIndex(1);
+
+  void premium() => bottomController.changeIndex(2);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GetBuilder<HomeScreenController>(builder: (controller) {
-        return ListView(
-          controller: controller.scrollController,
-          children: [
-            SizedBox(height: 250, child: VideoPlay()),
-            const SizedBox(height: 10),
-            ArchiveAndPremiumButton(archiveTap: () {}, premiumTap: () {}),
-            const SizedBox(height: 10),
-            videosButton(text: 'Videos', tap: () {}),
-            const SizedBox(height: 10),
-            const SuggestedVideos(),
-            const SizedBox(height: 10),
-            SecondaryButton(text: 'All Videos', onTap: () {}),
-            const SizedBox(height: 10),
-            RajdhaniLogo(img: AppImage.appLogo),
-            const SizedBox(height: 10),
-            PrimaryText(text: 'About Us', onTap: () {}),
-            PrimaryText(text: 'Privacy Policy', onTap: () {}),
-            PrimaryText(text: 'Terms', onTap: () {}),
-            const SizedBox(height: 10),
-            SocialButton(fbTap: () {}, instaTap: () {}, ytTap: () {}),
-            DownloadButton(onTap: () {}, text: 'Download'),
-            const SizedBox(height: 10),
-            MultiPlatformButton(apple: () {}, google: () {}, windows: () {}),
-            const SizedBox(height: 10),
-            const Certification()
-          ],
-        );
-      }),
+    return PopScope(
+      child: Scaffold(
+        body: GetBuilder<HomeScreenController>(builder: (controller) {
+          return ListView(
+            controller: controller.scrollController,
+            children: [
+              SizedBox(height: 250, child: VideoPlay()),
+              const SizedBox(height: 10),
+              ArchiveAndPremiumButton(archiveTap: archive, premiumTap: premium),
+              const SizedBox(height: 10),
+              videosButton(text: 'Videos', tap: () {}),
+              const SizedBox(height: 10),
+              const SuggestedVideos(),
+              const SizedBox(height: 10),
+              SecondaryButton(text: 'All Videos', onTap: () {}),
+              const SizedBox(height: 10),
+              RajdhaniLogo(img: AppImage.appLogo),
+              const SizedBox(height: 15),
+              PrimaryText(text: 'About Us', onTap: () {}),
+              PrimaryText(text: 'Privacy Policy', onTap: () {}),
+              PrimaryText(text: 'Terms', onTap: () {}),
+              const SizedBox(height: 15),
+              SocialButton(fbTap: () {}, instaTap: () {}, ytTap: () {}),
+              //  DownloadButton(onTap: () {}, text: 'Download'),
+              const SizedBox(height: 25),
+              //MultiPlatformButton(apple: () {}, google: () {}, windows: () {}),
+
+              const Certification()
+            ],
+          );
+        }),
+      ),
     );
   }
 }
