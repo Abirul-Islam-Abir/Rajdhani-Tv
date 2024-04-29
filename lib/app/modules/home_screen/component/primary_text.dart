@@ -15,6 +15,6 @@ class PrimaryText extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: Center(
-            child: Text(text, style: TextStyle(fontWeight: FontWeight.bold))));
+            child: Text(text, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20))));
   }
 }
