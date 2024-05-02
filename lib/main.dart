@@ -30,9 +30,6 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
           inputDecorationTheme: InputDecorationTheme(
             filled: true,
             fillColor: Colors.white,
-            border: OutlineInputBorder(
-                borderSide: BorderSide(),
-                borderRadius: BorderRadius.circular(10)),
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
