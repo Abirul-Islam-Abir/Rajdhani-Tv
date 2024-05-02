@@ -10,6 +10,7 @@ import '../../../data/method.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
 import '../../widgets/secondary_btn.dart';
 import '../../widgets/video_player.dart';
+import '../component/AllDetails.dart';
 import '../component/archive_premium_btn.dart';
 import '../component/cerfication.dart';
 import '../component/download_btn.dart';
@@ -47,18 +48,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 10),
               SecondaryButton(text: 'All Videos', onTap: () {}),
               const SizedBox(height: 10),
-              RajdhaniLogo(img: AppImage.appLogo),
-              const SizedBox(height: 15),
-              PrimaryText(text: 'About Us', onTap: () {}),
-              PrimaryText(text: 'Privacy Policy', onTap: () {}),
-              PrimaryText(text: 'Terms', onTap: () {}),
-              const SizedBox(height: 15),
-              SocialButton(fbTap: () {}, instaTap: () {}, ytTap: () {}),
-              //  DownloadButton(onTap: () {}, text: 'Download'),
-              const SizedBox(height: 25),
-              //MultiPlatformButton(apple: () {}, google: () {}, windows: () {}),
-
-              const Certification()
+             const  AllDetails()
             ],
           );
         }),
@@ -66,3 +56,4 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
