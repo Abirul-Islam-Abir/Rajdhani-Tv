@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/modules/contact_screen/view/contact_screen.dart';
 import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
+import 'package:untitled/app/routes/app_routes.dart';
 
 import '../../../../main.dart';
 import '../../../data/constant.dart';
@@ -75,8 +76,7 @@ class _PremiumScreenState extends State<PremiumScreen> {
                         style: TextStyle(color: Colors.white)),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PackagesScreen()));
+                        Get.toNamed(RouteName.packageScreen);
                       },
                       child: const Text(
                         'Subscribe now!',

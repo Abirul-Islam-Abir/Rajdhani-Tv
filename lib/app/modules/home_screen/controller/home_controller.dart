@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
-class HomeScreenController extends GetxController{
+class HomeScreenController extends GetxController {
   ScrollController scrollController = ScrollController();
   bool showAppbar = true;
   bool isScrollingDown = false;
   double bottomBarHeight = 75;
   int select = 0;
-void tvChange(index){
-
+  void tvChange(index) {
     select = index;
-  update();
+    update();
+  }
 
-}
   void myScroll() async {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
@@ -35,6 +34,7 @@ void tvChange(index){
       }
     });
   }
+
   @override
   void onInit() {
     myScroll();

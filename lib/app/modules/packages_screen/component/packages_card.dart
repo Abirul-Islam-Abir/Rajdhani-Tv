@@ -19,27 +19,22 @@ class SubscriptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    final width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.all(28.0),
       child: Container(
         height: 500,
         width: width,
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.red.withOpacity(0.5),
-            blurRadius: 10,
-            spreadRadius: 2,
-            offset: Offset(0, 3),
-          ),
-        ],
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.red.withOpacity(0.5),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 3),
+            ),
+          ],
           color: Colors.red,
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
@@ -81,7 +76,7 @@ class SubscriptionCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 40.0),
                   child: Text(
-                    price.toString(),
+                    '$price৳',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

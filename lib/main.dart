@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
 import 'app/data/constant.dart';
-import 'app/data/state_holder_binding.dart';
+import 'app/routes/app_pages.dart';
+import 'app/routes/app_routes.dart';
+import 'app/state_holder_binder/state_holder_binding.dart';
 import 'app/modules/bottom_nav_bar/view/bottom_nav.dart';
 import 'app/modules/home_screen/view/home_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -28,8 +31,7 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
         valueListenable: darkNotifier,
-        builder: (BuildContext context, bool isDark, Widget? child) {
-          return GetMaterialApp(
+        builder: (BuildContext context, bool isDark, Widget? child) => GetMaterialApp(
             title: 'Rajdhani Tv',
             debugShowCheckedModeBanner: false,
             useInheritedMediaQuery: true,
@@ -39,7 +41,7 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
             darkTheme: ThemeData.dark(),
             theme: ThemeData(
               primarySwatch: Colors.red,
-              brightness: Brightness.light, 
+              brightness: Brightness.light,
               elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: kPrimaryColor,
@@ -47,10 +49,11 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
                         borderRadius: BorderRadius.circular(5))),
               ),
             ),
-            getPages: [GetPage(name: '/', page: () => BottomNav())],
-            initialRoute: '/',
+            getPages: getPages(),
+            initialRoute:RouteName.initial,
             initialBinding: StateHolderBinding(),
-          );
-        });
+          ));
   }
+
+
 }
