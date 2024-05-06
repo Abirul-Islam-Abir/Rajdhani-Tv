@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -17,7 +16,9 @@ class CustomTextField extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: TextFormField(
         decoration: InputDecoration(
-            hintText: hint, contentPadding: EdgeInsets.all(pad)),
+            filled: true,
+            hintText: hint,
+            contentPadding: EdgeInsets.all(pad)),
       ),
     );
   }

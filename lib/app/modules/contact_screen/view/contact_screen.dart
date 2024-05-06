@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/app/modules/widgets/primary_btn.dart';
 
+import '../../../../main.dart';
 import '../../../data/app_image.dart';
 import '../../../data/constant.dart';
 import '../../home_screen/component/rajdhani_logo.dart';
+import '../../widgets/custom_text_field.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = darkNotifier.value;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -29,15 +32,7 @@ class ContactScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 1.5,
             width: double.infinity,
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5), // Shadow color
-                  spreadRadius: 5, // Spread radius
-                  blurRadius: 7, // Blur radius
-                  offset: Offset(0, 3), // Offset in x and y direction
-                ),
-              ],
-              color: kPrimaryColor.withOpacity(0.90),
+              color: isDark ? null : kPrimaryColor.withOpacity(0.90),
               borderRadius: BorderRadius.circular(20),
             ),
             child: SingleChildScrollView(
@@ -61,13 +56,15 @@ class ContactScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color:isDark?kPrimaryColor: Colors.white,
                           borderRadius: BorderRadius.circular(10)),
                       height: 60,
                       width: double.infinity,
                       child: Center(
                         child: Text('Send',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                 )),
                       ),
                     ),
                   )
@@ -76,28 +73,6 @@ class ContactScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
-    super.key,
-    required this.hint,
-    this.pad = 15,
-  });
-
-  final String hint;
-  final double pad;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-            hintText: hint, contentPadding: EdgeInsets.all(pad)),
       ),
     );
   }

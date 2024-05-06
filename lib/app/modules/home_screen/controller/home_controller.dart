@@ -7,8 +7,13 @@ class HomeScreenController extends GetxController{
   bool showAppbar = true;
   bool isScrollingDown = false;
   double bottomBarHeight = 75;
+  int select = 0;
+void tvChange(index){
 
+    select = index;
+  update();
 
+}
   void myScroll() async {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==

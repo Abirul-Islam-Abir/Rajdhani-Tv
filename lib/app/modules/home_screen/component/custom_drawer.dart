@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:untitled/app/modules/home_screen/component/primary_text.dart';
 import 'package:untitled/app/modules/home_screen/component/rajdhani_logo.dart';
 
+import '../../../../main.dart';
 import '../../../data/app_image.dart';
 import '../../../data/app_text.dart';
 import '../../contact_screen/view/contact_screen.dart';
@@ -10,11 +11,16 @@ import '../../schedule_screen/view/schedule_screen.dart';
 import '../../widgets/common_section_screen.dart';
 import '../../widgets/primary_btn.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
     super.key,
   });
 
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
   Future<void> navigate(num) async {
     switch (num) {
       case 0:
@@ -43,6 +49,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = darkNotifier.value;
     return Drawer(
       child: SafeArea(
         child: Column(
@@ -52,8 +59,15 @@ class CustomDrawer extends StatelessWidget {
             RajdhaniLogo(img: AppImage.appLogo),
             const SizedBox(height: 10),
             SwitchListTile(
-                title: Text('Dark Mode'), value: false, onChanged: (value) {}),
-            Divider(height: 25, color: Colors.grey), const SizedBox(height: 50),
+                title: Text('Dark Mode'),
+                value: isDark,
+                onChanged: (value) {
+                  isDark = !isDark;
+                  darkNotifier.value = isDark;
+                  setState(() {});
+                }),
+            Divider(height: 25, color: Colors.grey),
+            const SizedBox(height: 50),
             PrimaryText(
                 onTap: () {
                   navigate(0);
@@ -90,8 +104,9 @@ class CustomDrawer extends StatelessWidget {
                 },
                 text: 'FAQs'),
             const Spacer(),
-            // If logged in user after change to logout;
-            PrimaryButton(text: 'Login', onTap: () {}),
+            PrimaryButton(
+                text:'Log Out',
+                onTap: () {}),
             const SizedBox(height: 50),
           ],
         ),
