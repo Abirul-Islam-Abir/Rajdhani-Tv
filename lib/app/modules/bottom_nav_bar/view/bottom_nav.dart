@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/data/constant.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
@@ -62,23 +61,6 @@ class BottomNav extends StatelessWidget {
     );
   }
 
-  List<CrystalNavigationBarItem> buildItems() {
-    return [
-      CrystalNavigationBarItem(
-        icon: Icons.home_outlined,
-        unselectedIcon: Icons.home_outlined,
-        selectedColor: Colors.white,
-      ),
-      CrystalNavigationBarItem(
-          icon: Icons.file_copy_rounded,
-          unselectedIcon: Icons.file_copy_rounded,
-          selectedColor: Colors.white),
-      CrystalNavigationBarItem(
-          icon: Icons.video_settings,
-          unselectedIcon: Icons.video_settings,
-          selectedColor: Colors.white),
-    ];
-  }
 
   void _backButtonPressed(v) {
     _scaffoldKey.currentState?.closeDrawer();

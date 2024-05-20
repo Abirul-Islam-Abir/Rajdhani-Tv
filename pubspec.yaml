@@ -14,15 +14,13 @@ dependencies:
   cupertino_icons: ^1.0.6
   get: ^4.6.6
   flutter_svg: ^2.0.10+1
-  social_login_buttons: ^1.0.7
   sizer: ^2.0.15
   video_player: ^2.8.6
-  carousel_slider: ^4.2.1
-  crystal_navigation_bar: ^1.0.0
-  flutter_bounceable: ^1.1.0
   device_preview: ^1.1.0
   water_drop_nav_bar: ^2.2.1
   dio: ^5.4.3+1
+  wakelock: ^0.6.1
+
 
 dev_dependencies:
   flutter_test:

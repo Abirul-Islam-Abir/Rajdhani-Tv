@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
+import '../../../api_services/all_videos.dart';
+
 class HomeScreenController extends GetxController {
   ScrollController scrollController = ScrollController();
   bool showAppbar = true;
@@ -37,6 +39,7 @@ class HomeScreenController extends GetxController {
 
   @override
   void onInit() {
+    allVideosRequest();
     myScroll();
     super.onInit();
   }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/data/constant.dart';
@@ -29,15 +30,19 @@ class HomeScreen extends StatelessWidget {
   void archive() => bottomController.changeIndex(1);
   void premium() => bottomController.changeIndex(2);
 
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: GetBuilder<HomeScreenController>(
           builder: (controller) => ListView(
                 controller: controller.scrollController,
                 children: [
                   controller.select == 0
-                      ? SizedBox(height: 250, child: VideoPlay())
+                      ? Container(
+                          height: 250, color: Colors.black, child: VideoPlay())
                       : controller.select == 1
                           ? SizedBox(height: 250, child: Text('Sports'))
                           : SizedBox(height: 250, child: Text('Islamic')),

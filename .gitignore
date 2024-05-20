@@ -7,7 +7,6 @@
 .DS_Store
 .atom/
 .buildlog/
-.fvm/flutter_sdk
 .history
 .svn/
 migrate_working_dir/
@@ -43,3 +42,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# FVM Version Cache
+.fvm/

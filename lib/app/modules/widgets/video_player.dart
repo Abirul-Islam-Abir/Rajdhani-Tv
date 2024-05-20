@@ -16,7 +16,7 @@ class _VideoPlayState extends State<VideoPlay> {
     super.initState();
     _controller = VideoPlayerController.networkUrl(
       Uri.parse(
-          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
+          'https://cdn.ncare.live/live-orgin/rajdhanitv.stream/playlist.m3u8'),
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
 
@@ -36,6 +36,7 @@ class _VideoPlayState extends State<VideoPlay> {
     super.dispose();
   }
 
+  bool isFullScreen = false;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -74,6 +75,9 @@ class _VideoPlayState extends State<VideoPlay> {
               alignment: Alignment.bottomRight,
               child: IconButton(
                 onPressed: () {
+                  setState(() {
+                    isFullScreen = true;
+                  });
                   pushFullScreenVideo(context, _controller);
                 },
                 icon: Icon(
@@ -91,34 +95,35 @@ class _VideoPlayState extends State<VideoPlay> {
 }
 
 void pushFullScreenVideo(context, controller) {
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ],
   );
-  Navigator.of(context).push(
-    PageRouteBuilder(
-      opaque: false,
-      settings: RouteSettings(),
-      pageBuilder: (BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation) {
-        return Scaffold(
+  Get.to(() => WillPopScope(
+        onWillPop: () async {
+          setPortraitMode();
+         // Get.back();
+          return true;
+        },
+        child: Scaffold(
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: false,
           body: StatefulBuilder(builder: (context, setState) {
             return OrientationBuilder(
               builder: (context, orientation) {
-                var isPortrait = orientation == Orientation.portrait;
+                //  var isPortrait = orientation == Orientation.portrait;
                 return Center(
                   child: Stack(
-                    fit: isPortrait ? StackFit.loose : StackFit.expand,
+                    fit: StackFit.expand,
                     children: [
                       AspectRatio(
                         aspectRatio: controller.value.aspectRatio,
                         child: Stack(
-                          fit: isPortrait ? StackFit.loose : StackFit.expand,
+                          fit: StackFit.expand,
                           children: <Widget>[
                             VideoPlayer(controller),
                             AnimatedSwitcher(
@@ -153,18 +158,7 @@ void pushFullScreenVideo(context, controller) {
                                 alignment: Alignment.bottomRight,
                                 child: IconButton(
                                   onPressed: () {
-                                    SystemChrome.setEnabledSystemUIMode(
-                                        SystemUiMode.manual,
-                                        overlays: [
-                                          SystemUiOverlay.top,
-                                          SystemUiOverlay.bottom
-                                        ]);
-                                    SystemChrome.setPreferredOrientations(
-                                      [
-                                        DeviceOrientation.portraitUp,
-                                        DeviceOrientation.portraitDown,
-                                      ],
-                                    );
+                                    setPortraitMode();
                                     Navigator.of(context).pop();
                                   },
                                   icon: Icon(
@@ -184,8 +178,17 @@ void pushFullScreenVideo(context, controller) {
               },
             );
           }),
-        );
-      },
-    ),
+        ),
+      ));
+}
+
+void setPortraitMode() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [ SystemUiOverlay.top,SystemUiOverlay.bottom]);
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
   );
 }
