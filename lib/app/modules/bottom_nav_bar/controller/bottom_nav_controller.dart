@@ -14,6 +14,7 @@ class BottomNavController extends GetxController {
   @override
   void onInit() {
     Wakelock.enable();
+    setPortraitMode();
     super.onInit();
   }
   @override

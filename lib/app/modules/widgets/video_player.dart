@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/api_services/api_services.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlay extends StatefulWidget {
+  final String url;
+
+  const VideoPlay({super.key, required this.url});
+
   @override
   State<VideoPlay> createState() => _VideoPlayState();
 }
@@ -16,7 +21,7 @@ class _VideoPlayState extends State<VideoPlay> {
     super.initState();
     _controller = VideoPlayerController.networkUrl(
       Uri.parse(
-          'https://cdn.ncare.live/live-orgin/rajdhanitv.stream/playlist.m3u8'),
+          ApiServices.liveTv),
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
 
@@ -37,6 +42,7 @@ class _VideoPlayState extends State<VideoPlay> {
   }
 
   bool isFullScreen = false;
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -75,15 +81,20 @@ class _VideoPlayState extends State<VideoPlay> {
               alignment: Alignment.bottomRight,
               child: IconButton(
                 onPressed: () {
-                  setState(() {
-                    isFullScreen = true;
-                  });
-                  pushFullScreenVideo(context, _controller);
+                  Get.to(() => FullVideoPlay(controller: _controller));
+                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                      overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+                  SystemChrome.setPreferredOrientations(
+                    [
+                      DeviceOrientation.landscapeLeft,
+                      DeviceOrientation.landscapeRight,
+                    ],
+                  );
                 },
                 icon: Icon(
                   Icons.fullscreen_rounded,
                   size: 35,
-                  color: Colors.white,
+                  color: Colors.red,
                 ),
               ),
             ),
@@ -94,97 +105,96 @@ class _VideoPlayState extends State<VideoPlay> {
   }
 }
 
-void pushFullScreenVideo(context, controller) {
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-  SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ],
-  );
-  Get.to(() => WillPopScope(
-        onWillPop: () async {
-          setPortraitMode();
-         // Get.back();
-          return true;
-        },
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          resizeToAvoidBottomInset: false,
-          body: StatefulBuilder(builder: (context, setState) {
-            return OrientationBuilder(
-              builder: (context, orientation) {
-                //  var isPortrait = orientation == Orientation.portrait;
-                return Center(
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      AspectRatio(
-                        aspectRatio: controller.value.aspectRatio,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            VideoPlayer(controller),
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 50),
-                              reverseDuration:
-                                  const Duration(milliseconds: 200),
-                              child: controller.value.isPlaying
-                                  ? const SizedBox.shrink()
-                                  : const ColoredBox(
-                                      color: Colors.black26,
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.play_arrow,
-                                          color: Colors.white,
-                                          size: 100.0,
-                                          semanticLabel: 'Play',
-                                        ),
+class FullVideoPlay extends StatelessWidget {
+  const FullVideoPlay({
+    super.key,
+    required this.controller,
+  });
+
+  final VideoPlayerController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        setPortraitMode();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
+        body: StatefulBuilder(builder: (context, setState) {
+          return OrientationBuilder(
+            builder: (context, orientation) {
+              //  var isPortrait = orientation == Orientation.portrait;
+              return Center(
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    AspectRatio(
+                      aspectRatio: controller.value.aspectRatio,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: <Widget>[
+                          VideoPlayer(controller),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 50),
+                            reverseDuration: const Duration(milliseconds: 200),
+                            child: controller.value.isPlaying
+                                ? const SizedBox.shrink()
+                                : const ColoredBox(
+                                    color: Colors.black26,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.play_arrow,
+                                        color: Colors.white,
+                                        size: 100.0,
+                                        semanticLabel: 'Play',
                                       ),
                                     ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                controller.value.isPlaying
-                                    ? controller.pause()
-                                    : controller.play();
-                                setState(() {});
-                              },
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: IconButton(
-                                  onPressed: () {
-                                    setPortraitMode();
-                                    Navigator.of(context).pop();
-                                  },
-                                  icon: Icon(
-                                    Icons.fullscreen_rounded,
-                                    size: 35,
-                                    color: Colors.white,
                                   ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.value.isPlaying
+                                  ? controller.pause()
+                                  : controller.play();
+                              setState(() {});
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: IconButton(
+                                onPressed: () {
+                                  setPortraitMode();
+                                  Navigator.of(context).pop();
+                                },
+                                icon: Icon(
+                                  Icons.fullscreen_rounded,
+                                  size: 35,  color: Colors.red,
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              },
-            );
-          }),
-        ),
-      ));
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          );
+        }),
+      ),
+    );
+  }
 }
 
 void setPortraitMode() {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [ SystemUiOverlay.top,SystemUiOverlay.bottom]);
+      overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,

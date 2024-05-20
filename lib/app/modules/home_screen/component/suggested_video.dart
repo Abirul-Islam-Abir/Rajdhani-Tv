@@ -5,24 +5,42 @@ import '../../../data/constant.dart';
 
 class SuggestedVideos extends StatelessWidget {
   const SuggestedVideos({
-    super.key,
+    super.key, required this.videoUrl, required this.title,   this.onTap,
   });
+  final String videoUrl,title;
+  final Function()? onTap;
+  String getThumbnailUrl( ) {
+    // Extract the video ID from the URL
+    final uri = Uri.parse(videoUrl);
+    String? videoId;
 
+    if (uri.host.contains('youtube.com')) {
+      videoId = uri.queryParameters['v'];
+    } else if (uri.host.contains('youtu.be')) {
+      videoId = uri.pathSegments.first;
+    }
+
+    if (videoId == null) {
+      throw Exception('Invalid YouTube URL');
+    }
+
+    // Construct the thumbnail URL
+    return 'https://img.youtube.com/vi/$videoId/hqdefault.jpg';
+  }
   @override
   Widget build(BuildContext context) {
+  var url =  getThumbnailUrl( );
     final width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         Center(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(0.0),
             child: SizedBox(
                 height: 200,
-                width: width / 1.2,
-                child: Image.asset(
-                  'assets/images/news.jpg',
-                  fit: BoxFit.cover,
-                )),
+                width: width ,
+                child:  Image.network(url, fit: BoxFit.cover
+                    ,errorBuilder: (context, error, stackTrace) => Icon(Icons.error)),),
           ),
         ),
         Positioned(
@@ -32,19 +50,22 @@ class SuggestedVideos extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: Image.asset('assets/icon/Icon.png')),
-              Text('Rahjdhani tv news app',
+              InkWell(
+                onTap:onTap,
+                child: SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Image.asset('assets/icon/Icon.png')),
+              ),
+              Text(title,
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.normal)),
-              IconButton(
+             /* IconButton(
                   onPressed: () {},
                   icon: Icon(
                     Icons.more_vert,
                     color: Colors.white,
-                  ))
+                  ))*/
             ],
           ),
         ),
@@ -60,13 +81,14 @@ class SuggestedVideos extends StatelessWidget {
               Container(
                 height: 40,
                 width: 40,
+                /*
                 decoration: BoxDecoration(
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.circular(20)),
                 child: Icon(
                   Icons.arrow_left,
                   color: Colors.white,
-                ),
+                ),*/
               ),
               SvgPicture.asset(
                 'assets/svg/youtube.svg',
@@ -74,17 +96,18 @@ class SuggestedVideos extends StatelessWidget {
               Container(
                 height: 40,
                 width: 40,
-                decoration: BoxDecoration(
+              /*  decoration: BoxDecoration(
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.circular(20)),
                 child: Icon(
                   Icons.arrow_right,
                   color: Colors.white,
-                ),
+                ),*/
               ),
             ],
           ),
-        ), Positioned(
+        ),
+        /*Positioned(
           bottom: 0,
           right: 30,
           child: Padding(
@@ -99,7 +122,7 @@ class SuggestedVideos extends StatelessWidget {
               ),
             ),
           ),
-        )
+        )*/
       ],
     );
   }

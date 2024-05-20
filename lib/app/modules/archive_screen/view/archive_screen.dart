@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/app/modules/home_screen/component/all_details.dart';
 import 'package:untitled/app/modules/widgets/primary_btn.dart';
 
+import '../../../api_services/api_services.dart';
 import '../../../data/constant.dart';
 import '../../home_screen/component/suggested_video.dart';
 import '../../packages_screen/view/packages_screen.dart';
@@ -18,7 +19,7 @@ class ArchiveScreen extends StatelessWidget {
             Headline(
               text: 'NEWS',
             ),
-            SuggestedVideos(),
+            SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
             PrimaryButton(
               text: 'All Videos',
               onTap: () {},
@@ -26,7 +27,7 @@ class ArchiveScreen extends StatelessWidget {
             Headline(
               text: 'NATOK',
             ),
-            SuggestedVideos(),
+            SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
             PrimaryButton(
               text: 'All Videos',
               onTap: () {},
@@ -34,7 +35,7 @@ class ArchiveScreen extends StatelessWidget {
             Headline(
               text: 'TALK SHOW',
             ),
-            SuggestedVideos(),
+            SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
             PrimaryButton(
               text: 'All Videos',
               onTap: () {},
@@ -42,7 +43,7 @@ class ArchiveScreen extends StatelessWidget {
             Headline(
               text: 'ENTERTAINMENT',
             ),
-            SuggestedVideos(),
+          SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
             PrimaryButton(
               text: 'All Videos',
               onTap: () {},
