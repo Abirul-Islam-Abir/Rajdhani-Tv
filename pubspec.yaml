@@ -5,7 +5,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.1 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -20,8 +20,8 @@ dependencies:
   water_drop_nav_bar: ^2.2.1
   dio: ^5.4.3+1
   wakelock: ^0.6.1
-  youtube_video_player: ^0.1.1
   carousel_slider: ^4.2.1
+  youtube_player_flutter: ^8.0.0
 
 dev_dependencies:
   flutter_test:

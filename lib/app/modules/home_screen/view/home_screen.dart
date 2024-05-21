@@ -7,8 +7,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/api_services/api_services.dart';
 import 'package:untitled/app/data/constant.dart';
+import 'package:untitled/app/modules/all_videos_screen/view/all_videos_screen.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
-import 'package:youtube_video_player/potrait_player.dart';
+import 'package:untitled/app/modules/youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
 import '../../../data/app_image.dart';
 import '../../../data/method.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
@@ -38,18 +39,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<HomeScreenController>(
-          builder: (controller) =>
-              ListView(
+          builder: (controller) => ListView(
                 controller: controller.scrollController,
                 children: [
                   controller.select == 0
                       ? Container(
-                      height: 250,
-                      color: Colors.black,
-                      child: VideoPlay(url: ApiServices.liveTv))
+                          height: 300,
+                          color: Colors.black,
+                          child: VideoPlay(url: ApiServices.liveTv))
                       : controller.select == 1
-                      ? SizedBox(height: 250, child: Text('Sports'))
-                      : SizedBox(height: 250, child: Text('Islamic')),
+                          ? SizedBox(height: 250, child: Text('Sports'))
+                          : SizedBox(height: 250, child: Text('Islamic')),
                   const SizedBox(height: 10),
                   ArchiveAndPremiumButton(),
                   const SizedBox(height: 10),
@@ -58,15 +58,19 @@ class HomeScreen extends StatelessWidget {
                   CarouselSlider(
                     items: List.generate(
                       controller.data.length,
-                          (index) {
+                      (index) {
                         final video = controller.data[index];
-                        final embedCode = video.embedCodes?.isNotEmpty ??
-                            false
+                        final embedCode = video.embedCodes?.isNotEmpty ?? false
                             ? video.embedCodes![0].embed
                             : '';
                         return SuggestedVideos(
                           title: video.name ?? 'No Data',
                           videoUrl: ApiServices.youtubeBase + '$embedCode',
+                          onTap: () { controller.videoController.pause();
+                            Get.to(() => YouTubePlayerScreen(
+                                  url: embedCode.toString(),
+                                ));
+                          },
                         );
                       },
                     ),
@@ -88,7 +92,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  SecondaryButton(text: 'All Videos', onTap: () {}),
+                  SecondaryButton(
+                      text: 'All Videos',
+                      onTap: () {
+                        controller.videoController.pause();
+                        Get.to(() => AllVideoScreen(list: controller.data));
+                      }),
                   const SizedBox(height: 10),
                   const AllDetails()
                 ],

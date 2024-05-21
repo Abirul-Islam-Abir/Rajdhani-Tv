@@ -2,17 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/model/all_videos_model.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../../api_services/all_videos.dart';
+import '../../../api_services/api_services.dart';
 
 class HomeScreenController extends GetxController {
   ScrollController scrollController = ScrollController();
+  late VideoPlayerController videoController;
   bool showAppbar = true;
   bool isScrollingDown = false;
   double bottomBarHeight = 75;
   int select = 0;
+  videoPlayerController() {
+    videoController = VideoPlayerController.networkUrl(
+      Uri.parse(ApiServices.liveTv),
+      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+    );
+
+    videoController.addListener(() {
+      update();
+    });
+    videoController.setLooping(false);
+    videoController.initialize().then((_) {
+      videoController.play();
+      update();
+    });
+  }
 
   void tvChange(index) {
+    if (index == 0) {
+      videoController.play();
+    } else {
+      videoController.pause();
+    }
     select = index;
     update();
   }
@@ -50,7 +73,7 @@ class HomeScreenController extends GetxController {
 
   Future<void> initialize() async {
     try {
-     await Future.wait([allVideos()]);
+      await Future.wait([allVideos()]);
     } catch (e) {
       throw Exception(e.toString());
     } finally {
@@ -62,6 +85,13 @@ class HomeScreenController extends GetxController {
   void onInit() {
     initialize();
     scrollControll();
+    videoPlayerController();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    videoController.dispose();
+    super.dispose();
   }
 }

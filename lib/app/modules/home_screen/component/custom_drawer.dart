@@ -10,6 +10,7 @@ import '../../contact_screen/view/contact_screen.dart';
 import '../../schedule_screen/view/schedule_screen.dart';
 import '../../widgets/common_section_screen.dart';
 import '../../widgets/primary_btn.dart';
+import '../controller/home_controller.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
@@ -49,7 +50,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<HomeScreenController>().videoController.pause();
     bool isDark = darkNotifier.value;
+
     return Drawer(
       child: SafeArea(
         child: Column(
@@ -64,7 +67,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 onChanged: (value) {
                   isDark = !isDark;
                   darkNotifier.value = isDark;
-                  setState(() {});
+                  if (mounted) {
+                    setState(() {});
+                  }
                 }),
             Divider(height: 25, color: Colors.grey),
             const SizedBox(height: 50),
@@ -104,9 +109,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 },
                 text: 'FAQs'),
             const Spacer(),
-            PrimaryButton(
-                text:'Log Out',
-                onTap: () {}),
+            PrimaryButton(text: 'Log Out', onTap: () {}),
             const SizedBox(height: 50),
           ],
         ),
