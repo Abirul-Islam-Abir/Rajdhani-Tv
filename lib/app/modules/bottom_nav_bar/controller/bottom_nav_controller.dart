@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 
+import '../../../../main.dart';
 import '../../widgets/video_player.dart';
 import 'package:wakelock/wakelock.dart';
 class BottomNavController extends GetxController {
@@ -11,15 +13,22 @@ class BottomNavController extends GetxController {
       Get.find<HomeScreenController>().videoController.play();
     }else{
       Get.find<HomeScreenController>().videoController.pause();
+      Get.find<HomeScreenController>().isAppbarHide();
     }
     selectedIndex = index;
     update();
   }
 
-
+  Future  writeIsDarkMode( )async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? data = prefs.getBool('isDarkMode');
+    darkNotifier.value = data??false;
+    print('${darkNotifier.value}==========================================');
+  }
   @override
   void onInit() {
     Wakelock.enable();
+    writeIsDarkMode( );
     setPortraitMode();
     super.onInit();
   }

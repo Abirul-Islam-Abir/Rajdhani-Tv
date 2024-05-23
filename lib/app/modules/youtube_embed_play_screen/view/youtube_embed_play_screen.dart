@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/app/modules/home_screen/component/build_appbar.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../widgets/video_player.dart';
@@ -43,6 +44,7 @@ class _YouTubePlayerScreenState extends State<YouTubePlayerScreen> {
         return true;
       },
       child: Scaffold(
+        appBar: buildAppBar(),
         body: Center(
           child: YoutubePlayer(
             controller: _controller,

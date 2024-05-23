@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/app/modules/home_screen/component/primary_text.dart';
 import 'package:untitled/app/modules/home_screen/component/rajdhani_logo.dart';
 
 import '../../../../main.dart';
 import '../../../data/app_image.dart';
 import '../../../data/app_text.dart';
+import '../../../data/shared_pref.dart';
 import '../../contact_screen/view/contact_screen.dart';
 import '../../schedule_screen/view/schedule_screen.dart';
 import '../../widgets/common_section_screen.dart';
 import '../../widgets/primary_btn.dart';
 import '../controller/home_controller.dart';
-
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({
-    super.key,
-  });
+  const CustomDrawer({super.key});
 
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-  Future<void> navigate(num) async {
+  Future<void> navigate(int num) async {
     switch (num) {
       case 0:
         Get.to(() =>
@@ -30,6 +29,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         break;
       case 1:
         Get.to(() => ContactScreen());
+        break;
       case 2:
         Get.to(() => CommonSectionScreen(
             title: 'Privacy Policy', subtitle: AppString.privacyPolicy));
@@ -49,67 +49,85 @@ class _CustomDrawerState extends State<CustomDrawer> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    Get.find<HomeScreenController>().videoController.pause();
-    bool isDark = darkNotifier.value;
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<HomeScreenController>().videoController.pause();
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Drawer(
       child: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 10),
-            RajdhaniLogo(img: AppImage.appLogo),
+            RajdhaniLogo(
+                img: darkNotifier.value
+                    ? AppImage.appLogoLight
+                    : AppImage.appLogo),
             const SizedBox(height: 10),
             SwitchListTile(
-                title: Text('Dark Mode'),
-                value: isDark,
-                onChanged: (value) {
-                  isDark = !isDark;
-                  darkNotifier.value = isDark;
-                  if (mounted) {
-                    setState(() {});
-                  }
-                }),
+              title: Text('Dark Mode'),
+              value: darkNotifier.value,
+              onChanged: (value) {
+                setState(() {
+                  darkNotifier.value = value;
+                  SharedPref.storeIsDarkMode(value);
+                });
+                Get.find<HomeScreenController>().updateState();
+              },
+            ),
             Divider(height: 25, color: Colors.grey),
             const SizedBox(height: 50),
             PrimaryText(
-                onTap: () {
-                  navigate(0);
-                },
-                text: 'About'),
+              onTap: () {
+                navigate(0);
+              },
+              text: 'About',
+            ),
             const SizedBox(height: 10),
             PrimaryText(
-                onTap: () {
-                  navigate(1);
-                },
-                text: 'Contact'),
+              onTap: () {
+                navigate(1);
+              },
+              text: 'Contact',
+            ),
             const SizedBox(height: 10),
             PrimaryText(
-                onTap: () {
-                  navigate(3);
-                },
-                text: 'Privacy Plicy'),
+              onTap: () {
+                navigate(2);
+              },
+              text: 'Privacy Policy',
+            ),
             const SizedBox(height: 10),
             PrimaryText(
-                onTap: () {
-                  navigate(4);
-                },
-                text: 'Terms'),
+              onTap: () {
+                navigate(3);
+              },
+              text: 'Terms',
+            ),
             const SizedBox(height: 10),
             PrimaryText(
-                onTap: () {
-                  navigate(5);
-                },
-                text: 'Schedule'),
+              onTap: () {
+                navigate(4);
+              },
+              text: 'Schedule',
+            ),
             const SizedBox(height: 10),
             PrimaryText(
-                onTap: () {
-                  navigate(6);
-                },
-                text: 'FAQs'),
+              onTap: () {
+                navigate(5);
+              },
+              text: 'FAQs',
+            ),
             const Spacer(),
-            PrimaryButton(text: 'Log Out', onTap: () {}),
+            PrimaryButton(
+              text: 'Log Out',
+              onTap: () {},
+            ),
             const SizedBox(height: 50),
           ],
         ),
@@ -117,3 +135,4 @@ class _CustomDrawerState extends State<CustomDrawer> {
     );
   }
 }
+

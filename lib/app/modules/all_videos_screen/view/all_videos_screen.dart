@@ -5,6 +5,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../../api_services/api_services.dart';
 import '../../../model/all_videos_model.dart';
+import '../../home_screen/component/build_appbar.dart';
 import '../../home_screen/component/suggested_video.dart';
 import '../../widgets/video_player.dart';
 import '../../youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
@@ -39,7 +40,7 @@ class _AllVideoScreenState extends State<AllVideoScreen> {
         setPortraitMode();
         return true;
       },
-      child: Scaffold(
+      child: Scaffold(appBar: buildAppBar(),
           body: Column(
         children: [
           Expanded(

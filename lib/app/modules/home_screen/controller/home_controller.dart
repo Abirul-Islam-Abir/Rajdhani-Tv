@@ -14,6 +14,8 @@ class HomeScreenController extends GetxController {
   bool isScrollingDown = false;
   double bottomBarHeight = 75;
   int select = 0;
+  bool _isLoadedData = true;
+  bool get isLoadedData =>_isLoadedData;
   videoPlayerController() {
     videoController = VideoPlayerController.networkUrl(
       Uri.parse(ApiServices.liveTv),
@@ -29,7 +31,10 @@ class HomeScreenController extends GetxController {
       update();
     });
   }
-
+void isAppbarHide(){
+  showAppbar = true;
+  update();
+}
   void tvChange(index) {
     if (index == 0) {
       videoController.play();
@@ -39,7 +44,9 @@ class HomeScreenController extends GetxController {
     select = index;
     update();
   }
-
+void updateState(){
+    update();
+}
   Future<void> scrollControll() async {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
@@ -77,6 +84,7 @@ class HomeScreenController extends GetxController {
     } catch (e) {
       throw Exception(e.toString());
     } finally {
+      _isLoadedData = false;
       update();
     }
   }

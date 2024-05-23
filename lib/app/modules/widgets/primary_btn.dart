@@ -14,8 +14,10 @@ class PrimaryButton extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: color),
-        onPressed: onTap,
-        child: Text(text, style: TextStyle(color: Colors.white, fontSize: 11)));
+    return SizedBox(width: 200,
+      child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: color),
+          onPressed: onTap,
+          child: Text(text, style: TextStyle(color: Colors.white, fontSize: 11))),
+    );
   }
 }

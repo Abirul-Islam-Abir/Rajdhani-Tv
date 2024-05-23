@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
 import 'app/data/constant.dart';
+import 'app/modules/splash_screen/view/splash_screen.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 import 'app/state_holder_binder/state_holder_binding.dart';
@@ -50,7 +51,7 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
               ),
             ),
             getPages: getPages(),
-            initialRoute:RouteName.initial,
+            home: SplashScreen(),
             initialBinding: StateHolderBinding(),
           ));
   }

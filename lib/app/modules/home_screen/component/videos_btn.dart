@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../data/constant.dart';
 
-class videosButton extends StatelessWidget {
+class VideosButton extends StatelessWidget {
   final Function() tap;
   final String text;
 
-  const videosButton({super.key, required this.tap, required this.text});
+  const VideosButton({super.key, required this.tap, required this.text});
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;

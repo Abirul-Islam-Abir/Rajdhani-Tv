@@ -32,7 +32,7 @@ class _VideoPlayState extends State<VideoPlay> {
               child:  controller.videoController.value.isPlaying
                   ? const SizedBox.shrink()
                   : const ColoredBox(
-                color: Colors.black26,
+                color: Colors.black,
                 child: Center(
                   child: Icon(
                     Icons.play_arrow,
@@ -72,7 +72,7 @@ class _VideoPlayState extends State<VideoPlay> {
                   icon: Icon(
                     Icons.fullscreen_rounded,
                     size: 35,
-                    color: Colors.red,
+                    color: Colors.white,
                   ),
                 ),
               ),

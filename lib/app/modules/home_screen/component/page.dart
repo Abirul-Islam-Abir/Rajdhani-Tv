@@ -6,6 +6,6 @@ import '../view/home_screen.dart';
 
 List<Widget> pages = [
   HomeScreen(),
-  const ArchiveScreen(),
+    ArchiveScreen(),
   const PremiumScreen(),
 ];

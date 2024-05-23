@@ -13,7 +13,9 @@ import 'package:untitled/app/modules/youtube_embed_play_screen/view/youtube_embe
 import '../../../data/app_image.dart';
 import '../../../data/method.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
+import '../../widgets/primary_btn.dart';
 import '../../widgets/secondary_btn.dart';
+import '../../widgets/suggested_video_shimmer.dart';
 import '../../widgets/video_player.dart';
 import '../component/all_details.dart';
 import '../component/archive_premium_btn.dart';
@@ -39,69 +41,71 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<HomeScreenController>(
-          builder: (controller) => ListView(
-                controller: controller.scrollController,
-                children: [
-                  controller.select == 0
-                      ? Container(
-                          height: 300,
-                          color: Colors.black,
-                          child: VideoPlay(url: ApiServices.liveTv))
-                      : controller.select == 1
-                          ? SizedBox(height: 250, child: Text('Sports'))
-                          : SizedBox(height: 250, child: Text('Islamic')),
-                  const SizedBox(height: 10),
-                  ArchiveAndPremiumButton(),
-                  const SizedBox(height: 10),
-                  videosButton(text: 'Videos', tap: () {}),
-                  const SizedBox(height: 10),
-                  CarouselSlider(
-                    items: List.generate(
-                      controller.data.length,
-                      (index) {
-                        final video = controller.data[index];
-                        final embedCode = video.embedCodes?.isNotEmpty ?? false
-                            ? video.embedCodes![0].embed
-                            : '';
-                        return SuggestedVideos(
-                          title: video.name ?? 'No Data',
-                          videoUrl: ApiServices.youtubeBase + '$embedCode',
-                          onTap: () { controller.videoController.pause();
-                            Get.to(() => YouTubePlayerScreen(
-                                  url: embedCode.toString(),
-                                ));
-                          },
-                        );
-                      },
+          builder: (controller) => SingleChildScrollView( controller: controller.scrollController,
+            child: Column(
+
+                  children: [
+                    controller.select == 0
+                        ? Container(
+                            height: 300,width: double.infinity,
+                            color: Colors.black,
+                            child: VideoPlay(url: ApiServices.liveTv))
+                        : controller.select == 1
+                            ? SizedBox(height: 250, child: Text('Sports'))
+                            : SizedBox(height: 250, child: Text('Islamic')),
+                    const SizedBox(height: 10),
+                    ArchiveAndPremiumButton(),
+                    const SizedBox(height: 10),
+                    PrimaryButton(text: 'Videos', onTap: () {}),
+                    const SizedBox(height: 30),
+                  controller.isLoadedData?SuggestedVideoShimmer():  CarouselSlider(
+                      items: List.generate(
+                        controller.data.length,
+                        (index) {
+                          final video = controller.data[index];
+                          final embedCode = video.embedCodes?.isNotEmpty ?? false
+                              ? video.embedCodes![0].embed
+                              : '';
+                          return SuggestedVideos(
+                            title: video.name ?? 'No Data',
+                            videoUrl: ApiServices.youtubeBase + '$embedCode',
+                            onTap: () { controller.videoController.pause();
+                              Get.to(() => YouTubePlayerScreen(
+                                    url: embedCode.toString(),
+                                  ));
+                            },
+                          );
+                        },
+                      ),
+                      options: CarouselOptions(
+                        height: 200,
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 1.0,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 10),
+                        autoPlayAnimationDuration: Duration(seconds: 4),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.3,
+                        onPageChanged: (index, reason) {},
+                        scrollDirection: Axis.horizontal,
+                      ),
                     ),
-                    options: CarouselOptions(
-                      height: 200,
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 1.0,
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      reverse: false,
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 10),
-                      autoPlayAnimationDuration: Duration(seconds: 4),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      enlargeFactor: 0.3,
-                      onPageChanged: (index, reason) {},
-                      scrollDirection: Axis.horizontal,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  SecondaryButton(
-                      text: 'All Videos',
-                      onTap: () {
-                        controller.videoController.pause();
-                        Get.to(() => AllVideoScreen(list: controller.data));
-                      }),
-                  const SizedBox(height: 10),
-                  const AllDetails()
-                ],
-              )),
+                    const SizedBox(height: 30),
+                    PrimaryButton(
+                        text: 'All Videos',
+                        onTap: () {
+                          controller.videoController.pause();
+                          Get.to(() => AllVideoScreen(list: controller.data));
+                        }),
+                    const SizedBox(height: 30),
+                    const AllDetails()
+                  ],
+                ),
+          )),
     );
   }
 }

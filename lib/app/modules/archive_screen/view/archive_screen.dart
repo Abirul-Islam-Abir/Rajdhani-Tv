@@ -16,34 +16,46 @@ class ArchiveScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Headline(
-              text: 'NEWS',
+            Headline(text: 'NEWS'),
+            const SizedBox(height: 20),
+            SuggestedVideos(
+              title: 'title',
+              videoUrl: ApiServices.youtubeBase + 'Gbsn-hyeZqs',
             ),
-            SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
+            const SizedBox(height: 20),
+            PrimaryButton(text: 'All Videos', onTap: () {}),
+            const SizedBox(height: 10),
+            Headline(text: 'NATOK'),
+            const SizedBox(height: 20),
+            SuggestedVideos(
+              title: 'title',
+              videoUrl: ApiServices.youtubeBase + 'Gbsn-hyeZqs',
+            ),
+            const SizedBox(height: 20),
             PrimaryButton(
               text: 'All Videos',
               onTap: () {},
             ),
-            Headline(
-              text: 'NATOK',
+            const SizedBox(height: 10),
+            Headline(text: 'TALK SHOW'),
+            const SizedBox(height: 10),
+            SuggestedVideos(
+              title: 'title',
+              videoUrl: ApiServices.youtubeBase + 'Gbsn-hyeZqs',
             ),
-            SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
+            const SizedBox(height: 20),
             PrimaryButton(
               text: 'All Videos',
               onTap: () {},
             ),
-            Headline(
-              text: 'TALK SHOW',
+            const SizedBox(height: 10),
+            Headline(text: 'ENTERTAINMENT'),
+            const SizedBox(height: 20),
+            SuggestedVideos(
+              title: 'title',
+              videoUrl: ApiServices.youtubeBase + 'Gbsn-hyeZqs',
             ),
-            SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
-            PrimaryButton(
-              text: 'All Videos',
-              onTap: () {},
-            ),
-            Headline(
-              text: 'ENTERTAINMENT',
-            ),
-          SuggestedVideos(title: 'title',videoUrl: ApiServices.youtubeBase+'Gbsn-hyeZqs',),
+            const SizedBox(height: 20),
             PrimaryButton(
               text: 'All Videos',
               onTap: () {},
@@ -67,7 +79,7 @@ class Headline extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15.0),
       child: Container(
-        height: 50,
+        height: 40,
         decoration: BoxDecoration(
           color: kPrimaryColor,
         ),
@@ -75,9 +87,7 @@ class Headline extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
       ),
