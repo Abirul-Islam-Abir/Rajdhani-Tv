@@ -30,7 +30,7 @@ class Certification extends StatelessWidget {
                 Text(
                   'Copyright 2024',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 SizedBox(width: 10),
                 Text(

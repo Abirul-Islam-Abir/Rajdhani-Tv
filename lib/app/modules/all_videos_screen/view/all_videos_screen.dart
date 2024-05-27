@@ -11,7 +11,7 @@ import '../../widgets/video_player.dart';
 import '../../youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
 
 class AllVideoScreen extends StatefulWidget {
-  final List<AllVideosModel> list;
+  final List<EmbedCodes> list;
 
   AllVideoScreen({super.key, required this.list});
 
@@ -40,40 +40,43 @@ class _AllVideoScreenState extends State<AllVideoScreen> {
         setPortraitMode();
         return true;
       },
-      child: Scaffold(appBar: buildAppBar(),
+      child: Scaffold(
+          appBar: buildAppBar(),
           body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: widget.list.length,
-              itemBuilder: (context, index) {
-                final video = widget.list[index];
-                final embedCode = video.embedCodes?.isNotEmpty ?? false
-                    ? video.embedCodes![0].embed
-                    : '';
-                var url = getThumbnailUrl(ApiServices.youtubeBase + '$embedCode');
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 18.0),
-                  child: InkWell(
-                      onTap: () {
-                        Get.to(() =>
-                            YouTubePlayerScreen(url: embedCode.toString()));
-                      },
-                      child: Stack(
-                        children: [
-
-                          Image.network('$url'), Positioned(
-
-                              top: 50,bottom: 50,right: 50,left: 50,
-                              child: Image.asset('assets/icon/youtube.png')),
-                        ],
-                      )),
-                );
-              },
-            ),
-          ),
-        ],
-      )),
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: widget.list.length,
+                  itemBuilder: (context, index) {
+                    final video = widget.list[index];
+                    final embedCode = video.embed! ;
+                    var url =
+                        getThumbnailUrl(ApiServices.youtubeBase + embedCode);
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 18.0),
+                      child: InkWell(
+                          onTap: () {
+                            Get.to(() =>
+                                YouTubePlayerScreen(url: embedCode.toString()));
+                          },
+                          child: Stack(
+                            children: [
+                              Image.network(url),
+                              Positioned(
+                                  top: 50,
+                                  bottom: 50,
+                                  right: 50,
+                                  left: 50,
+                                  child:
+                                      Image.asset('assets/icon/youtube.png')),
+                            ],
+                          )),
+                    );
+                  },
+                ),
+              ),
+            ],
+          )),
     );
   }
 }

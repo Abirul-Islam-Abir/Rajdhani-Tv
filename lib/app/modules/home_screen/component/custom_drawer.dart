@@ -61,7 +61,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return Drawer(
       child: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 10),
             RajdhaniLogo(
@@ -81,7 +80,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               },
             ),
             Divider(height: 25, color: Colors.grey),
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
             PrimaryText(
               onTap: () {
                 navigate(0);

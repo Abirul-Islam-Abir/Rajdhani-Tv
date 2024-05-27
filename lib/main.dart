@@ -13,10 +13,10 @@ import 'package:sizer/sizer.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() => runApp(
-    /*  DevicePreview(
+      DevicePreview(
         enabled: !kReleaseMode,
         builder: (context) => const RajdhaniTv(), // Wrap your app
-      ),*/RajdhaniTv(),
+      ),
     );
 final darkNotifier = ValueNotifier<bool>(false);
 
