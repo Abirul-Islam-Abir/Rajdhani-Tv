@@ -4,7 +4,6 @@ import 'package:untitled/app/modules/home_screen/controller/home_controller.dart
 
 import '../../../../main.dart';
 import '../../widgets/video_player.dart';
-import 'package:wakelock/wakelock.dart';
 class BottomNavController extends GetxController {
   int selectedIndex = 0;
 
@@ -27,14 +26,12 @@ class BottomNavController extends GetxController {
   }
   @override
   void onInit() {
-    Wakelock.enable();
     writeIsDarkMode( );
     setPortraitMode();
     super.onInit();
   }
   @override
   void dispose() {
-    Wakelock.disable();
     super.dispose();
   }
 }

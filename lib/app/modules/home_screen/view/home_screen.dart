@@ -27,6 +27,7 @@ import '../component/primary_text.dart';
 import '../component/rajdhani_logo.dart';
 import '../component/social_btn.dart';
 import '../component/suggested_video.dart';
+import '../component/update_available.dart';
 import '../component/videos_btn.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,89 +38,79 @@ class HomeScreen extends StatelessWidget {
   void archive() => bottomController.changeIndex(1);
 
   void premium() => bottomController.changeIndex(2);
-
+  String appName = packageInfo.appName;
+  String packageName = packageInfo.packageName;
+  String version = packageInfo.version;
+  String buildNumber = packageInfo.buildNumber;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GetBuilder<HomeScreenController>(
-          builder: (controller) => SingleChildScrollView(
-                controller: controller.scrollController,
-                child: Column(
-                  children: [
-                    controller.select == 0
-                        ? Container(
-                            height: 300,
-                            width: double.infinity,
-                            color: Colors.black,
-                            child: VideoPlay(url: ApiServices.liveTv))
-                        : controller.select == 1
-                            ? SizedBox(height: 250, child: Text('Sports'))
-                            : SizedBox(height: 250, child: Text('Islamic')),
-                    const SizedBox(height: 10),
-                    ArchiveAndPremiumButton(),
-                    const SizedBox(height: 20),
-                    Headline(text: 'Videos'),
-                    const SizedBox(height: 40),
-                    controller.isLoadedData
-                        ? SuggestedVideoShimmer()
-                        : CarouselSlider(
-                            items: List.generate(
-                              controller.allVideosData.length,
-                              (index) {
-                                final video = controller.allVideosData[index];
-                                final embedCode =
-                                    video.embedCodes?.isNotEmpty ?? false
-                                        ? video.embedCodes![0].embed
-                                        : '';
-                                return SuggestedVideos(
-                                  title: video.name ?? 'No Data',
-                                  text: controller.categoryData[index].name
-                                      .toString(),
-                                  videoUrl:
-                                      ApiServices.youtubeBase + '$embedCode',
-                                  onTap: () {
-                                    controller.videoController.pause();
-                                    Get.to(() => YouTubePlayerScreen(
-                                          url: embedCode.toString(),
-                                        ));
-                                  },
-                                );
-                              },
+    return UpdateAvailable(
+      packageName: ' $applicationId com.codewave.rajdhanitv',
+      isUpdate: true,
+      child: Scaffold(
+        body: GetBuilder<HomeScreenController>(
+            builder: (controller) => SingleChildScrollView(
+                  controller: controller.scrollController,
+                  child: Column(
+                    children: [
+                      controller.select == 0
+                          ? Container(
+                              height: 280,
+                              width: double.infinity,
+                              color: Colors.black,
+                              child: VideoPlay(url: ApiServices.liveTv))
+                          : controller.select == 1
+                              ? SizedBox(height: 250, child: Text('Sports'))
+                              : SizedBox(height: 250, child: Text('Islamic')),
+                      const SizedBox(height: 10),
+                      ArchiveAndPremiumButton(),
+                      const SizedBox(height: 20),
+                      Headline(text: 'Videos'),
+                      const SizedBox(height: 40),
+                      controller.isLoadedData
+                          ? SuggestedVideoShimmer()
+                          : CarouselSlider(
+                              items: List.generate(
+                                controller.allVideosData.length,
+                                (index) {
+                                  final video = controller.allVideosData[index];
+                                  final embedCode =
+                                      video.embedCodes?.isNotEmpty ?? false
+                                          ? video.embedCodes![0].embed
+                                          : '';
+                                  return SuggestedVideos(
+                                    title: video.name ?? 'No Data',
+                                    text: controller.categoryData[index].name
+                                        .toString(),
+                                    videoUrl:
+                                        ApiServices.youtubeBase + '$embedCode',
+                                    onTap: () {
+                                      controller.videoController.pause();
+                                      Get.to(() => YouTubePlayerScreen(
+                                            url: embedCode.toString(),
+                                          ));
+                                    },
+                                  );
+                                },
+                              ),
+                              options: CarouselOptions(
+                                height: 300,
+                                aspectRatio: 16 / 9,
+                                viewportFraction: 1.0,
+                                initialPage: 0,
+                                enableInfiniteScroll: true,
+                                reverse: false,
+                                autoPlay: true,
+                                autoPlayInterval: Duration(seconds: 5),
+                                autoPlayAnimationDuration: Duration(seconds: 4),
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enlargeCenterPage: true,
+                                enlargeFactor: 0.0,
+                                onPageChanged: (index, reason) {},
+                                scrollDirection: Axis.horizontal,
+                              ),
                             ),
-                            options: CarouselOptions(
-                              height: 300,
-                              aspectRatio: 16 / 9,
-                              viewportFraction: 1.0,
-                              initialPage: 0,
-                              enableInfiniteScroll: true,
-                              reverse: false,
-                              autoPlay: true,
-                              autoPlayInterval: Duration(seconds: 5),
-                              autoPlayAnimationDuration: Duration(seconds: 4),
-                              autoPlayCurve: Curves.fastOutSlowIn,
-                              enlargeCenterPage: true,
-                              enlargeFactor: 0.0,
-                              onPageChanged: (index, reason) {},
-                              scrollDirection: Axis.horizontal,
-                            ),
-                          ),
-                    SingleChildScrollView(scrollDirection: Axis.horizontal,
-                      child: Row(children: List.generate(
-                        5,
-                            (index) => RecommendedVideo(
-                          title: '',
-                          text: 'Recommended Video ',
-                          videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
-                          onTap: () {
-                            controller.videoController.pause();
-                            Get.to(() => YouTubePlayerScreen(
-                              url: 'VQ1viPcYG80',
-                            ));
-                          },
-                        ),
-                      ))
-                    ),
-                    SingleChildScrollView(scrollDirection: Axis.horizontal,
+                      SingleChildScrollView(scrollDirection: Axis.horizontal,
                         child: Row(children: List.generate(
                           5,
                               (index) => RecommendedVideo(
@@ -134,18 +125,35 @@ class HomeScreen extends StatelessWidget {
                             },
                           ),
                         ))
-                    ),
-                    PrimaryButton(
-                        text: 'All Videos',
-                        onTap: () {
-                          controller.videoController.pause();
-                          Get.find<BottomNavController>().changeIndex(1);
-                        }),
-                    const SizedBox(height: 30),
-                    const AllDetails(),
-                  ],
-                ),
-              )),
+                      ),
+                      SingleChildScrollView(scrollDirection: Axis.horizontal,
+                          child: Row(children: List.generate(
+                            5,
+                                (index) => RecommendedVideo(
+                              title: '',
+                              text: 'Suggested Video ',
+                              videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
+                              onTap: () {
+                                controller.videoController.pause();
+                                Get.to(() => YouTubePlayerScreen(
+                                  url: 'VQ1viPcYG80',
+                                ));
+                              },
+                            ),
+                          ))
+                      ),
+                      PrimaryButton(
+                          text: 'All Videos',
+                          onTap: () {
+                            controller.videoController.pause();
+                            Get.find<BottomNavController>().changeIndex(1);
+                          }),
+                      const SizedBox(height: 30),
+                      const AllDetails(),
+                    ],
+                  ),
+                )),
+      ),
     );
   }
 }

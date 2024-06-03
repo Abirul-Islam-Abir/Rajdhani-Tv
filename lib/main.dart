@@ -12,12 +12,17 @@ import 'app/modules/home_screen/view/home_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:device_preview/device_preview.dart';
 
-void main() => runApp(
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
       DevicePreview(
         enabled: !kReleaseMode,
         builder: (context) => const RajdhaniTv(), // Wrap your app
       ),
     );
+}
 final darkNotifier = ValueNotifier<bool>(false);
 
 class RajdhaniTv extends StatefulWidget {
