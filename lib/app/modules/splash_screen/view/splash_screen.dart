@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
 
 import '../../../data/app_image.dart';
+import '../../../data/shared_pref.dart';
 import '../../home_screen/view/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,6 +15,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    SharedPref.retrieveDarkMode();
+    SharedPref.retrieveIsSubscribed();
     Future.delayed(const Duration(seconds: 5)).then((value) =>
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => BottomNav()),

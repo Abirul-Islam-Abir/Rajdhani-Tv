@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../data/constant.dart';
 import '../../archive_screen/view/archive_screen.dart';
+import '../../widgets/headline_title.dart';
 import '../view/home_screen.dart';
 
 class SuggestedVideos extends StatelessWidget {

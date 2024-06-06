@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 
 import '../../../../main.dart';
@@ -18,16 +19,10 @@ class BottomNavController extends GetxController {
     update();
   }
 
-  Future  writeIsDarkMode( )async{
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool? data = prefs.getBool('isDarkMode');
-    darkNotifier.value = data??false;
-    print('${darkNotifier.value}==========================================');
-  }
+
   @override
   void onInit() {
-    writeIsDarkMode( );
-    setPortraitMode();
+     setPortraitMode();
     super.onInit();
   }
   @override

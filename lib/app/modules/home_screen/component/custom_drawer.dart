@@ -13,6 +13,7 @@ import '../../schedule_screen/view/schedule_screen.dart';
 import '../../widgets/common_section_screen.dart';
 import '../../widgets/primary_btn.dart';
 import '../controller/home_controller.dart';
+
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
 
@@ -31,8 +32,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
         Get.to(() => ContactScreen());
         break;
       case 2:
-        Get.to(() => CommonSectionScreen(
-            title: 'Privacy Policy', subtitle: AppString.privacyPolicy));
+        Get.to(() =>
+            CommonSectionScreen(
+                title: 'Privacy Policy', subtitle: AppString.privacyPolicy));
         break;
       case 3:
         Get.to(() =>
@@ -42,8 +44,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
         Get.to(() => ScheduleScreen());
         break;
       case 5:
-        Get.to(() => CommonSectionScreen(
-            title: 'FAQs', subtitle: AppString.privacyPolicy));
+        Get.to(() =>
+            CommonSectionScreen(
+                title: 'FAQs', subtitle: AppString.privacyPolicy));
         break;
     }
   }
@@ -52,7 +55,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<HomeScreenController>().videoController.pause();
+      Get
+          .find<HomeScreenController>()
+          .videoController
+          .pause();
     });
   }
 
@@ -68,17 +74,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ? AppImage.appLogoLight
                     : AppImage.appLogo),
             const SizedBox(height: 10),
-            SwitchListTile(
-              title: Text('Dark Mode'),
-              value: darkNotifier.value,
-              onChanged: (value) {
-                setState(() {
-                  darkNotifier.value = value;
-                  SharedPref.storeIsDarkMode(value);
-                });
-                Get.find<HomeScreenController>().updateState();
-              },
-            ),
+            GetBuilder<HomeScreenController>(builder: (controller) {
+              return SwitchListTile(
+                title: Text('Dark Mode'),
+                value: darkNotifier.value,
+                onChanged:controller.changeDarkMode,
+              );
+            }),
             Divider(height: 25, color: Colors.grey),
             const SizedBox(height: 30),
             PrimaryText(
@@ -134,4 +136,3 @@ class _CustomDrawerState extends State<CustomDrawer> {
     );
   }
 }
-

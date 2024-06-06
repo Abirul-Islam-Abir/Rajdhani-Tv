@@ -4,6 +4,7 @@ abstract class ApiServices{
   static String subscriptionPackage = '$_baseUrl/subscribe_package_api';
   static String allVideos = '$_baseUrl/archives_api';
   static String categoryUrl = '$_baseUrl/video_category_api';
+  static String loginUrl = '$_baseUrl/member_login_api';
   static String youtubeBase = 'https://www.youtube.com/watch?v=';
 
 }

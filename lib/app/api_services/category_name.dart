@@ -1,15 +1,15 @@
 
-import 'package:dio/dio.dart';
+ import 'dart:convert';
+
 import 'package:untitled/app/api_services/api_services.dart';
+import 'package:http/http.dart' as http;
 
 Future categoryRequest() async {
-  Dio dio = Dio();
   try {
-    Response response = await dio.get(ApiServices.categoryUrl);
+    final response = await http.get(Uri.parse(ApiServices.categoryUrl));
+    final decodedResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      var responseData = response.data;
-      print(responseData['categories']);
-      return responseData['categories'];
+      return decodedResponse['categories'];
     } else {
       throw Exception('Failed to load subscription packages');
     }

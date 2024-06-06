@@ -33,6 +33,7 @@ class RajdhaniTv extends StatefulWidget {
 }
 
 class _RajdhaniTvState extends State<RajdhaniTv> {
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
@@ -56,7 +57,7 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
               ),
             ),
             getPages: getPages(),
-            home: SplashScreen(),
+             initialRoute: RouteName.initial,
             initialBinding: StateHolderBinding(),
           ));
   }

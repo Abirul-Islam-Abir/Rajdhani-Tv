@@ -1,14 +1,14 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
 import 'package:untitled/app/api_services/api_services.dart';
+import 'package:http/http.dart' as http;
 
 Future allVideosRequest() async {
-  Dio dio = Dio();
-
   try {
-    Response response = await dio.get(ApiServices.allVideos);
+    final response = await http.get(Uri.parse(ApiServices.allVideos));
+    final decodedResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      var responseData = response.data;
-      return responseData['categories'];
+      return decodedResponse['categories'];
     } else {
       throw Exception('Failed to load subscription packages');
     }
