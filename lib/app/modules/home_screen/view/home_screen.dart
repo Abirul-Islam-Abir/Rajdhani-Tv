@@ -50,26 +50,27 @@ class HomeScreen extends StatelessWidget {
     return UpdateAvailable(
       packageName: homeController.packageName,
       isUpdate: true,
-      child: Scaffold(
-          body: SingleChildScrollView(
-        controller: controller.scrollController,
-        child: Column(
-          children: [  Container(
+      child: GetBuilder<HomeScreenController>(builder: (controller) {
+        return Scaffold(
+            body: SingleChildScrollView(
+              controller: controller.scrollController,
+              child: Column(
+                children: [ Container(
                     height: 280,
                     width: double.infinity,
                     color: Colors.black,
                     child: VideoPlay(url: ApiServices.liveTv))
-            const SizedBox(height: 10),
-            ArchiveAndPremiumButton(),
-            const SizedBox(height: 20),
-            Headline(text: 'Videos'),
-            const SizedBox(height: 40),
-            controller.isLoadedData
-                ? SuggestedVideoShimmer()
-                : CarouselSlider(
+                  const SizedBox(height: 10),
+                  ArchiveAndPremiumButton(),
+                  const SizedBox(height: 20),
+                  Headline(text: 'Videos'),
+                  const SizedBox(height: 40),
+                  controller.isLoadedData
+                      ? SuggestedVideoShimmer()
+                      : CarouselSlider(
                     items: List.generate(
                       controller.allVideosData.length,
-                      (index) {
+                          (index) {
                         final video = controller.allVideosData[index];
                         final embedCode = video.embedCodes?.isNotEmpty ?? false
                             ? video.embedCodes![0].embed
@@ -80,7 +81,8 @@ class HomeScreen extends StatelessWidget {
                           videoUrl: ApiServices.youtubeBase + '$embedCode',
                           onTap: () {
                             controller.videoController.pause();
-                            Get.to(() => YouTubePlayerScreen(
+                            Get.to(() =>
+                                YouTubePlayerScreen(
                                   url: embedCode.toString(),
                                 ));
                           },
@@ -104,46 +106,46 @@ class HomeScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                     ),
                   ),
-            SuggestedVideoList(
-              text: 'Suggested Video',
-              videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
-              list: [],
-              onTap: () {
-                controller.videoController.pause();
-                Get.to(() => YouTubePlayerScreen(url: 'VQ1viPcYG80'));
-              },
-            ),
-            SuggestedVideoList(
-              text: 'Suggested Video',
-              videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
-              list: [],
-              onTap: () {
-                controller.videoController.pause();
-                Get.to(() => YouTubePlayerScreen(url: 'VQ1viPcYG80'));
-              },
-            ),
-            PrimaryButton(
-                text: 'All Videos',
-                onTap: () {
-                  controller.videoController.pause();
-                  Get.find<BottomNavController>().changeIndex(1);
-                }),
-            const SizedBox(height: 30),
-            const AllDetails(),
-          ],
-        ),
-      )),
+                  SuggestedVideoList(
+                    text: 'Suggested Video',
+                    videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
+                    list: [],
+                    onTap: () {
+                      controller.videoController.pause();
+                      Get.to(() => YouTubePlayerScreen(url: 'VQ1viPcYG80'));
+                    },
+                  ),
+                  SuggestedVideoList(
+                    text: 'Suggested Video',
+                    videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
+                    list: [],
+                    onTap: () {
+                      controller.videoController.pause();
+                      Get.to(() => YouTubePlayerScreen(url: 'VQ1viPcYG80'));
+                    },
+                  ),
+                  PrimaryButton(
+                      text: 'All Videos',
+                      onTap: () {
+                        controller.videoController.pause();
+                        Get.find<BottomNavController>().changeIndex(1);
+                      }),
+                  const SizedBox(height: 30),
+                  const AllDetails(),
+                ],
+              ),
+            ));
+      }),
     );
   }
 }
 
 class SuggestedVideoList extends StatelessWidget {
-  const SuggestedVideoList(
-      {super.key,
-      required this.text,
-      required this.videoUrl,
-      this.onTap,
-      required this.list});
+  const SuggestedVideoList({super.key,
+    required this.text,
+    required this.videoUrl,
+    this.onTap,
+    required this.list});
 
   final String text, videoUrl;
   final Function()? onTap;
@@ -155,12 +157,13 @@ class SuggestedVideoList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
             children: List.generate(
-          5,
-          (index) => RecommendedVideo(
-              title: '',
-              text: 'Suggested Video ',
-              videoUrl: videoUrl,
-              onTap: onTap),
-        )));
+              5,
+                  (index) =>
+                  RecommendedVideo(
+                      title: '',
+                      text: 'Suggested Video ',
+                      videoUrl: videoUrl,
+                      onTap: onTap),
+            )));
   }
 }
