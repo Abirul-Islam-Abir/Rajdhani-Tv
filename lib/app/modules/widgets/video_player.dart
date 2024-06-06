@@ -151,7 +151,7 @@ class FullVideoPlay extends StatelessWidget {
                                 icon: const Icon(
                                   Icons.fullscreen_rounded,
                                   size: 35,
-                                  color: Colors.red,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),

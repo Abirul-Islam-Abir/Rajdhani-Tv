@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/modules/create_account_screen/view/create_account_screen.dart';
 import 'package:untitled/app/modules/home_screen/component/all_details.dart';
 
 import '../../../data/app_image.dart';
@@ -31,11 +32,19 @@ class PackagesScreen extends StatelessWidget {
               builder: (controller) => Column(
                 children: List.generate(
                   controller.data.length,
-                  (index) => SubscriptionCard(
-                      gradientColors: subscriptionData[index]['color'],
-                      onTap: () {},
-                      month: '${controller.data[index].packageName}',
-                      price: controller.data[index].price!),
+                  (index) {
+                    final color = subscriptionData[index]['color'];
+                    final name = controller.data[index].packageName;
+                    final price = controller.data[index].price!;
+                    return SubscriptionCard(
+                      gradientColors: color,
+                      month: '$name',
+                      price: price,
+                      onTap: () {
+                        Get.to(() => CreateAccountScreen());
+                      },
+                    );
+                  },
                 ),
               ),
             ),

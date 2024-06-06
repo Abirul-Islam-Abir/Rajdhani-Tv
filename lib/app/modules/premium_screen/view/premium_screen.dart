@@ -23,26 +23,30 @@ class _PremiumScreenState extends State<PremiumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BackgroundBox(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomTextField(
-              controller: controller.nameController,
-              hint: 'User Name',
-            ),
-            CustomTextField(
-              controller: controller.passController,
-              hint: 'Password',
-            ),
-            Obx(() => RememberBox(
-                value: controller.isChecked, onChanged: controller.isCheck)),
-            Obx(() => SubmitButton(
-                isLoading: controller.isLoading, tap: controller.login)),
-            SubscribeButton(tap: () {
-              Get.toNamed(RouteName.packageScreen);
-            })
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [   SizedBox(height: 20),
+              Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),),   SizedBox(height: 20),
+              CustomTextField(
+                controller: controller.nameController,
+                hint: 'Email',
+              ),
+              CustomTextField(
+                controller: controller.passController,
+                hint: 'Password',
+              ),
+              Obx(() => RememberBox(
+                  value: controller.isChecked, onChanged: controller.isCheck)),
+              Obx(() => SubmitButton(
+                  isLoading: controller.isLoading, tap: controller.login)),
+              SubscribeButton(tap: () {
+                Get.toNamed(RouteName.packageScreen);
+              },title: 'Don\'n have an account',btnText: 'Subscribe',)
+          
+            ],
+          ),
         ),
       ),
     );

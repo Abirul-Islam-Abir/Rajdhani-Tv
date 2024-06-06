@@ -15,7 +15,7 @@ class BackgroundBox extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Center(
         child: Container(
-          height: MediaQuery.of(context).size.height / 1.5,
+          height: MediaQuery.of(context).size.height / 1.6,
           width: double.infinity,
           decoration: BoxDecoration(
             color: kPrimaryColor.withOpacity(0.90),

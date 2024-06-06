@@ -19,10 +19,11 @@ class HomeScreenController extends GetxController {
   bool isScrollingDown = false;
   double bottomBarHeight = 75;
   int select = 0;
-  bool _isLoadedData = true;
-
-  bool get isLoadedData => _isLoadedData;
-
+  RxBool _isLoadedData = true.obs;
+  bool get isLoadedData => _isLoadedData.value;
+void isLoad(value){
+  _isLoadedData.value = value;
+}
   videoPlayerController() {
     videoController = VideoPlayerController.networkUrl(
       Uri.parse(ApiServices.liveTv),
@@ -93,7 +94,6 @@ class HomeScreenController extends GetxController {
     packageName = packageInfo.packageName;
     version = packageInfo.version;
     buildNumber = packageInfo.buildNumber;
-    update();
   }
 
   List<AllVideosModel> allVideosData = [];
@@ -119,8 +119,7 @@ class HomeScreenController extends GetxController {
     } catch (e) {
       throw Exception(e.toString());
     } finally {
-      _isLoadedData = false;
-      update();
+      isLoad(false);
     }
   }
 

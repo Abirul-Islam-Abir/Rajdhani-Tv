@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
+import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
+import 'package:upgrader/upgrader.dart';
 
 import '../../../data/app_image.dart';
 import '../../../data/shared_pref.dart';
@@ -22,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
             (route) => false));
     super.initState();
   }
-
+            final controller = Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,8 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: MediaQuery.of(context).size.width / 2.5,
                   child: Image.asset(AppImage.appLogo)),
               const Spacer(),
-              const Text('Rajdhani Tv', style: TextStyle(color: Colors.grey)),
-              const Text('Version: 1.1.0',
+                Text( '${controller.appName}', style: TextStyle(color: Colors.grey)),
+                Text('${controller.version}',
                   style: TextStyle(color: Colors.grey)),
             ],
           ),
