@@ -31,90 +31,94 @@ class HomeScreen extends StatelessWidget {
     return UpdateAvailable(
       packageName: homeController.packageName,
       isUpdate: true,
-      child: Scaffold(
-          body: SingleChildScrollView(
-        controller: controller.scrollController,
-        child: Column(
-          children: [
-            Container(
-                height: 280,
-                width: double.infinity,
-                color: Colors.black,
-                child: VideoPlay(url: ApiServices.liveTv)),
-            const SizedBox(height: 10),
-            ArchiveAndPremiumButton(),
-            const SizedBox(height: 20),
-            const Headline(text: 'Videos'),
-            const SizedBox(height: 40),
-            controller.isLoadedData
-                ? const SuggestedVideoShimmer()
-                : CarouselSlider(
-                    items: List.generate(
-                      controller.allVideosData.length,
-                      (index) {
-                        final video = controller.allVideosData[index];
-                        final embedCode = video.embedCodes?.isNotEmpty ?? false
-                            ? video.embedCodes![0].embed
-                            : '';
-                        return SuggestedVideos(
-                          title: video.name ?? 'No Data',
-                          text: controller.categoryData[index].name.toString(),
-                          videoUrl: '${ApiServices.youtubeBase}$embedCode',
-                          onTap: () {
-                            controller.videoController.pause();
-                            Get.to(() => YouTubePlayerScreen(
-                                  url: embedCode.toString(),
-                                ));
-                          },
-                        );
-                      },
+      child: GetBuilder<HomeScreenController>(builder: (controller) {
+        return Scaffold(
+            body: SingleChildScrollView(
+          controller: controller.scrollController,
+          child: Column(
+            children: [
+              Container(
+                  height: 280,
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: VideoPlay(url: ApiServices.liveTv)),
+              const SizedBox(height: 10),
+              ArchiveAndPremiumButton(),
+              const SizedBox(height: 20),
+              const Headline(text: 'Videos'),
+              const SizedBox(height: 40),
+              controller.isLoadedData
+                  ? const SuggestedVideoShimmer()
+                  : CarouselSlider(
+                      items: List.generate(
+                        controller.allVideosData.length,
+                        (index) {
+                          final video = controller.allVideosData[index];
+                          final embedCode =
+                              video.embedCodes?.isNotEmpty ?? false
+                                  ? video.embedCodes![0].embed
+                                  : '';
+                          return SuggestedVideos(
+                            title: video.name ?? 'No Data',
+                            text:
+                                controller.categoryData[index].name.toString(),
+                            videoUrl: '${ApiServices.youtubeBase}$embedCode',
+                            onTap: () {
+                              controller.videoController.pause();
+                              Get.to(() => YouTubePlayerScreen(
+                                    url: embedCode.toString(),
+                                  ));
+                            },
+                          );
+                        },
+                      ),
+                      options: CarouselOptions(
+                        height: 300,
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 1.0,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 5),
+                        autoPlayAnimationDuration: const Duration(seconds: 4),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                        enlargeFactor: 0.0,
+                        onPageChanged: (index, reason) {},
+                        scrollDirection: Axis.horizontal,
+                      ),
                     ),
-                    options: CarouselOptions(
-                      height: 300,
-                      aspectRatio: 16 / 9,
-                      viewportFraction: 1.0,
-                      initialPage: 0,
-                      enableInfiniteScroll: true,
-                      reverse: false,
-                      autoPlay: true,
-                      autoPlayInterval: const Duration(seconds: 5),
-                      autoPlayAnimationDuration: const Duration(seconds: 4),
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enlargeCenterPage: true,
-                      enlargeFactor: 0.0,
-                      onPageChanged: (index, reason) {},
-                      scrollDirection: Axis.horizontal,
-                    ),
-                  ),
-            SuggestedVideoList(
-              text: 'Suggested Video',
-              videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
-              list: const [],
-              onTap: () {
-                controller.videoController.pause();
-                Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80'));
-              },
-            ),
-            SuggestedVideoList(
-              text: 'Suggested Video',
-              videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
-              list: const [],
-              onTap: () {
-                controller.videoController.pause();
-                Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80'));
-              },
-            ),
-            PrimaryButton(
-                text: 'All Videos',
+              SuggestedVideoList(
+                text: 'Suggested Video',
+                videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
+                list: const [],
                 onTap: () {
                   controller.videoController.pause();
-                  Get.find<BottomNavController>().changeIndex(1);
-                }),
-            const SizedBox(height: 30),
-            const AllDetails(),
-          ],
-        ),
-      )),
+                  Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80'));
+                },
+              ),
+              SuggestedVideoList(
+                text: 'Suggested Video',
+                videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
+                list: const [],
+                onTap: () {
+                  controller.videoController.pause();
+                  Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80'));
+                },
+              ),
+              PrimaryButton(
+                  text: 'All Videos',
+                  onTap: () {
+                    controller.videoController.pause();
+                    Get.find<BottomNavController>().changeIndex(1);
+                  }),
+              const SizedBox(height: 30),
+              const AllDetails(),
+            ],
+          ),
+        ));
+      }),
     );
   }
 }
