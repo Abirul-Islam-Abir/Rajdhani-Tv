@@ -54,16 +54,11 @@ class HomeScreen extends StatelessWidget {
           body: SingleChildScrollView(
         controller: controller.scrollController,
         child: Column(
-          children: [
-            controller.select == 0
-                ? Container(
+          children: [  Container(
                     height: 280,
                     width: double.infinity,
                     color: Colors.black,
                     child: VideoPlay(url: ApiServices.liveTv))
-                : controller.select == 1
-                    ? SizedBox(height: 250, child: Text('Sports'))
-                    : SizedBox(height: 250, child: Text('Islamic')),
             const SizedBox(height: 10),
             ArchiveAndPremiumButton(),
             const SizedBox(height: 20),
