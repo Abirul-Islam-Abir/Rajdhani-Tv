@@ -14,7 +14,7 @@ class Certification extends StatelessWidget {
       color: kPrimaryColor,
       height: 100,
       width: width,
-      child: Center(
+      child: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

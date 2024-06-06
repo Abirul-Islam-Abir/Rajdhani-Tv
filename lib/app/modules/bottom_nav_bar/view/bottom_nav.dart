@@ -1,16 +1,14 @@
-import 'dart:io';
-
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/data/constant.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
+import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 import '../../../data/method.dart';
 import '../../home_screen/component/build_appbar.dart';
 import '../../home_screen/component/custom_drawer.dart';
 import '../../home_screen/component/page.dart';
-import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 class BottomNav extends StatelessWidget {
   BottomNav({super.key});
@@ -37,7 +35,8 @@ class BottomNav extends StatelessWidget {
                     waterDropColor: kPrimaryColor,
                     backgroundColor: Colors.white,
                     onItemSelected: controller.changeIndex,
-                    selectedIndex: controller.selectedIndex,inactiveIconColor: Colors.black,
+                    selectedIndex: controller.selectedIndex,
+                    inactiveIconColor: Colors.black,
                     barItems: <BarItem>[
                       BarItem(
                         filledIcon: Icons.home,
@@ -60,7 +59,6 @@ class BottomNav extends StatelessWidget {
               )),
     );
   }
-
 
   void _backButtonPressed(v) {
     _scaffoldKey.currentState?.closeDrawer();

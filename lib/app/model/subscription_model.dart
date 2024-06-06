@@ -9,12 +9,12 @@ class SubscriptionModel {
 
   SubscriptionModel(
       {this.id,
-        this.packageName,
-        this.price,
-        this.duration,
-        this.publish,
-        this.createdAt,
-        this.updatedAt});
+      this.packageName,
+      this.price,
+      this.duration,
+      this.publish,
+      this.createdAt,
+      this.updatedAt});
 
   SubscriptionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,14 +27,14 @@ class SubscriptionModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['package_name'] = this.packageName;
-    data['price'] = this.price;
-    data['duration'] = this.duration;
-    data['publish'] = this.publish;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['package_name'] = packageName;
+    data['price'] = price;
+    data['duration'] = duration;
+    data['publish'] = publish;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

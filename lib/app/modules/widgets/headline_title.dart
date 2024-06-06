@@ -12,7 +12,7 @@ class HeadlineTitle extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       child: CustomPaint(
-        size: Size(280, 50), // Specify the size directly
+        size: const Size(280, 50), // Specify the size directly
         painter: CustomShapePainter(text: text),
       ),
     );

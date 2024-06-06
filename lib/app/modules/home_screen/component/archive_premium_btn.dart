@@ -24,7 +24,6 @@ class ArchiveAndPremiumButton extends StatelessWidget {
                 return PrimaryButton(
                   color: controller.select == index ? Colors.red : Colors.grey,
                   onTap: () {
-
                     controller.tvChange(index);
                   },
                   text: list[index],

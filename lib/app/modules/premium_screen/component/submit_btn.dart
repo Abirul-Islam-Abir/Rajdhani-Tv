@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
@@ -15,26 +14,26 @@ class SubmitButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: isLoading
-          ? Container(
-        height: 60,
-        width: double.infinity,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      )
+          ? const SizedBox(
+              height: 60,
+              width: double.infinity,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
           : Container(
-        decoration: BoxDecoration(
-            color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-        height: 60,
-        width: double.infinity,
-        child: InkWell(
-          onTap: tap,
-          child: const Center(
-            child: Text('Submit',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
-        ),
-      ),
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+              height: 60,
+              width: double.infinity,
+              child: InkWell(
+                onTap: tap,
+                child: const Center(
+                  child: Text('Submit',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ),
     );
   }
 }

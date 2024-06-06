@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class RememberBox extends StatelessWidget {
@@ -16,7 +14,7 @@ class RememberBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return CheckboxListTile(
       checkColor: Colors.white,
-      fillColor: MaterialStatePropertyAll(Colors.red),
+      fillColor: const MaterialStatePropertyAll(Colors.red),
       title: const Text('Remember me',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
       controlAffinity: ListTileControlAffinity.leading,

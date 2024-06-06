@@ -3,7 +3,6 @@ import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
 
 import '../../../data/app_image.dart';
 import '../../../data/shared_pref.dart';
-import '../../home_screen/view/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,9 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: MediaQuery.of(context).size.width / 2.5,
                   child: Image.asset(AppImage.appLogo)),
               const Spacer(),
-              Text('Rajdhani Tv', style: const TextStyle(color: Colors.grey)),
-              Text('Version: 1.1.0',
-                  style: const TextStyle(color: Colors.grey)),
+              const Text('Rajdhani Tv', style: TextStyle(color: Colors.grey)),
+              const Text('Version: 1.1.0',
+                  style: TextStyle(color: Colors.grey)),
             ],
           ),
         ),

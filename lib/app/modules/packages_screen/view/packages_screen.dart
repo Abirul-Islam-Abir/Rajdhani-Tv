@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/app/data/constant.dart';
 import 'package:untitled/app/modules/home_screen/component/all_details.dart';
 
 import '../../../data/app_image.dart';
@@ -27,7 +26,7 @@ class PackagesScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            PackagesHeadline(text: 'Our Packages'),
+            const PackagesHeadline(text: 'Our Packages'),
             GetBuilder<PackagesScreenController>(
               builder: (controller) => Column(
                 children: List.generate(
@@ -40,7 +39,7 @@ class PackagesScreen extends StatelessWidget {
                 ),
               ),
             ),
-            AllDetails()
+            const AllDetails()
           ],
         ),
       ),

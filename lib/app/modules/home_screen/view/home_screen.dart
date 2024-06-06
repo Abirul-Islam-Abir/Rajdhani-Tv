@@ -1,38 +1,19 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/api_services/api_services.dart';
-import 'package:untitled/app/data/constant.dart';
-import 'package:untitled/app/modules/all_videos_screen/view/all_videos_screen.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 import 'package:untitled/app/modules/youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
-import '../../../data/app_image.dart';
-import '../../../data/method.dart';
-import '../../../data/subscribed_value_change.dart';
+
 import '../../archive_screen/view/archive_screen.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
-import '../../premium_screen/controller/premium_screen_controller.dart';
 import '../../widgets/primary_btn.dart';
-import '../../widgets/secondary_btn.dart';
 import '../../widgets/suggested_video_shimmer.dart';
 import '../../widgets/video_player.dart';
 import '../component/all_details.dart';
 import '../component/archive_premium_btn.dart';
-import '../component/cerfication.dart';
-import '../component/custom_shape.dart';
-import '../component/download_btn.dart';
-import '../component/multi_platform_btn.dart';
-import '../component/primary_text.dart';
-import '../component/rajdhani_logo.dart';
-import '../component/social_btn.dart';
 import '../component/suggested_video.dart';
 import '../component/update_available.dart';
-import '../component/videos_btn.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -54,18 +35,19 @@ class HomeScreen extends StatelessWidget {
           body: SingleChildScrollView(
         controller: controller.scrollController,
         child: Column(
-          children: [  Container(
-                    height: 280,
-                    width: double.infinity,
-                    color: Colors.black,
-                    child: VideoPlay(url: ApiServices.liveTv))
+          children: [
+            Container(
+                height: 280,
+                width: double.infinity,
+                color: Colors.black,
+                child: VideoPlay(url: ApiServices.liveTv)),
             const SizedBox(height: 10),
             ArchiveAndPremiumButton(),
             const SizedBox(height: 20),
-            Headline(text: 'Videos'),
+            const Headline(text: 'Videos'),
             const SizedBox(height: 40),
             controller.isLoadedData
-                ? SuggestedVideoShimmer()
+                ? const SuggestedVideoShimmer()
                 : CarouselSlider(
                     items: List.generate(
                       controller.allVideosData.length,
@@ -77,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                         return SuggestedVideos(
                           title: video.name ?? 'No Data',
                           text: controller.categoryData[index].name.toString(),
-                          videoUrl: ApiServices.youtubeBase + '$embedCode',
+                          videoUrl: '${ApiServices.youtubeBase}$embedCode',
                           onTap: () {
                             controller.videoController.pause();
                             Get.to(() => YouTubePlayerScreen(
@@ -95,8 +77,8 @@ class HomeScreen extends StatelessWidget {
                       enableInfiniteScroll: true,
                       reverse: false,
                       autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 5),
-                      autoPlayAnimationDuration: Duration(seconds: 4),
+                      autoPlayInterval: const Duration(seconds: 5),
+                      autoPlayAnimationDuration: const Duration(seconds: 4),
                       autoPlayCurve: Curves.fastOutSlowIn,
                       enlargeCenterPage: true,
                       enlargeFactor: 0.0,
@@ -106,20 +88,20 @@ class HomeScreen extends StatelessWidget {
                   ),
             SuggestedVideoList(
               text: 'Suggested Video',
-              videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
-              list: [],
+              videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
+              list: const [],
               onTap: () {
                 controller.videoController.pause();
-                Get.to(() => YouTubePlayerScreen(url: 'VQ1viPcYG80'));
+                Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80'));
               },
             ),
             SuggestedVideoList(
               text: 'Suggested Video',
-              videoUrl: ApiServices.youtubeBase + 'VQ1viPcYG80',
-              list: [],
+              videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
+              list: const [],
               onTap: () {
                 controller.videoController.pause();
-                Get.to(() => YouTubePlayerScreen(url: 'VQ1viPcYG80'));
+                Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80'));
               },
             ),
             PrimaryButton(

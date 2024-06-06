@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/app/modules/widgets/primary_btn.dart';
 
 import '../../../../main.dart';
 import '../../../data/app_image.dart';
@@ -19,9 +18,9 @@ class ContactScreen extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back_ios_new_outlined),
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
         ),
-        title: Text('Contact'),
+        title: const Text('Contact'),
         centerTitle: true,
         actions: [RajdhaniLogo(img: AppImage.appLogo)],
       ),
@@ -39,16 +38,16 @@ class ContactScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomTextField(
+                  const CustomTextField(
                     hint: 'Name',
                   ),
-                  CustomTextField(
+                  const CustomTextField(
                     hint: 'Email',
                   ),
-                  CustomTextField(
+                  const CustomTextField(
                     hint: 'Subject',
                   ),
-                  CustomTextField(
+                  const CustomTextField(
                     hint: 'Message',
                     pad: 50,
                   ),
@@ -56,15 +55,15 @@ class ContactScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          color:isDark?kPrimaryColor: Colors.white,
+                          color: isDark ? kPrimaryColor : Colors.white,
                           borderRadius: BorderRadius.circular(10)),
                       height: 60,
                       width: double.infinity,
-                      child: Center(
+                      child: const Center(
                         child: Text('Send',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                 )),
+                              fontWeight: FontWeight.bold,
+                            )),
                       ),
                     ),
                   )

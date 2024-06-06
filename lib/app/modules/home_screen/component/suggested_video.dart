@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../data/constant.dart';
 import '../../archive_screen/view/archive_screen.dart';
 import '../../widgets/headline_title.dart';
-import '../view/home_screen.dart';
 
 class SuggestedVideos extends StatelessWidget {
   const SuggestedVideos({
@@ -43,7 +41,7 @@ class SuggestedVideos extends StatelessWidget {
                       child: Image.network(url,
                           fit: fit,
                           errorBuilder: (context, error, stackTrace) =>
-                              Icon(Icons.error)),
+                              const Icon(Icons.error)),
                     ),
                   ),
                 ),
@@ -59,7 +57,7 @@ class SuggestedVideos extends StatelessWidget {
                           width: 50,
                           child: Image.asset('assets/icon/Icon.png')),
                       Text(title,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.normal)),
                       /* IconButton(
@@ -80,7 +78,7 @@ class SuggestedVideos extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
+                      const SizedBox(
                         height: 40,
                         width: 40,
                         /*
@@ -95,7 +93,7 @@ class SuggestedVideos extends StatelessWidget {
                       SvgPicture.asset(
                         'assets/svg/youtube.svg',
                       ),
-                      Container(
+                      const SizedBox(
                         height: 40,
                         width: 40,
                         /*  decoration: BoxDecoration(
@@ -127,11 +125,11 @@ class SuggestedVideos extends StatelessWidget {
                 )*/
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Headline(text: text),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],
@@ -166,7 +164,7 @@ class RecommendedVideo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Ensure left alignment
         children: [
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           HeadlineTitle(text: text),
           Stack(
             children: [
@@ -177,7 +175,7 @@ class RecommendedVideo extends StatelessWidget {
                   child: Image.network(url,
                       fit: fit,
                       errorBuilder: (context, error, stackTrace) =>
-                          Icon(Icons.error)),
+                          const Icon(Icons.error)),
                 ),
               ),
               Positioned(
@@ -192,7 +190,7 @@ class RecommendedVideo extends StatelessWidget {
                         width: 50,
                         child: Image.asset('assets/icon/Icon.png')),
                     Text(title,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.normal)),
                   ],
@@ -207,14 +205,14 @@ class RecommendedVideo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
+                    const SizedBox(
                       height: 40,
                       width: 40,
                     ),
                     SvgPicture.asset(
                       'assets/svg/youtube.svg',
                     ),
-                    Container(
+                    const SizedBox(
                       height: 40,
                       width: 40,
                     ),
@@ -222,7 +220,8 @@ class RecommendedVideo extends StatelessWidget {
                 ),
               ),
             ],
-          ),     SizedBox(height: 12),
+          ),
+          const SizedBox(height: 12),
         ],
       ),
     );

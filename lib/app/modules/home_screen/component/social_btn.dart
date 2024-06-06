@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/app/modules/home_screen/component/circle_tap.dart';
 
-import '../../../data/constant.dart';
-
 class SocialButton extends StatelessWidget {
   const SocialButton({
     super.key,
@@ -20,21 +18,21 @@ class SocialButton extends StatelessWidget {
       children: [
         InkWell(
           onTap: fbTap,
-          child: CircleButton(
+          child: const CircleButton(
             imageLogo: 'assets/icon/facebook.png',
             color: Colors.black38,
           ),
         ),
         InkWell(
           onTap: instaTap,
-          child: CircleButton(
+          child: const CircleButton(
             imageLogo: 'assets/icon/instagram.png',
             color: Colors.black38,
           ),
         ),
         InkWell(
           onTap: ytTap,
-          child: CircleButton(
+          child: const CircleButton(
             imageLogo: 'assets/icon/youtube.png',
             color: Colors.black38,
           ),

@@ -17,7 +17,7 @@ class CommonSectionScreen extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back_ios_new_outlined),
+          icon: const Icon(Icons.arrow_back_ios_new_outlined),
         ),
         title: Text(title),
         centerTitle: true,
@@ -30,7 +30,6 @@ class CommonSectionScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 1.5,
             width: double.infinity,
             decoration: BoxDecoration(
-
               color: kPrimaryColor.withOpacity(0.90),
               borderRadius: BorderRadius.circular(20),
             ),
@@ -40,7 +39,7 @@ class CommonSectionScreen extends StatelessWidget {
                 child: Center(
                   child: Text(
                     subtitle,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: Colors.white,

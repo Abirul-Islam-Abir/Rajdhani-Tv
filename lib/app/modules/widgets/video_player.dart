@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:untitled/app/api_services/api_services.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 import 'package:video_player/video_player.dart';
 
@@ -15,8 +14,6 @@ class VideoPlay extends StatefulWidget {
 }
 
 class _VideoPlayState extends State<VideoPlay> {
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeScreenController>(builder: (controller) {
@@ -25,29 +22,29 @@ class _VideoPlayState extends State<VideoPlay> {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
-            VideoPlayer( controller.videoController),
+            VideoPlayer(controller.videoController),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 50),
               reverseDuration: const Duration(milliseconds: 200),
-              child:  controller.videoController.value.isPlaying
+              child: controller.videoController.value.isPlaying
                   ? const SizedBox.shrink()
                   : const ColoredBox(
-                color: Colors.black,
-                child: Center(
-                  child: Icon(
-                    Icons.play_arrow,
-                    color: Colors.white,
-                    size: 100.0,
-                    semanticLabel: 'Play',
-                  ),
-                ),
-              ),
+                      color: Colors.black,
+                      child: Center(
+                        child: Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                          size: 100.0,
+                          semanticLabel: 'Play',
+                        ),
+                      ),
+                    ),
             ),
             GestureDetector(
               onTap: () {
                 controller.videoController.value.isPlaying
-                    ?  controller.videoController.pause()
-                    :  controller.videoController.play();
+                    ? controller.videoController.pause()
+                    : controller.videoController.play();
               },
             ),
             Padding(
@@ -56,7 +53,8 @@ class _VideoPlayState extends State<VideoPlay> {
                 alignment: Alignment.bottomRight,
                 child: IconButton(
                   onPressed: () {
-                    Get.to(() => FullVideoPlay(controller:  controller.videoController));
+                    Get.to(() =>
+                        FullVideoPlay(controller: controller.videoController));
                     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
                         overlays: [
                           SystemUiOverlay.bottom,
@@ -69,7 +67,7 @@ class _VideoPlayState extends State<VideoPlay> {
                       ],
                     );
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.fullscreen_rounded,
                     size: 35,
                     color: Colors.white,
@@ -122,16 +120,16 @@ class FullVideoPlay extends StatelessWidget {
                             child: controller.value.isPlaying
                                 ? const SizedBox.shrink()
                                 : const ColoredBox(
-                              color: Colors.black26,
-                              child: Center(
-                                child: Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 100.0,
-                                  semanticLabel: 'Play',
-                                ),
-                              ),
-                            ),
+                                    color: Colors.black26,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.play_arrow,
+                                        color: Colors.white,
+                                        size: 100.0,
+                                        semanticLabel: 'Play',
+                                      ),
+                                    ),
+                                  ),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -150,9 +148,10 @@ class FullVideoPlay extends StatelessWidget {
                                   setPortraitMode();
                                   Navigator.of(context).pop();
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.fullscreen_rounded,
-                                  size: 35, color: Colors.red,
+                                  size: 35,
+                                  color: Colors.red,
                                 ),
                               ),
                             ),

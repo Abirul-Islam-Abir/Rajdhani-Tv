@@ -22,7 +22,7 @@ class CustomShapePainter extends CustomPainter {
 
     canvas.drawPath(path, paint);
 
-    final textStyle = TextStyle(
+    const textStyle = TextStyle(
       color: Colors.white, // Choose any color
       fontSize: 16, // Adjust the font size as needed
       fontWeight: FontWeight.bold,

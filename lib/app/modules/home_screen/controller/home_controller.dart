@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:untitled/app/model/all_videos_model.dart';
 import 'package:untitled/app/model/category_model.dart';
 import 'package:video_player/video_player.dart';
@@ -9,11 +10,6 @@ import '../../../../main.dart';
 import '../../../api_services/all_videos.dart';
 import '../../../api_services/api_services.dart';
 import '../../../api_services/category_name.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-
 import '../../../data/shared_pref.dart';
 
 class HomeScreenController extends GetxController {
@@ -57,11 +53,13 @@ class HomeScreenController extends GetxController {
     select = index;
     update();
   }
-changeDarkMode(value)async{
+
+  changeDarkMode(value) async {
     darkNotifier.value = value;
     await SharedPref.storeIsDarkMode(value);
     update();
-}
+  }
+
   Future<void> scrollControll() async {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
@@ -89,7 +87,7 @@ changeDarkMode(value)async{
   String? version;
   String? buildNumber;
 
- Future deviceInfo() async {
+  Future deviceInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     appName = packageInfo.appName;
     packageName = packageInfo.packageName;

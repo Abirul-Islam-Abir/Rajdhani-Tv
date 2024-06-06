@@ -5,12 +5,12 @@ import '../../../data/constant.dart';
 
 class SubscriptionCard extends StatelessWidget {
   const SubscriptionCard({
-    Key? key,
+    super.key,
     required this.month,
     required this.price,
     required this.onTap,
     this.gradientColors = const [Colors.green, Colors.pink],
-  }) : super(key: key);
+  });
 
   final String month;
   final Function() onTap;
@@ -32,7 +32,7 @@ class SubscriptionCard extends StatelessWidget {
               color: Colors.red.withOpacity(0.5),
               blurRadius: 10,
               spreadRadius: 2,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
           color: Colors.red,
@@ -50,12 +50,12 @@ class SubscriptionCard extends StatelessWidget {
               width: 100,
               child: Image.asset(AppImage.appLogo),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Text(
               month,
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.normal,
                 color: Colors.white,
                 fontSize: 40,
@@ -65,7 +65,7 @@ class SubscriptionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'BDT.',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class SubscriptionCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 40.0),
                   child: Text(
                     '$price৳',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 50,
@@ -86,7 +86,7 @@ class SubscriptionCard extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
+            const Text(
               '✔ All Content Access',
               style: TextStyle(
                 fontWeight: FontWeight.normal,
@@ -94,7 +94,7 @@ class SubscriptionCard extends StatelessWidget {
                 fontSize: 25,
               ),
             ),
-            Text(
+            const Text(
               '✔ Live Support',
               style: TextStyle(
                 fontWeight: FontWeight.normal,
@@ -102,13 +102,13 @@ class SubscriptionCard extends StatelessWidget {
                 fontSize: 25,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             MaterialButton(
               color: kPrimaryColor,
               onPressed: onTap,
-              child: Text(
+              child: const Text(
                 'Subscribe',
                 style: TextStyle(color: Colors.white),
               ),

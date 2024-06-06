@@ -1,14 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/app/modules/contact_screen/view/contact_screen.dart';
-import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
 import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
 import 'package:untitled/app/routes/app_routes.dart';
 
-import '../../../../main.dart';
-import '../../../data/constant.dart';
-import '../../home_screen/component/all_details.dart';
 import '../../widgets/custom_text_field.dart';
 import '../component/background_box.dart';
 import '../component/remember_box.dart';

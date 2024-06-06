@@ -9,12 +9,12 @@ class AllVideosModel {
 
   AllVideosModel(
       {this.id,
-        this.name,
-        this.archives,
-        this.publish,
-        this.createdAt,
-        this.updatedAt,
-        this.embedCodes});
+      this.name,
+      this.archives,
+      this.publish,
+      this.createdAt,
+      this.updatedAt,
+      this.embedCodes});
 
   AllVideosModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -26,21 +26,21 @@ class AllVideosModel {
     if (json['embed_codes'] != null) {
       embedCodes = <EmbedCodes>[];
       json['embed_codes'].forEach((v) {
-        embedCodes!.add(new EmbedCodes.fromJson(v));
+        embedCodes!.add(EmbedCodes.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['archives'] = this.archives;
-    data['publish'] = this.publish;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.embedCodes != null) {
-      data['embed_codes'] = this.embedCodes!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['archives'] = archives;
+    data['publish'] = publish;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (embedCodes != null) {
+      data['embed_codes'] = embedCodes!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -59,14 +59,14 @@ class EmbedCodes {
 
   EmbedCodes(
       {this.id,
-        this.title,
-        this.embed,
-        this.category,
-        this.autoplay,
-        this.muted,
-        this.publish,
-        this.createdAt,
-        this.updatedAt});
+      this.title,
+      this.embed,
+      this.category,
+      this.autoplay,
+      this.muted,
+      this.publish,
+      this.createdAt,
+      this.updatedAt});
 
   EmbedCodes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -81,16 +81,16 @@ class EmbedCodes {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['embed'] = this.embed;
-    data['category'] = this.category;
-    data['autoplay'] = this.autoplay;
-    data['muted'] = this.muted;
-    data['publish'] = this.publish;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['embed'] = embed;
+    data['category'] = category;
+    data['autoplay'] = autoplay;
+    data['muted'] = muted;
+    data['publish'] = publish;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

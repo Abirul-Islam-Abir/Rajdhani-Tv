@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -13,7 +12,7 @@ import '../../youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
 class AllVideoScreen extends StatefulWidget {
   final List<EmbedCodes> list;
 
-  AllVideoScreen({super.key, required this.list});
+  const AllVideoScreen({super.key, required this.list});
 
   @override
   _AllVideoScreenState createState() => _AllVideoScreenState();
@@ -49,7 +48,7 @@ class _AllVideoScreenState extends State<AllVideoScreen> {
                   itemCount: widget.list.length,
                   itemBuilder: (context, index) {
                     final video = widget.list[index];
-                    final embedCode = video.embed! ;
+                    final embedCode = video.embed!;
                     var url =
                         getThumbnailUrl(ApiServices.youtubeBase + embedCode);
                     return Padding(

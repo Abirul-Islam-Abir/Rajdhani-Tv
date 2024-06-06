@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class SecondaryButton extends StatelessWidget {
@@ -11,10 +10,13 @@ class SecondaryButton extends StatelessWidget {
   final Function() onTap;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(height: 50,width: 120,
+    return SizedBox(
+      height: 50,
+      width: 120,
       child: ElevatedButton(
           onPressed: onTap,
-          child: Text(text, style: TextStyle(color: Colors.white, fontSize: 11))),
+          child: Text(text,
+              style: const TextStyle(color: Colors.white, fontSize: 11))),
     );
   }
 }
