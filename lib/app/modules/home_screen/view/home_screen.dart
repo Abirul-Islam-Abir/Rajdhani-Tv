@@ -59,8 +59,8 @@ class HomeScreen extends StatelessWidget {
                     height: 280,
                     width: double.infinity,
                     color: Colors.black,
-                    child: VideoPlay(url: ApiServices.liveTv))
-                  const SizedBox(height: 10),
+                    child: VideoPlay(url: ApiServices.liveTv)),
+                    SizedBox(height: 10),
                   ArchiveAndPremiumButton(),
                   const SizedBox(height: 20),
                   Headline(text: 'Videos'),
