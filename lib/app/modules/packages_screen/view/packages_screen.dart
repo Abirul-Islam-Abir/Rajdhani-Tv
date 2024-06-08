@@ -10,7 +10,8 @@ import '../component/packages_card.dart';
 import '../controller/package_screen_controller.dart';
 
 class PackagesScreen extends StatelessWidget {
-  const PackagesScreen({super.key});
+  PackagesScreen({super.key});
+  final controller = Get.put(PackagesScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,29 +30,33 @@ class PackagesScreen extends StatelessWidget {
           children: [
             const PackagesHeadline(text: 'Our Packages'),
             GetBuilder<PackagesScreenController>(
-              builder: (controller) => Column(
-                children: List.generate(
-                  controller.data.length,
-                  (index) {
-                    final color = subscriptionData[index]['color'];
-                    final name = controller.data[index].packageName;
-                    final price = controller.data[index].price!;
-                    final packageId = controller.data[index].id;
+              builder: (controller) => controller.isLoading
+                  ? SizedBox(
+                      height: 300,
+                      child: Center(child: const CircularProgressIndicator()))
+                  : Column(
+                      children: List.generate(
+                        controller.data.length,
+                        (index) {
+                          final color = subscriptionData[index]['color'];
+                          final name = controller.data[index].packageName;
+                          final price = controller.data[index].price!;
+                          final packageId = controller.data[index].id;
 
-                    return SubscriptionCard(
-                      gradientColors: color,
-                      month: '$name',
-                      price: price,
-                      subscribeOnTap: () {
-                        // log(controller.generateTranId().toString());
-                        // Get.to(() => CreateAccountScreen());
-                        Get.to(() => CreateAccountScreen(),
-                            arguments: [price, packageId]);
-                      },
-                    );
-                  },
-                ),
-              ),
+                          return SubscriptionCard(
+                            gradientColors: color,
+                            month: '$name',
+                            price: price,
+                            subscribeOnTap: () {
+                              // log(controller.generateTranId().toString());
+                              // Get.to(() => CreateAccountScreen());
+                              Get.to(() => CreateAccountScreen(
+                                  packageId: packageId!, price: price));
+                            },
+                          );
+                        },
+                      ),
+                    ),
             ),
             const AllDetails()
           ],

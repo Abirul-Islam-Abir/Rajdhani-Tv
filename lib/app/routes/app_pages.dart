@@ -17,7 +17,7 @@ List<GetPage<dynamic>> getPages() => [
       ),
       GetPage(
         name: RouteName.packageScreen,
-        page: () => const PackagesScreen(),
+        page: () => PackagesScreen(),
       ),
       GetPage(
         name: RouteName.bottomNav,

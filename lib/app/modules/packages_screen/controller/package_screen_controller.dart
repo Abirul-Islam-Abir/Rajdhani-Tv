@@ -5,7 +5,7 @@ import '../../../model/subscription_model.dart';
 
 class PackagesScreenController extends GetxController {
   List<SubscriptionModel> data = [];
-
+  bool isLoading = false;
   // get tranId => null;
   Future<void> subscriptionResponse() async {
     final response = await subscriptionRequest();
@@ -15,11 +15,17 @@ class PackagesScreenController extends GetxController {
   }
 
   Future<void> initialize() async {
+    isLoading = true;
+    update();
     try {
-      Future.wait([subscriptionResponse()]);
+      await Future.wait([subscriptionResponse()]);
     } catch (e) {
       throw Exception(e.toString());
+    } finally {
+      update();
     }
+    isLoading = false;
+    update();
   }
 
   @override

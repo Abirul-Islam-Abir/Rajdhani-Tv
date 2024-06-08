@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
-import 'package:untitled/app/modules/create_account_screen/view/create_account_screen.dart';
 import 'package:untitled/app/modules/home_screen/component/suggested_video.dart';
+import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
 
 import '../../../api_services/api_services.dart';
 import '../../../model/all_videos_model.dart';
@@ -37,15 +37,12 @@ class SliderVideo extends StatelessWidget {
                     text: list[index].name.toString(),
                     videoUrl: '${ApiServices.youtubeBase}$embedCode',
                     onTap: () {
-                       Get.find<HomeScreenController>()
-                              .videoController
-                              .pause()
-                          ;
+                      Get.find<HomeScreenController>().videoController.pause();
                       isSubscribed
                           ? Get.to(() => YouTubePlayerScreen(
                                 url: embedCode.toString(),
                               ))
-                          : Get.to(() => CreateAccountScreen());
+                          : Get.to(() => PackagesScreen());
                     },
                   ),
                 );

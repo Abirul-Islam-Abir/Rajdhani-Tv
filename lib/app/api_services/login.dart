@@ -7,7 +7,7 @@ Future loginRequest({name, pass}) async {
   try {
     final response = await http.post(Uri.parse(ApiServices.loginUrl),
         body: {"subscriber_email": name, "password": pass},
-        headers: {'Authorization': 'Application/json'});
+        headers: {'Content-Type': 'application/json'});
     final decodedResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
       return decodedResponse;
