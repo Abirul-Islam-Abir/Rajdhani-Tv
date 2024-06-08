@@ -40,8 +40,10 @@ class PackagesScreen extends StatelessWidget {
                       gradientColors: color,
                       month: '$name',
                       price: price,
-                      onTap: () {
-                        Get.to(() => CreateAccountScreen());
+                      subscribeOnTap: () {
+                        //TODO: Add subscription logic
+                        controller.sslCommerzGeneralCall();
+                        // Get.to(() => CreateAccountScreen());
                       },
                     );
                   },

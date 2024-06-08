@@ -8,12 +8,12 @@ class SubscriptionCard extends StatelessWidget {
     super.key,
     required this.month,
     required this.price,
-    required this.onTap,
+    required this.subscribeOnTap,
     this.gradientColors = const [Colors.green, Colors.pink],
   });
 
   final String month;
-  final Function() onTap;
+  final Function() subscribeOnTap;
   final List<Color> gradientColors;
   final int price;
 
@@ -107,7 +107,7 @@ class SubscriptionCard extends StatelessWidget {
             ),
             MaterialButton(
               color: kPrimaryColor,
-              onPressed: onTap,
+              onPressed: subscribeOnTap,
               child: const Text(
                 'Subscribe',
                 style: TextStyle(color: Colors.white),

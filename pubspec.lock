@@ -179,6 +179,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_sslcommerz:
+    dependency: "direct main"
+    description:
+      name: flutter_sslcommerz
+      sha256: "9ccc6ff8971766929fe7ca20c6421e14afe4712cb08ecb0251bc7a5af5832bc4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2-nullsafety.0"
   flutter_svg:
     dependency: "direct main"
     description:
