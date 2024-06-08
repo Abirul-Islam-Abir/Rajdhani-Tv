@@ -10,7 +10,6 @@ import 'app/state_holder_binder/state_holder_binding.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -18,6 +17,8 @@ Future<void> main() async {
     ),
   );
 }
+
+
 
 final darkNotifier = ValueNotifier<bool>(false);
 
@@ -55,6 +56,6 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
               getPages: getPages(),
               initialRoute: RouteName.initial,
               initialBinding: StateHolderBinding(),
-            ));
+            ),);
   }
 }
