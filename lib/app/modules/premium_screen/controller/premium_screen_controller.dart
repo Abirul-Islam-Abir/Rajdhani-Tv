@@ -22,7 +22,9 @@ class PremiumScreenController extends GetxController {
         name: nameController.text, pass: passController.text);
     if (response['success'] == true) {
       Get.snackbar('Success!', response['message']);
-      await SharedPref.storeIsSubscribed(true);
+
+      await SharedPref.storeMail(nameController.text.toString());
+      await SharedPref.storeToken(response['token']);
       subscribed(true);
       isLoaded(false);
       Get.find<BottomNavController>().changeIndex(0);

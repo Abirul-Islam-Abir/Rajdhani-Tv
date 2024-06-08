@@ -14,6 +14,7 @@ import '../../widgets/suggested_video_shimmer.dart';
 import '../../widgets/video_player.dart';
 import '../component/all_details.dart';
 import '../component/archive_premium_btn.dart';
+import '../component/headline_text.dart';
 import '../component/slider_videos.dart';
 import '../component/suggested_video.dart';
 import '../component/update_available.dart';

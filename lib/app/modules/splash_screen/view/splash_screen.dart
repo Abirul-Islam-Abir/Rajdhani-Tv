@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(
                   width: MediaQuery.of(context).size.width / 1.5,
                   height: MediaQuery.of(context).size.width / 2.5,
-                  child: Image.asset(darkNotifier.value?AppImage.appLogo:AppImage.appLogoLight)),
+                  child: Image.asset(AppImage.appLogo)),
               const Spacer(),
               Text('Rajdhani Tv',
                   style: TextStyle(color: Colors.grey)),
