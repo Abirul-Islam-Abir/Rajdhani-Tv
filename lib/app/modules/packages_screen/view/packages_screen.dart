@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/app/modules/create_account_screen/view/create_account_screen.dart';
 import 'package:untitled/app/modules/home_screen/component/all_details.dart';
 
 import '../../../data/app_image.dart';
@@ -36,13 +35,16 @@ class PackagesScreen extends StatelessWidget {
                     final color = subscriptionData[index]['color'];
                     final name = controller.data[index].packageName;
                     final price = controller.data[index].price!;
+                    final packageId = controller.data[index].id;
+
                     return SubscriptionCard(
                       gradientColors: color,
                       month: '$name',
                       price: price,
                       subscribeOnTap: () {
                         //TODO: Add subscription logic
-                        controller.sslCommerzGeneralCall();
+                        controller.sslCommerzGeneralCall(price, packageId!);
+                        // log(controller.generateTranId().toString());
                         // Get.to(() => CreateAccountScreen());
                       },
                     );
