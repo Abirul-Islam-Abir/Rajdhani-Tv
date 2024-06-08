@@ -41,12 +41,12 @@ class PackagesScreenController extends GetxController {
         // ipn_url: "www.ipnurl.com",
         // multi_card_name: formData['multicard'],
         currency: SSLCurrencyType.BDT,
-        product_category: "Food",
+        product_category: "Entertainment",
         sdkType: SSLCSdkType.TESTBOX,
 
         store_id: 'rajdh65fee33aef616',
         store_passwd: 'rajdh65fee33aef616@ssl',
-        total_amount: 10,
+        total_amount: double.parse(data.first.price.toString()),
         tran_id: "mmm",
       ),
     );
