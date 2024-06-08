@@ -5,8 +5,12 @@ import 'package:untitled/app/modules/home_screen/controller/home_controller.dart
 
 import '../../../api_services/api_services.dart';
 import '../../../data/constant.dart';
+import '../../../data/subscribed_value_change.dart';
 import '../../all_videos_screen/view/all_videos_screen.dart';
+import '../../create_account_screen/view/create_account_screen.dart';
+import '../../home_screen/component/recommended_video.dart';
 import '../../home_screen/component/suggested_video.dart';
+import '../../premium_screen/view/premium_screen.dart';
 
 class ArchiveScreen extends StatelessWidget {
   const ArchiveScreen({super.key});
@@ -35,7 +39,10 @@ class ArchiveScreen extends StatelessWidget {
                     text: controller.categoryData[index].name.toString(),
                     videoUrl: '${ApiServices.youtubeBase}$embedCode',
                     onTap: () {
-                      Get.to(() => AllVideoScreen(list: video.embedCodes!));
+                      isSubscribed
+                          ? Get.to(
+                              () => AllVideoScreen(list: video.embedCodes!))
+                          : Get.to(() => PremiumScreen());
                     },
                   );
                 },
@@ -46,29 +53,6 @@ class ArchiveScreen extends StatelessWidget {
           ),
         );
       }),
-    );
-  }
-}
-
-class Headline extends StatelessWidget {
-  const Headline({super.key, required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: Get.width,
-      decoration: const BoxDecoration(
-        color: kPrimaryColor,
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
-      ),
     );
   }
 }

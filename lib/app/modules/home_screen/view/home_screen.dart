@@ -14,6 +14,7 @@ import '../../widgets/suggested_video_shimmer.dart';
 import '../../widgets/video_player.dart';
 import '../component/all_details.dart';
 import '../component/archive_premium_btn.dart';
+import '../component/headline_text.dart';
 import '../component/slider_videos.dart';
 import '../component/suggested_video.dart';
 import '../component/update_available.dart';
@@ -32,47 +33,49 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UpdateAvailable(
-        packageName: homeController.packageName,
-        isUpdate: false,
-        child: Scaffold(
-            body: SingleChildScrollView(
-              controller: controller.scrollController,
-              child: Column(
-                children: [
-                  Container(
-                      height: 280,
-                      width: double.infinity,
-                      color: Colors.black,
-                      child: VideoPlay(url: ApiServices.liveTv)),
-                  const SizedBox(height: 10),
-                  ArchiveAndPremiumButton(),
-                  const SizedBox(height: 20),
-                  const Headline(text: 'Videos'),
-                  const SizedBox(height: 40),
-                  Obx(() => SliderVideo(
-                      isLoaded: controller.isLoadedData,
-                      list: controller.allVideosData,
-                    )),
-                  SuggestedVideoList(
-                    text: 'Suggested Video',
-                    videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
-                    list: const [],
-                  ),
-                  SuggestedVideoList(
-                    text: 'Suggested Video',
-                    videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
-                    list: const [],
-                  ),
-                  PrimaryButton(
-                      text: 'All Videos',
-                      onTap: () {
-                        controller.videoController.pause();
-                        Get.find<BottomNavController>().changeIndex(1);
-                      }),
-                  const SizedBox(height: 30),
-                  const AllDetails(),
-                ],
+      packageName: homeController.packageName,
+      isUpdate: false,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          controller: controller.scrollController,
+          child: Column(
+            children: [
+              Container(
+                  height: 280,
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: VideoPlay(url: ApiServices.liveTv)),
+              const SizedBox(height: 10),
+            /*  ArchiveAndPremiumButton(),*/
+              const SizedBox(height: 20),
+              const Headline(text: 'Videos'),
+              const SizedBox(height: 40),
+              Obx(() => SliderVideo(
+                    isLoaded: controller.isLoadedData,
+                    list: controller.allVideosData,
+                  )),
+              SuggestedVideoList(
+                text: 'Suggested Video',
+                videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
+                list: const [],
               ),
-            )));
+              SuggestedVideoList(
+                text: 'Suggested Video',
+                videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
+                list: const [],
+              ),
+              PrimaryButton(
+                  text: 'All Videos',
+                  onTap: () {
+                    controller.videoController.pause();
+                    Get.find<BottomNavController>().changeIndex(1);
+                  }),
+              const SizedBox(height: 30),
+              const AllDetails(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

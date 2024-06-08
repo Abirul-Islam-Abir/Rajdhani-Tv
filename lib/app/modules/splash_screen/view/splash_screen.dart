@@ -4,6 +4,7 @@ import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 import 'package:upgrader/upgrader.dart';
 
+import '../../../../main.dart';
 import '../../../data/app_image.dart';
 import '../../../data/shared_pref.dart';
 
@@ -25,11 +26,13 @@ class _SplashScreenState extends State<SplashScreen> {
             (route) => false));
     super.initState();
   }
-            final controller = Get.put(HomeScreenController());
+
+  final controller = Get.put(HomeScreenController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
+      child: Scaffold(backgroundColor: Colors.white,
         body: Center(
           child: Column(
             children: [
@@ -39,8 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: MediaQuery.of(context).size.width / 2.5,
                   child: Image.asset(AppImage.appLogo)),
               const Spacer(),
-                Text( '${controller.appName}', style: TextStyle(color: Colors.grey)),
-                Text('${controller.version}',
+              Text('Rajdhani Tv',
+                  style: TextStyle(color: Colors.grey)),
+              Text('1.0.0',
                   style: TextStyle(color: Colors.grey)),
             ],
           ),

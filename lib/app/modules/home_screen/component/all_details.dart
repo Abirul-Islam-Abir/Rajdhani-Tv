@@ -37,7 +37,7 @@ class AllDetails extends StatelessWidget {
                 PrimaryText(text: 'Terms', onTap: () { Get.to(() =>
                     CommonSectionScreen(title: 'Terms', subtitle: AppString.terms));}),
                 const SizedBox(height: 15),
-                SocialButton(fbTap: () {}, instaTap: () {}, ytTap: () {}),
+                SocialButton( ),
                 //  DownloadButton(onTap: () {}, text: 'Download'),
                 const SizedBox(height: 25),
                 //MultiPlatformButton(apple: () {}, google: () {}, windows: () {}),

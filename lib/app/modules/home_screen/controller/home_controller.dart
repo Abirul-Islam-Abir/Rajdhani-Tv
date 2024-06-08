@@ -35,7 +35,7 @@ void isLoad(value){
     });
     videoController.setLooping(false);
     videoController.initialize().then((_) {
-      videoController.pause();
+      videoController.play();
       update();
     });
   }

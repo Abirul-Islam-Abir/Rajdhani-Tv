@@ -109,7 +109,7 @@ class SubscriptionCard extends StatelessWidget {
               color: kPrimaryColor,
               onPressed: subscribeOnTap,
               child: const Text(
-                'Subscribe',
+                'Subscribe Now!',
                 style: TextStyle(color: Colors.white),
               ),
             ),
