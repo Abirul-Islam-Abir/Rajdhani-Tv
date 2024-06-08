@@ -36,12 +36,17 @@ class PackagesScreen extends StatelessWidget {
                     final color = subscriptionData[index]['color'];
                     final name = controller.data[index].packageName;
                     final price = controller.data[index].price!;
+                    final packageId = controller.data[index].id;
+
                     return SubscriptionCard(
                       gradientColors: color,
                       month: '$name',
                       price: price,
-                      onTap: () {
-                        Get.to(() => CreateAccountScreen());
+                      subscribeOnTap: () {
+                        // log(controller.generateTranId().toString());
+                        // Get.to(() => CreateAccountScreen());
+                        Get.to(() => CreateAccountScreen(),
+                            arguments: [price, packageId]);
                       },
                     );
                   },
