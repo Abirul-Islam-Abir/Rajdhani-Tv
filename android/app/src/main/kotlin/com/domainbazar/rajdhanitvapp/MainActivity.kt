@@ -1,4 +1,4 @@
-package com.domainbazar.rajdhanitvlive.untitled
+package com.domainbazar.rajdhanitvapp
 
 import io.flutter.embedding.android.FlutterActivity
 
