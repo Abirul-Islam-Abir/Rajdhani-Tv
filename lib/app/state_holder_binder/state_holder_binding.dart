@@ -11,7 +11,7 @@ class StateHolderBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => BottomNavController());
     Get.lazyPut(() => NetworkController());
-    Get.put(PackagesScreenController());
+    Get.lazyPut(() => PackagesScreenController());
     Get.put(CreateAccountController());
     Get.put(HomeScreenController());
   }
