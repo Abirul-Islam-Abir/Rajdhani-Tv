@@ -26,8 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
             (route) => false));
     super.initState();
   }
-
-  final controller = Get.put(HomeScreenController());
+ 
 
   @override
   Widget build(BuildContext context) {
