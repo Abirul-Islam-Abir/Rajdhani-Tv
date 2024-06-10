@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/model/all_videos_model.dart';
 import 'package:untitled/app/model/category_model.dart';
 import 'package:video_player/video_player.dart';
@@ -19,10 +20,14 @@ class HomeScreenController extends GetxController {
   bool isScrollingDown = false;
   double bottomBarHeight = 75;
   int select = 0;
+  RxBool _isLogOut = false.obs;
+  bool get isLogOut => _isLogOut.value;
   RxBool _isLoadedData = true.obs;
   bool get isLoadedData => _isLoadedData.value;
 void isLoad(value){
   _isLoadedData.value = value;
+}void isLogedOut(value){
+  _isLogOut.value = value;
 }
   videoPlayerController() {
     videoController = VideoPlayerController.networkUrl(
@@ -60,7 +65,10 @@ void isLoad(value){
     await SharedPref.storeIsDarkMode(value);
     update();
   }
-
+void updateMethod(){
+ subscribed(false);
+  update();
+}
   Future<void> scrollControll() async {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
@@ -132,9 +140,9 @@ void isLoad(value){
     super.onInit();
   }
 
-  @override
-  void dispose() {
+   @override
+  void onClose() { 
     videoController.dispose();
-    super.dispose();
+    super.onClose();
   }
 }

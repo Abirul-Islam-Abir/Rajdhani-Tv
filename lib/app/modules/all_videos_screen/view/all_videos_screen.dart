@@ -6,7 +6,6 @@ import '../../../api_services/api_services.dart';
 import '../../../model/all_videos_model.dart';
 import '../../home_screen/component/build_appbar.dart';
 import '../../home_screen/component/get_thumbnail_image.dart';
-import '../../home_screen/component/suggested_video.dart';
 import '../../widgets/video_player.dart';
 import '../../youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
 

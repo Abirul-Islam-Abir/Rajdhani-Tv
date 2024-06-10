@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/data/utils/validate.dart';
 import 'package:untitled/app/modules/create_account_screen/controller/create_account_controller.dart';
 import 'package:untitled/app/modules/home_screen/component/build_appbar.dart';
 
@@ -23,55 +24,59 @@ class CreateAccountScreen extends StatelessWidget {
       appBar: buildAppBar(),
       body: BackgroundBox(
         height: 1.3,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 20),
-              const Text(
-                'Sign Up',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.white),
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: controller.nameController,
-                hint: 'Name',
-              ),
-              CustomTextField(
-                controller: controller.emailController,
-                hint: 'Email',
-              ),
-              CustomTextField(
-                controller: controller.mobileController,
-                hint: 'Mobile Number',
-              ),
-              CustomTextField(
-                controller: controller.passController,
-                hint: 'Password',
-              ),
-              CustomTextField(
-                controller: controller.confirmPassController,
-                hint: 'Confirm Password',
-              ),
-              Obx(() => SubmitButton(
-                    isLoading: controller.isLoading.value,
-                    tap: () {
-                      controller.onButtonPressed(price, packageId);
-                    },
-                  )),
-              SubscribeButton(
-                tap: () {
-                  Get.back();
-                  Get.back();
-                },
-                title: 'Already have an account',
-                btnText: 'Log In',
-              )
-            ],
+        child: Form(
+
+key: controller.key,          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+                const Text(
+                  'Sign Up',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+                CustomTextField(validator: validateName,
+                  controller: controller.nameController,
+                  hint: 'Name',
+                ),
+                CustomTextField(validator: validateEmail,
+                  controller: controller.emailController,
+                  hint: 'Email',
+                ),
+                CustomTextField(
+                  validator: validatePhoneNumber,
+                  controller: controller.mobileController,
+                  hint: 'Mobile Number',
+                ),
+                CustomTextField(validator: validateNumericPassword,
+                  controller: controller.passController,
+                  hint: 'Password',
+                ),
+                CustomTextField(validator: validateNumericPassword,
+                  controller: controller.confirmPassController,
+                  hint: 'Confirm Password',
+                ),
+                Obx(() => SubmitButton(
+                      isLoading: controller.isLoading.value,
+                      tap: () {
+                        controller.onButtonPressed(price, packageId);
+                      },
+                    )),
+                SubscribeButton(
+                  tap: () {
+                    Get.back();
+                    Get.back();
+                  },
+                  title: 'Already have an account',
+                  btnText: 'Log In',
+                )
+              ],
+            ),
           ),
         ),
       ),

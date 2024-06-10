@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
-import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 
 import '../../../data/app_image.dart';
 import '../../../data/shared_pref.dart';
@@ -19,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPref.retrieveDarkMode();
     SharedPref.retrieveIsSubscribed();
     //TODO token can be retrieved from shared pref
-    SharedPref.retrieveToken();
+    SharedPref.retrieveSubscriberId();
     Future.delayed(const Duration(seconds: 5)).then((value) =>
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => BottomNav()),

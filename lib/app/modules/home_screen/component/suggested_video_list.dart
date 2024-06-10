@@ -4,10 +4,8 @@ import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/modules/home_screen/component/recommended_video.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 
-import '../../create_account_screen/view/create_account_screen.dart';
 import '../../premium_screen/view/premium_screen.dart';
 import '../../youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
-import 'suggested_video.dart';
 
 class SuggestedVideoList extends StatelessWidget {
   const SuggestedVideoList(
@@ -34,7 +32,7 @@ class SuggestedVideoList extends StatelessWidget {
               videoUrl: videoUrl,
               onTap: () {
            Get.find<HomeScreenController>().videoController.pause() ;
-               isSubscribed? Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80')):Get.to(() => PremiumScreen());;
+               isSubscribed? Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80')):Get.to(() => PremiumScreen(),arguments: true);;
               }),
         ),
       ),

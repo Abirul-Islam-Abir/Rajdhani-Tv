@@ -42,7 +42,7 @@ class SliderVideo extends StatelessWidget {
                           ? Get.to(() => YouTubePlayerScreen(
                                 url: embedCode.toString(),
                               ))
-                          : Get.to(() => PackagesScreen());
+                          : Get.to(() => PackagesScreen(),arguments: true);
                     },
                   ),
                 );

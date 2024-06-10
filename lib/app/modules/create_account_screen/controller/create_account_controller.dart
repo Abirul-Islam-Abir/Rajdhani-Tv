@@ -14,7 +14,9 @@ import 'package:untitled/app/api_services/api_services.dart';
 import 'package:untitled/app/api_services/login.dart';
 import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
+import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
+import 'package:untitled/app/modules/splash_screen/view/splash_screen.dart';
 
 class CreateAccountController extends GetxController {
   final nameController = TextEditingController();
@@ -22,10 +24,10 @@ class CreateAccountController extends GetxController {
   final mobileController = TextEditingController();
   final passController = TextEditingController();
   final confirmPassController = TextEditingController();
-
+final key = GlobalKey<FormState>();
   bool isPaymentSuccess = false;
   String transactionId = '';
-  int status = 0;
+  int status = 1;
   // final RxBool _isLoading = false.obs;
   // final RxBool _isChecked = false.obs;
   // bool get isChecked => _isChecked.value;
@@ -42,10 +44,9 @@ class CreateAccountController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  Future<bool> signUp(String trxId, int status, int packageId) async {
+  Future  signUp({required String trxId,required int status,required int packageId,required int price}) async {
     isLoading.value = true;
-    update();
-    dev.log('signUp called1');
+    update(); 
     final resBody = {
       "subscriber_name": nameController.text.trim().toString(),
       "subscriber_email": emailController.text.trim().toString(),
@@ -54,55 +55,37 @@ class CreateAccountController extends GetxController {
       "package_id": packageId,
       "trans_id": trxId,
       "status": status,
-    };
-    dev.log('signUp called2');
+    }; 
     final response = await http.post(
         Uri.parse(
           ApiServices.signUp,
         ),
         body: jsonEncode(resBody),
-        headers: {'Content-Type': 'application/json'});
-    dev.log('signUp called3');
-    dev.log(response.statusCode.toString());
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      dev.log('signUp called4');
-      dev.log(response.body);
-      // isLoading.value = false;
-      // update();
-      Future.delayed(const Duration(seconds: 1), () async {
-        login();
-      });
-
-      return true;
+        headers: {'Content-Type': 'application/json'}); 
+    if (response.statusCode == 200 || response.statusCode == 201) {  
+   await sslCommerzGeneralCall(price, packageId,trxId) ; 
     } else {
       isLoading.value = false;
-      update();
-      return false;
+      update(); 
     }
   }
 
-  Future<void> login() async {
-    // isLoading.value = true;
-    // update();
+  Future<void> login() async { 
     final response = await loginRequest(
         name: emailController.text, pass: passController.text);
     if (response['success'] == true) {
       Get.snackbar('Success!', response['message']);
-      await SharedPref.storeMail(nameController.text.toString());
-      await SharedPref.storeToken(response['token']);
-      subscribed(true);
-      isLoading.value = false;
-      update();
-      Get.offAll(() => BottomNav());
+      await SharedPref.storeMail(emailController.text.toString());
+      await SharedPref.storeIsSubscribed(true);
+        subscribed(true);  
+      Get.back();
+      Get.to(BottomNav());
     } else {
-      Get.snackbar('inValid!', response['message']);
-      isLoading.value = false;
-      update();
+      Get.snackbar('inValid!', response['message']); 
     }
   }
 
-  Future<void> sslCommerzGeneralCall(int price, int packageId) async {
-    String trxId = generateTranId();
+  Future<void> sslCommerzGeneralCall(int price, int packageId,String trxId) async { 
     Sslcommerz sslcommerz = Sslcommerz(
       initializer: SSLCommerzInitialization(
         //Use the ipn if you have valid one, or it will fail the transaction.
@@ -110,17 +93,15 @@ class CreateAccountController extends GetxController {
         // multi_card_name: formData['multicard'],
         currency: SSLCurrencyType.BDT,
         product_category: "Entertainment",
-        sdkType: SSLCSdkType.TESTBOX,
-
+        sdkType: SSLCSdkType.TESTBOX, 
         store_id: 'rajdh65fee33aef616',
         store_passwd: 'rajdh65fee33aef616@ssl',
         total_amount: double.parse(price.toString()),
         tran_id: trxId,
       ),
     );
-    try {
-      SSLCTransactionInfoModel result = await sslcommerz.payNow();
-
+    try { 
+      SSLCTransactionInfoModel result = await sslcommerz.payNow(); 
       if (result.status!.toLowerCase() == "failed") {
         Get.showSnackbar(const GetSnackBar(
           message: "Transaction is Failed....",
@@ -131,24 +112,22 @@ class CreateAccountController extends GetxController {
         Get.showSnackbar(const GetSnackBar(
           message: "Transaction is Closed....",
           duration: Duration(seconds: 2),
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 229, 206, 204),
         ));
-      } else {
-        dev.log(result.tranId ?? 'no tranId');
-        isPaymentSuccess = true;
-        transactionId = result.tranId!;
-        status = 1;
-        update();
-
+      } else {  
         Get.showSnackbar(GetSnackBar(
           message:
               "Transaction is ${result.status} and Amount is ${result.amount}",
           duration: const Duration(seconds: 2),
           backgroundColor: Colors.green,
-        ));
+        )); 
+           await login();
       }
     } catch (e) {
       debugPrint(e.toString());
+    }finally{
+        isLoading.value = false;
+      update();
     }
   }
 
@@ -160,29 +139,24 @@ class CreateAccountController extends GetxController {
     confirmPassController.clear();
   }
 
-  onButtonPressed(int price, int packageId) async {
-    if (nameController.text.isEmpty) {
-      Get.snackbar('Error', 'Name is required',
-          backgroundColor: Colors.redAccent.withOpacity(.3));
-    } else if (emailController.text.isEmpty) {
-      Get.snackbar('Error', 'Email is required',
-          backgroundColor: Colors.redAccent.withOpacity(.3));
-    } else if (mobileController.text.isEmpty) {
-      Get.snackbar('Error', 'Mobile is required',
-          backgroundColor: Colors.redAccent.withOpacity(.3));
-    } else if (passController.text.isEmpty) {
-      Get.snackbar('Error', 'Password is required',
-          backgroundColor: Colors.redAccent.withOpacity(.3));
-    } else if (confirmPassController.text.isEmpty) {
-      Get.snackbar('Error', 'Confirm Password is required',
-          backgroundColor: Colors.redAccent.withOpacity(.3));
-    } else if (passController.text != confirmPassController.text) {
-      Get.snackbar('Error', 'Password and Confirm Password must be same',
-          backgroundColor: Colors.redAccent.withOpacity(.3));
-    } else {
-      await sslCommerzGeneralCall(price, packageId).then((_) async {
-        if (isPaymentSuccess) await signUp(transactionId, status, packageId);
-      });
-    }
+ void onButtonPressed(int price, int packageId) async {
+  if(  key.currentState!.validate()){
+if(passController.text == confirmPassController.text){  
+String trxId = generateTranId();
+await signUp(trxId:  trxId,status:  status,packageId:  packageId,price: price); 
+     } 
+  }
+     
+  }
+    @override
+  void onClose() {
+    // Dispose of all the TextEditingControllers
+    nameController.dispose();
+    emailController.dispose();
+    mobileController.dispose();
+    passController.dispose();
+    confirmPassController.dispose();
+    // Call super.onClose() to ensure proper cleanup
+    super.onClose();
   }
 }

@@ -28,7 +28,7 @@ class BottomNav extends StatelessWidget {
       child: GetBuilder<HomeScreenController>(
           builder: (controller) => Scaffold(
                 key: _scaffoldKey,
-                drawer: const CustomDrawer(),
+                drawer:   CustomDrawer(scaffoldKey: _scaffoldKey,),
                 appBar: controller.showAppbar ? buildAppBar() : null,
                 bottomNavigationBar: GetBuilder<BottomNavController>(
                   builder: (controller) => WaterDropNavBar(

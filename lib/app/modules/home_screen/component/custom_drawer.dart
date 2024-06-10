@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/modules/home_screen/component/primary_text.dart';
 import 'package:untitled/app/modules/home_screen/component/rajdhani_logo.dart';
 
@@ -13,13 +14,15 @@ import '../../widgets/primary_btn.dart';
 import '../controller/home_controller.dart';
 
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({super.key});
+  CustomDrawer({required this.scaffoldKey});
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
+  final controller = Get.put(HomeScreenController());
   Future<void> navigate(int num) async {
     switch (num) {
       case 0:
@@ -118,10 +121,21 @@ class _CustomDrawerState extends State<CustomDrawer> {
               text: 'FAQs',
             ),
             const Spacer(),
-            PrimaryButton(
-              text: 'Log Out',
-              onTap: () {},
-            ),
+            Obx(() =>controller.isLogOut?Center(child: CircularProgressIndicator()): PrimaryButton(
+                  text: 'Log Out',
+                  onTap: () async {
+                    controller.isLogedOut(true);
+                    await SharedPref.unSubscribe().then((value) { 
+                      controller.updateMethod();
+                     Future.delayed(Duration(seconds: 3)).then((value) {
+                       Get.snackbar('Success!', 'Successfully Log Out');
+                      controller.isLogedOut(false);
+                       widget.scaffoldKey.currentState!.closeDrawer();
+                       Get.find<HomeScreenController>().videoController.play();
+                     });
+                    });
+                  },
+                )),
             const SizedBox(height: 50),
           ],
         ),

@@ -2,35 +2,62 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
+import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
 
 import '../../../api_services/login.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
 
 class PremiumScreenController extends GetxController {
-  final nameController = TextEditingController(text: "apitest@mail.com");
-  final passController = TextEditingController(text: '12345678');
+  final emailController = TextEditingController( );
+  final passController = TextEditingController( );
   final RxBool _isLoading = false.obs;
   final RxBool _isChecked = false.obs;
+  final bool isPrem = Get.arguments??false;
   bool get isChecked => _isChecked.value;
   bool get isLoading => _isLoading.value;
   void isLoaded(isLoad) => _isLoading.value = isLoad;
   void isCheck(isLoad) => _isChecked.value = isLoad;
-
+final key = GlobalKey<FormState>();
   Future<void> login() async {
+    if(key.currentState!.validate()){ 
     isLoaded(true);
-    final response = await loginRequest(
-        name: nameController.text, pass: passController.text);
-    if (response['success'] == true) {
-      Get.snackbar('Success!', response['message']);
-
-      await SharedPref.storeMail(nameController.text.toString());
-      await SharedPref.storeToken(response['token']);
-      subscribed(true);
-      isLoaded(false);
-      Get.find<BottomNavController>().changeIndex(0);
-    } else {
-      Get.snackbar('inValid!', response['message']);
+    try {
+      final response = await loginRequest(
+          name: emailController.text.toString(),
+          pass: passController.text.toString());
+      if (response['success'] == true) {
+        Get.snackbar('Success!', response['message']);
+        await SharedPref.storeMail(emailController.text.toString());
+        await SharedPref.storeSubscriberId(response['subscriber_id']);
+         await SharedPref.storeMail(emailController.text.toString());
+      await SharedPref.storeIsSubscribed(true); 
+        subscribed(true);
+    
+       isPrem? Get.to(BottomNav()): Get.find<BottomNavController>().changeIndex(0);
+      } else {
+        Get.snackbar('inValid!', response['message']);
+      }
+    } catch (e) {
+      Get.snackbar('inValid!', '$e');
+    } finally {
       isLoaded(false);
     }
+    }
+  }
+ void setMail()async{
+      print(isPrem);
+    final data = await SharedPref.retrieveMail();
+  emailController.text =data??'';
+}
+  @override
+  void onInit() {
+    setMail();
+    super.onInit();
+  }  @override
+  void onClose() {
+    // Dispose of TextEditingController instances
+    emailController.dispose();
+    passController.dispose();
+    super.onClose();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/data/utils/validate.dart';
 import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
 import 'package:untitled/app/routes/app_routes.dart';
 
@@ -23,29 +24,31 @@ class _PremiumScreenState extends State<PremiumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BackgroundBox(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [   SizedBox(height: 20),
-              Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),),   SizedBox(height: 20),
-              CustomTextField(
-                controller: controller.nameController,
-                hint: 'Email',
-              ),
-              CustomTextField(
-                controller: controller.passController,
-                hint: 'Password',
-              ),
-              Obx(() => RememberBox(
-                  value: controller.isChecked, onChanged: controller.isCheck)),
-              Obx(() => SubmitButton(
-                  isLoading: controller.isLoading, tap: controller.login)),
-              SubscribeButton(tap: () {
-                Get.toNamed(RouteName.packageScreen);
-              },title: 'Don\'n have an account',btnText: 'Subscribe',)
-          
-            ],
+        child: Form(key: controller.key,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [   SizedBox(height: 20),
+                Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),),   SizedBox(height: 20),
+                CustomTextField(validator: validateEmail,
+                  controller: controller.emailController,
+                  hint: 'Email',
+                ),
+                CustomTextField(validator: validateNumericPassword,
+                  controller: controller.passController,
+                  hint: 'Password',
+                ),
+                Obx(() => RememberBox(
+                    value: controller.isChecked, onChanged: controller.isCheck)),
+                Obx(() => SubmitButton(
+                    isLoading: controller.isLoading, tap: controller.login)),
+                SubscribeButton(tap: () {
+                  Get.toNamed(RouteName.packageScreen);
+                },title: 'Don\'n have an account',btnText: 'Subscribe',)
+            
+              ],
+            ),
           ),
         ),
       ),
