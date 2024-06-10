@@ -8,11 +8,17 @@ import '../../../dummy_data/subscription_data.dart';
 import '../component/package_headline.dart';
 import '../component/packages_card.dart';
 import '../controller/package_screen_controller.dart';
+import 'package:intl/intl.dart';
 
 class PackagesScreen extends StatelessWidget {
   PackagesScreen({super.key});
   final controller = Get.put(PackagesScreenController());
-
+String duration (day){
+    DateTime currentDate = DateTime.now();
+    DateTime nextDate = currentDate.add(Duration(days: day));
+    String formattedNextDate = DateFormat('yyyy-MM-dd').format(nextDate);
+    return formattedNextDate;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,18 +46,17 @@ class PackagesScreen extends StatelessWidget {
                         (index) {
                           final color = subscriptionData[index]['color'];
                           final name = controller.data[index].packageName;
-                          final price = controller.data[index].price!;
+                          final price = controller.data[index].price;
                           final packageId = controller.data[index].id;
-
+final days = controller.data[index].duration;
                           return SubscriptionCard(
                             gradientColors: color,
                             month: '$name',
-                            price: price,
-                            subscribeOnTap: () {
-                              // log(controller.generateTranId().toString());
-                              // Get.to(() => CreateAccountScreen());
+                            price: price!,
+                            subscribeOnTap: () { 
+                              final day = duration (days);
                               Get.to(() => CreateAccountScreen(
-                                  packageId: packageId!, price: price));
+                                  packageId: packageId!, price: price,duration: day , ));
                             },
                           );
                         },

@@ -11,12 +11,13 @@ import '../../widgets/custom_text_field.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen(
-      {super.key, required this.price, required this.packageId});
+      {super.key, required this.price, required this.packageId, required this.duration});
 
   final controller = Get.put(CreateAccountController());
 
   final int price;
   final int packageId;
+  final String duration;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ key: controller.key,          child: SingleChildScrollView(
                 Obx(() => SubmitButton(
                       isLoading: controller.isLoading.value,
                       tap: () {
-                        controller.onButtonPressed(price, packageId);
+                        controller.onButtonPressed(price, packageId,'$duration');
                       },
                     )),
                 SubscribeButton(

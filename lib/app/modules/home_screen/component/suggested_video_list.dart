@@ -32,7 +32,7 @@ class SuggestedVideoList extends StatelessWidget {
               videoUrl: videoUrl,
               onTap: () {
            Get.find<HomeScreenController>().videoController.pause() ;
-               isSubscribed? Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80')):Get.to(() => PremiumScreen(),arguments: true);;
+               isSubscribed? Get.to(() => const YouTubePlayerScreen(url: 'VQ1viPcYG80')):Get.to(() => PremiumScreen());;
               }),
         ),
       ),

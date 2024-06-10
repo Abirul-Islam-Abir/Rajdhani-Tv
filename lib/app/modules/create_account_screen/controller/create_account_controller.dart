@@ -44,17 +44,21 @@ final key = GlobalKey<FormState>();
 
   RxBool isLoading = false.obs;
 
-  Future  signUp({required String trxId,required int status,required int packageId,required int price}) async {
+  Future  signUp({required String trxId,required int status,required int packageId,required int price,required String date}) async {
     isLoading.value = true;
     update(); 
+    print(date);
     final resBody = {
-      "subscriber_name": nameController.text.trim().toString(),
-      "subscriber_email": emailController.text.trim().toString(),
-      "subscriber_mobile": mobileController.text.trim().toString(),
-      "password": confirmPassController.text.toString(),
-      "package_id": packageId,
-      "trans_id": trxId,
-      "status": status,
+        "subscriber_name":  nameController.text.trim().toString(),
+    "subscriber_email":emailController.text.trim().toString(),
+    "subscriber_mobile":mobileController.text.trim().toString(),
+    "password": confirmPassController.text.toString(),
+   "package_id": packageId,
+    "expired_date":date ,
+     "status": status,
+  
+  
+     
     }; 
     final response = await http.post(
         Uri.parse(
@@ -139,11 +143,11 @@ final key = GlobalKey<FormState>();
     confirmPassController.clear();
   }
 
- void onButtonPressed(int price, int packageId) async {
+ void onButtonPressed(int price, int packageId,String day) async {
   if(  key.currentState!.validate()){
 if(passController.text == confirmPassController.text){  
 String trxId = generateTranId();
-await signUp(trxId:  trxId,status:  status,packageId:  packageId,price: price); 
+await signUp(trxId:  trxId,status:  status,packageId:  packageId,price: price,date: day); 
      } 
   }
      

@@ -26,13 +26,12 @@ final key = GlobalKey<FormState>();
           name: emailController.text.toString(),
           pass: passController.text.toString());
       if (response['success'] == true) {
-        Get.snackbar('Success!', response['message']);
+      //  Get.snackbar('Success!', response['message']);
         await SharedPref.storeMail(emailController.text.toString());
         await SharedPref.storeSubscriberId(response['subscriber_id']);
          await SharedPref.storeMail(emailController.text.toString());
       await SharedPref.storeIsSubscribed(true); 
-        subscribed(true);
-    
+        subscribed(true); 
        isPrem? Get.to(BottomNav()): Get.find<BottomNavController>().changeIndex(0);
       } else {
         Get.snackbar('inValid!', response['message']);
