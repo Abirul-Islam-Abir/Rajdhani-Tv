@@ -29,6 +29,7 @@ dependencies:
   http: ^1.2.1
   lottie: ^3.1.2
   flutter_sslcommerz: ^2.2.2-nullsafety.0
+  wakelock_plus: ^1.2.5
 
 dev_dependencies:
   flutter_launcher_icons: "^0.13.1"

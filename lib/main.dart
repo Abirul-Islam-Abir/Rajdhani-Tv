@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'app/data/constant.dart';
 import 'app/routes/app_pages.dart';
@@ -10,6 +11,7 @@ import 'app/state_holder_binder/state_holder_binding.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WakelockPlus.enable();
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
