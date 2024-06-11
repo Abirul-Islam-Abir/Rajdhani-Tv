@@ -11,6 +11,14 @@ String? validateName(String? value) {
   return null;
 }
 
+String? validateText(String? value) {
+  // Check if the name is empty
+  if (value == null || value.isEmpty) {
+    return 'Text is required';
+  }
+  return null;
+}
+
 String? validateEmail(String? value) {
   // Check if the email is empty
   if (value == null || value.isEmpty) {
@@ -25,6 +33,7 @@ String? validateEmail(String? value) {
   }
   return null;
 }
+
 String? validatePhoneNumber(String? value) {
   // Check if the phone number is empty
   if (value == null || value.isEmpty) {
@@ -39,6 +48,7 @@ String? validatePhoneNumber(String? value) {
   }
   return null;
 }
+
 String? validateNumericPassword(String? value) {
   // Check if the password is empty
   if (value == null || value.isEmpty) {

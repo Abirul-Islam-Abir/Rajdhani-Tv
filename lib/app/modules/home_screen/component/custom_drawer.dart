@@ -30,7 +30,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             CommonSectionScreen(title: 'About', subtitle: AppString.about));
         break;
       case 1:
-        Get.to(() => const ContactScreen());
+        Get.to(() => ContactScreen());
         break;
       case 2:
         Get.to(() => CommonSectionScreen(
@@ -121,21 +121,25 @@ class _CustomDrawerState extends State<CustomDrawer> {
               text: 'FAQs',
             ),
             const Spacer(),
-            Obx(() =>controller.isLogOut?Center(child: CircularProgressIndicator()): PrimaryButton(
-                  text: 'Log Out',
-                  onTap: () async {
-                    controller.isLogedOut(true);
-                    await unSubscribedPushData().then((value) { 
-                      controller.updateMethod();
-                     Future.delayed(Duration(seconds: 3)).then((value) {
-                       Get.snackbar('Success!', 'Successfully Log Out');
-                      controller.isLogedOut(false);
-                       widget.scaffoldKey.currentState!.closeDrawer();
-                       Get.find<HomeScreenController>().videoController.play();
-                     });
-                    });
-                  },
-                )),
+            Obx(() => controller.isLogOut
+                ? Center(child: CircularProgressIndicator())
+                : PrimaryButton(
+                    text: 'Log Out',
+                    onTap: () async {
+                      controller.isLogedOut(true);
+                      await unSubscribedPushData().then((value) {
+                        controller.updateMethod();
+                        Future.delayed(Duration(seconds: 3)).then((value) {
+                          Get.snackbar('Success!', 'Successfully Log Out');
+                          controller.isLogedOut(false);
+                          widget.scaffoldKey.currentState!.closeDrawer();
+                          Get.find<HomeScreenController>()
+                              .videoController
+                              .play();
+                        });
+                      });
+                    },
+                  )),
             const SizedBox(height: 50),
           ],
         ),
