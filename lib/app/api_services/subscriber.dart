@@ -7,8 +7,16 @@ Future subscriberDataRequest(id) async {
   try {
     final response = await http.get(Uri.parse('${ApiServices.subscriber}$id'));
     final decodedResponse = jsonDecode(response.body);
-    if (response.statusCode == 200|| response.statusCode == 201) {
-      return decodedResponse['data'];
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final resUnsuccess = {
+        "remaining_days": 0,
+      };
+
+      final data = decodedResponse['success'] == true
+          ? decodedResponse['data']
+          : resUnsuccess;
+
+      return data;
     } else {
       throw Exception('Failed to load subscription packages');
     }

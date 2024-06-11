@@ -10,59 +10,69 @@ import '../../../api_services/login.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
 
 class PremiumScreenController extends GetxController {
-  final emailController = TextEditingController( );
-  final passController = TextEditingController( );
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
   final RxBool _isLoading = false.obs;
   final RxBool _isChecked = false.obs;
-  final bool isPrem = Get.arguments??false;
+  final bool isPrem = Get.arguments ?? false;
   bool get isChecked => _isChecked.value;
   bool get isLoading => _isLoading.value;
   void isLoaded(isLoad) => _isLoading.value = isLoad;
   void isCheck(isLoad) => _isChecked.value = isLoad;
-final key = GlobalKey<FormState>();
-  Future<void> login() async {
-    if(key.currentState!.validate()){ 
-    isLoaded(true);
-    try {
-      final response = await loginRequest(
-          name: emailController.text.toString(),
-          pass: passController.text.toString());
-      if (response['success'] == true) {
-      //  Get.snackbar('Success!', response['message']);
-        await SharedPref.storeMail(emailController.text.toString());
-        await SharedPref.storeSubscriberId(response['subscriber_id']);
-         await SharedPref.storeMail(emailController.text.toString());
 
-         //! New API call
-       final data =  await subscriberDataRequest(response['subscriber_id']);
-       if(data['remaining_days'] == 0 || data['remaining_days'] <= 1  || data['remaining_days'] == null){
-           Get.to(()=>PackagesScreen());
-       }else{
-         await SharedPref.storeIsSubscribed(true); 
-        subscribed(true); 
-       isPrem? Get.to( ()=> BottomNav()): Get.find<BottomNavController>().changeIndex(0);
-       }
-      
-      } else {
-        Get.snackbar('inValid!', response['message']);
+  Map resBody = {};
+  final key = GlobalKey<FormState>();
+  Future<void> login() async {
+    if (key.currentState!.validate()) {
+      isLoaded(true);
+      try {
+        final response = await loginRequest(
+            name: emailController.text.toString(),
+            pass: passController.text.toString());
+        if (response['success'] == true) {
+          //  Get.snackbar('Success!', response['message']);
+          await SharedPref.storeMail(emailController.text.toString());
+          await SharedPref.storeSubscriberId(response['subscriber_id']);
+          await SharedPref.storeMail(emailController.text.toString());
+
+          //! New API call
+          final data = await subscriberDataRequest(response['subscriber_id']);
+          if (data['remaining_days'] == 0 ||
+              data['remaining_days'] <= 1 ||
+              data['remaining_days'] == null) {
+            Get.to(() => PackagesScreen());
+          } else {
+            resBody = data;
+            await SharedPref.storeIsSubscribed(true);
+            subscribed(true);
+            isPrem
+                ? Get.to(() => BottomNav())
+                : Get.find<BottomNavController>().changeIndex(0);
+          }
+        } else {
+          Get.snackbar('inValid!', response['message']);
+        }
+      } catch (e) {
+        Get.snackbar('inValid!', '$e');
+      } finally {
+        isLoaded(false);
       }
-    } catch (e) {
-      Get.snackbar('inValid!', '$e');
-    } finally {
-      isLoaded(false);
-    }
     }
   }
- void setMail()async{
-      print(isPrem);
+
+  void setMail() async {
+    print(isPrem);
     final data = await SharedPref.retrieveMail();
-  emailController.text =data??'';
-}
+    emailController.text = data ?? '';
+  }
+
   @override
   void onInit() {
     setMail();
     super.onInit();
-  }  @override
+  }
+
+  @override
   void onClose() {
     // Dispose of TextEditingController instances
     emailController.dispose();

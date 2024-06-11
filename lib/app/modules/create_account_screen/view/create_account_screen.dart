@@ -11,7 +11,10 @@ import '../../widgets/custom_text_field.dart';
 
 class CreateAccountScreen extends StatelessWidget {
   CreateAccountScreen(
-      {super.key, required this.price, required this.packageId, required this.duration});
+      {super.key,
+      required this.price,
+      required this.packageId,
+      required this.duration});
 
   final controller = Get.put(CreateAccountController());
 
@@ -26,8 +29,8 @@ class CreateAccountScreen extends StatelessWidget {
       body: BackgroundBox(
         height: 1.3,
         child: Form(
-
-key: controller.key,          child: SingleChildScrollView(
+          key: controller.key,
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,11 +44,13 @@ key: controller.key,          child: SingleChildScrollView(
                       color: Colors.white),
                 ),
                 const SizedBox(height: 20),
-                CustomTextField(validator: validateName,
+                CustomTextField(
+                  validator: validateName,
                   controller: controller.nameController,
                   hint: 'Name',
                 ),
-                CustomTextField(validator: validateEmail,
+                CustomTextField(
+                  validator: validateEmail,
                   controller: controller.emailController,
                   hint: 'Email',
                 ),
@@ -54,18 +59,21 @@ key: controller.key,          child: SingleChildScrollView(
                   controller: controller.mobileController,
                   hint: 'Mobile Number',
                 ),
-                CustomTextField(validator: validateNumericPassword,
+                CustomTextField(
+                  validator: validateNumericPassword,
                   controller: controller.passController,
                   hint: 'Password',
                 ),
-                CustomTextField(validator: validateNumericPassword,
+                CustomTextField(
+                  validator: validateNumericPassword,
                   controller: controller.confirmPassController,
                   hint: 'Confirm Password',
                 ),
                 Obx(() => SubmitButton(
                       isLoading: controller.isLoading.value,
                       tap: () {
-                        controller.onButtonPressed(price, packageId,'$duration');
+                        controller.onButtonPressed(
+                            price, packageId, '$duration');
                       },
                     )),
                 SubscribeButton(

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:untitled/app/data/constant.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
+import 'package:upgrader/upgrader.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 import '../../../data/method.dart';
@@ -26,35 +27,52 @@ class BottomNav extends StatelessWidget {
       canPop: false,
       onPopInvoked: _backButtonPressed,
       child: GetBuilder<HomeScreenController>(
-          builder: (controller) => Scaffold(
-                key: _scaffoldKey,
-                drawer:   CustomDrawer(scaffoldKey: _scaffoldKey,),
-                appBar: controller.showAppbar ? buildAppBar() : null,
-                bottomNavigationBar: GetBuilder<BottomNavController>(
-                  builder: (controller) => WaterDropNavBar(
-                    waterDropColor: kPrimaryColor,
-                    backgroundColor: Colors.white,
-                    onItemSelected: controller.changeIndex,
-                    selectedIndex: controller.selectedIndex,
-                    inactiveIconColor: Colors.black,
-                    barItems: <BarItem>[
-                      BarItem(
-                        filledIcon: Icons.home,
-                        outlinedIcon: Icons.home_outlined,
-                      ),
-                      BarItem(
-                          filledIcon: Icons.newspaper_outlined,
-                          outlinedIcon: Icons.newspaper_outlined),
-                      BarItem(
-                        filledIcon: Icons.subscriptions,
-                        outlinedIcon: Icons.subscriptions,
-                      ),
-                    ],
+          builder: (controller) => UpgradeAlert(
+                upgrader: Upgrader(
+                  dialogStyle: UpgradeDialogStyle.cupertino,
+                  showIgnore: false,
+                  showLater: false,
+                  showReleaseNotes: true,
+                  canDismissDialog: false,
+                  durationUntilAlertAgain: const Duration(seconds: 0),
+                  cupertinoButtonTextStyle: const TextStyle(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
-                  //other params
                 ),
-                body: GetBuilder<BottomNavController>(
-                  builder: (controller) => pages[controller.selectedIndex],
+                child: Scaffold(
+                  key: _scaffoldKey,
+                  drawer: CustomDrawer(
+                    scaffoldKey: _scaffoldKey,
+                  ),
+                  appBar: controller.showAppbar ? buildAppBar() : null,
+                  bottomNavigationBar: GetBuilder<BottomNavController>(
+                    builder: (controller) => WaterDropNavBar(
+                      waterDropColor: kPrimaryColor,
+                      backgroundColor: Colors.white,
+                      onItemSelected: controller.changeIndex,
+                      selectedIndex: controller.selectedIndex,
+                      inactiveIconColor: Colors.black,
+                      barItems: <BarItem>[
+                        BarItem(
+                          filledIcon: Icons.home,
+                          outlinedIcon: Icons.home_outlined,
+                        ),
+                        BarItem(
+                            filledIcon: Icons.newspaper_outlined,
+                            outlinedIcon: Icons.newspaper_outlined),
+                        BarItem(
+                          filledIcon: Icons.subscriptions,
+                          outlinedIcon: Icons.subscriptions,
+                        ),
+                      ],
+                    ),
+                    //other params
+                  ),
+                  body: GetBuilder<BottomNavController>(
+                    builder: (controller) => pages[controller.selectedIndex],
+                  ),
                 ),
               )),
     );
