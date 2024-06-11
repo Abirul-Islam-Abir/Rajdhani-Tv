@@ -7,6 +7,7 @@ import 'package:untitled/app/modules/home_screen/component/rajdhani_logo.dart';
 import '../../../../main.dart';
 import '../../../data/app_image.dart';
 import '../../../data/app_text.dart';
+import '../../../data/utils/subscribe_or_unsubscribe_data_push.dart';
 import '../../contact_screen/view/contact_screen.dart';
 import '../../schedule_screen/view/schedule_screen.dart';
 import '../../widgets/common_section_screen.dart';
@@ -125,7 +126,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   text: 'Log Out',
                   onTap: () async {
                     controller.isLogedOut(true);
-                    await SharedPref.unSubscribe().then((value) { 
+                    await unSubscribedPushData().then((value) { 
                       controller.updateMethod();
                      Future.delayed(Duration(seconds: 3)).then((value) {
                        Get.snackbar('Success!', 'Successfully Log Out');

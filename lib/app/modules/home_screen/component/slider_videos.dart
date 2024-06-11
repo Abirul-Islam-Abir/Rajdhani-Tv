@@ -30,9 +30,7 @@ class SliderVideo extends StatelessWidget {
                 final embedCode = video.embedCodes?.isNotEmpty ?? false
                     ? video.embedCodes![0].embed
                     : '';
-                return InkWell(
-                  onTap: () {},
-                  child: SuggestedVideos(
+                return SuggestedVideos(
                     title: video.name ?? 'No Data',
                     text: list[index].name.toString(),
                     videoUrl: '${ApiServices.youtubeBase}$embedCode',
@@ -44,8 +42,7 @@ class SliderVideo extends StatelessWidget {
                               ))
                           : Get.to(() => PackagesScreen(),arguments: true);
                     },
-                  ),
-                );
+                  );
               },
             ),
             options: CarouselOptions(

@@ -8,8 +8,7 @@ class PackagesScreenController extends GetxController {
   bool isLoading = false;
   // get tranId => null;
   Future<void> subscriptionResponse() async {
-    final response = await subscriptionRequest();
-    print(response);
+    final response = await subscriptionRequest(); 
     for (var json in response) {
       data.add(SubscriptionModel.fromJson(json));
     }

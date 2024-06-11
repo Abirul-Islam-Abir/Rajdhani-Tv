@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/api_services/subscriber.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
+import 'package:untitled/app/data/utils/subscribe_or_unsubscribe_data_push.dart';
+import 'package:untitled/app/model/subscriber_model.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
+import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
 
 import '../../../data/app_image.dart';
 import '../../../data/shared_pref.dart';
@@ -17,30 +20,29 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   initState() {
-    SharedPref.retrieveDarkMode();
-    SharedPref.retrieveIsSubscribed();
-    //TODO token can be retrieved from shared pref
-    SharedPref.retrieveSubscriberId();
-    checkSubscriptionValidity();
+    SharedPref.retrieveDarkMode();  
+    Future.delayed(const Duration(seconds: 5))
+        .then((value) => checkSubscriptionValidity());
+
     super.initState();
   }
 
-  checkSubscriptionValidity() async {
-    final subId = SharedPref.retrieveSubscriberId();
+ Future checkSubscriptionValidity() async {
+    final subId  = await SharedPref.retrieveSubscriberId();
     print(subId);
-
     final data = await subscriberDataRequest(subId);
-    if (data['remaining_days'] == 0 ||
-        data['remaining_days'] <= 1 ||
-        data['remaining_days'] == null) {
-      await SharedPref.storeIsSubscribed(false);
-      subscribed(false);
+    //Set data for login ui when user login
+    resBody = data;
+    print(data);
+    SubscriberModel subscriber = SubscriberModel.fromJson(data);
+    if (subscriber.remainingDays == 0 ||
+        subscriber.remainingDays! <= 1 ||
+        subscriber.remainingDays == null) {
+      unSubscribedPushData();
       Get.off(() => BottomNav());
     } else {
-      await SharedPref.storeIsSubscribed(true);
-      subscribed(true);
-      Future.delayed(const Duration(seconds: 5))
-          .then((value) => Get.off(() => BottomNav()));
+      subscribedPushData();
+      Get.off(() => BottomNav());
     }
   }
 

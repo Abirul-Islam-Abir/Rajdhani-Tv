@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -11,16 +10,14 @@ import 'package:flutter_sslcommerz/sslcommerz.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:untitled/app/api_services/api_services.dart';
+import 'package:untitled/app/api_services/create_account.dart';
 import 'package:untitled/app/api_services/login.dart';
 import 'package:untitled/app/api_services/subscriber.dart';
 import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
-import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
-import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
-import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
+import 'package:untitled/app/data/utils/subscribe_or_unsubscribe_data_push.dart';
+import 'package:untitled/app/model/subscriber_model.dart';
 import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
-import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
-import 'package:untitled/app/modules/splash_screen/view/splash_screen.dart';
 
 class CreateAccountController extends GetxController {
   final nameController = TextEditingController();
@@ -31,7 +28,8 @@ class CreateAccountController extends GetxController {
   final key = GlobalKey<FormState>();
   bool isPaymentSuccess = false;
   String transactionId = '';
-  int status = 1;
+  int status = 1; 
+
   // final RxBool _isLoading = false.obs;
   // final RxBool _isChecked = false.obs;
   // bool get isChecked => _isChecked.value;
@@ -48,7 +46,8 @@ class CreateAccountController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  Future signUp(
+ 
+  Future crateAccount(
       {required String trxId,
       required int status,
       required int packageId,
@@ -56,6 +55,7 @@ class CreateAccountController extends GetxController {
       required String date}) async {
     isLoading.value = true;
     print(date);
+    
     final resBody = {
       "subscriber_name": nameController.text.trim().toString(),
       "subscriber_email": emailController.text.trim().toString(),
@@ -65,17 +65,16 @@ class CreateAccountController extends GetxController {
       "expired_date": date,
       "status": status,
     };
-    final response = await http.post(
-        Uri.parse(
-          ApiServices.signUp,
-        ),
-        body: jsonEncode(resBody),
-        headers: {'Content-Type': 'application/json'});
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      await sslCommerzGeneralCall(price, packageId, trxId);
-    } else {
-      isLoading.value = false;
+    final response = await createAccountRequest(resBody);
+    if(response['success']==true && response['message'] == 'Registration successful' ){
+       await sslCommerzGeneralCall(price, packageId, trxId);
+    }else if(response['success']==false && response['message'] == 'Email already exists'){
+      Get.snackbar('','Email already exists');
+await sslCommerzGeneralCall(price, packageId, trxId);
+    }else{
+isLoading.value = false;
     }
+   
   }
 
   Future<void> login() async {
@@ -87,18 +86,20 @@ class CreateAccountController extends GetxController {
       await SharedPref.storeMail(emailController.text.toString());
       await SharedPref.storeSubscriberId(response['subscriber_id']);
       await SharedPref.storeMail(emailController.text.toString());
+
+       
       //! New API call
       final data = await subscriberDataRequest(response['subscriber_id']);
-      if (data['remaining_days'] == 0 ||
-          data['remaining_days'] <= 1 ||
-          data['remaining_days'] == null) {
+      SubscriberModel subscriber = SubscriberModel.fromJson(data); 
+      if (subscriber.remainingDays == 0 ||
+          subscriber.remainingDays! <= 1 ||
+          subscriber.remainingDays == null) {
+            unSubscribedPushData();
         Get.to(() => PackagesScreen());
       } else {
-        await SharedPref.storeIsSubscribed(true);
-        subscribed(true);
+        subscribedPushData();
         isLoading.value = false; 
-        Get.back();    Get.back();   
-        //Get.offAll(() => BottomNav());
+        Get.back();    Get.back();    
       }
     } else {
       isLoading.value = false;
@@ -166,7 +167,7 @@ class CreateAccountController extends GetxController {
     if (key.currentState!.validate()) {
       if (passController.text == confirmPassController.text) {
         String trxId = generateTranId();
-        await signUp(
+        await crateAccount(
             trxId: trxId,
             status: status,
             packageId: packageId,

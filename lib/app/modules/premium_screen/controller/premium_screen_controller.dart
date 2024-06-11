@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:untitled/app/api_services/subscriber.dart';
 import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
+import 'package:untitled/app/data/utils/subscribe_or_unsubscribe_data_push.dart';
+import 'package:untitled/app/model/subscriber_model.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
 import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
 
 import '../../../api_services/login.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
-
+  Map resBody ={} ;
 class PremiumScreenController extends GetxController {
   final emailController = TextEditingController();
   final passController = TextEditingController();
@@ -20,7 +22,7 @@ class PremiumScreenController extends GetxController {
   void isLoaded(isLoad) => _isLoading.value = isLoad;
   void isCheck(isLoad) => _isChecked.value = isLoad;
 
-  Map resBody = {};
+ 
   final key = GlobalKey<FormState>();
   Future<void> login() async {
     if (key.currentState!.validate()) {
@@ -37,17 +39,16 @@ class PremiumScreenController extends GetxController {
 
           //! New API call
           final data = await subscriberDataRequest(response['subscriber_id']);
-          if (data['remaining_days'] == 0 ||
-              data['remaining_days'] <= 1 ||
-              data['remaining_days'] == null) {
+          SubscriberModel  subscriber = SubscriberModel.fromJson(data); 
+          resBody = data;
+          if (subscriber.remainingDays == 0 ||
+          subscriber.remainingDays! <= 1 ||
+          subscriber.remainingDays == null) {
+            unSubscribedPushData();
             Get.to(() => PackagesScreen());
-          } else {
-            resBody = data;
-            await SharedPref.storeIsSubscribed(true);
-            subscribed(true);
-            isPrem
-                ? Get.to(() => BottomNav())
-                : Get.find<BottomNavController>().changeIndex(0);
+          } else { 
+          subscribedPushData();
+             Get.find<BottomNavController>().changeIndex(0);
           }
         } else {
           Get.snackbar('inValid!', response['message']);
