@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/model/all_videos_model.dart';
 import 'package:untitled/app/model/category_model.dart';
@@ -24,11 +23,14 @@ class HomeScreenController extends GetxController {
   bool get isLogOut => _isLogOut.value;
   RxBool _isLoadedData = true.obs;
   bool get isLoadedData => _isLoadedData.value;
-void isLoad(value){
-  _isLoadedData.value = value;
-}void isLogedOut(value){
-  _isLogOut.value = value;
-}
+  void isLoad(value) {
+    _isLoadedData.value = value;
+  }
+
+  void isLogedOut(value) {
+    _isLogOut.value = value;
+  }
+
   videoPlayerController() {
     videoController = VideoPlayerController.networkUrl(
       Uri.parse(ApiServices.liveTv),
@@ -65,10 +67,12 @@ void isLoad(value){
     await SharedPref.storeIsDarkMode(value);
     update();
   }
-void updateMethod(){
- subscribed(false);
-  update();
-}
+
+  void updateMethod() {
+    subscribed(false);
+    update();
+  }
+
   Future<void> scrollControll() async {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
@@ -91,26 +95,27 @@ void updateMethod(){
     });
   }
 
-  String? appName;
-  String? packageName;
-  String? version;
-  String? buildNumber;
-
-  Future deviceInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    appName = packageInfo.appName;
-    packageName = packageInfo.packageName;
-    version = packageInfo.version;
-    buildNumber = packageInfo.buildNumber;
-  }
-
   List<AllVideosModel> allVideosData = [];
   List<CategoryModel> categoryData = [];
+  List<EmbedCodes> suggestedData = [];
+  List<EmbedCodes> recommendedData = [];
 
   Future<void> allVideos() async {
     final response = await allVideosRequest();
-    for (var json in response) {
-      allVideosData.add(AllVideosModel.fromJson(json));
+    List categories = response['categories'];
+    List suggest = response['categories'][2]['embed_codes']; 
+    List recommend = response['categories'][5]['embed_codes']; 
+    for (var json in categories) {  
+      allVideosData.add(AllVideosModel.fromJson(json));  
+      print(json);
+    }
+    for (var json in suggest) { 
+      // Parse and add to allVideosData 
+      suggestedData.add(EmbedCodes.fromJson(json));   print(json);
+    }
+     for (var json in recommend) { 
+      // Parse and add to allVideosData 
+      recommendedData.add(EmbedCodes.fromJson(json));   print(json);
     }
   }
 
@@ -136,12 +141,11 @@ void updateMethod(){
     initialize();
     scrollControll();
     videoPlayerController();
-    deviceInfo();
     super.onInit();
   }
 
-   @override
-  void onClose() { 
+  @override
+  void onClose() {
     videoController.dispose();
     super.onClose();
   }

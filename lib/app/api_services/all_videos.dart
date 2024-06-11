@@ -8,7 +8,7 @@ Future allVideosRequest() async {
     final response = await http.get(Uri.parse(ApiServices.allVideos));
     final decodedResponse = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      return decodedResponse['categories'];
+      return decodedResponse;
     } else {
       throw Exception('Failed to load subscription packages');
     }

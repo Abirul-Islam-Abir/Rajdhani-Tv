@@ -5,8 +5,6 @@ import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/data/utils/validate.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
-import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
-import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
 import 'package:untitled/app/modules/widgets/primary_btn.dart';
 import 'package:untitled/app/routes/app_routes.dart';
 

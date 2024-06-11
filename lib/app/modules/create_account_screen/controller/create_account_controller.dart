@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,13 +7,10 @@ import 'package:flutter_sslcommerz/model/SSLCommerzInitialization.dart';
 import 'package:flutter_sslcommerz/model/SSLCurrencyType.dart';
 import 'package:flutter_sslcommerz/sslcommerz.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:untitled/app/api_services/api_services.dart';
 import 'package:untitled/app/api_services/create_account.dart';
 import 'package:untitled/app/api_services/login.dart';
 import 'package:untitled/app/api_services/subscriber.dart';
 import 'package:untitled/app/data/shared_pref.dart';
-import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/data/utils/subscribe_or_unsubscribe_data_push.dart';
 import 'package:untitled/app/model/subscriber_model.dart';
 import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';

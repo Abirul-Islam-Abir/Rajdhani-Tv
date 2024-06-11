@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/modules/home_screen/component/primary_text.dart';
 import 'package:untitled/app/modules/home_screen/component/rajdhani_logo.dart';
 

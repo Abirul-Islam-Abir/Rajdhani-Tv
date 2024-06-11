@@ -43,16 +43,14 @@ class HomeScreen extends StatelessWidget {
                   isLoaded: controller.isLoadedData,
                   list: controller.allVideosData,
                 )),
-            SuggestedVideoList(
-              text: 'Suggested Video',
-              videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
-              list: const [],
-            ),
-            SuggestedVideoList(
-              text: 'Suggested Video',
-              videoUrl: '${ApiServices.youtubeBase}VQ1viPcYG80',
-              list: const [],
-            ),
+            Obx(() => SuggestedVideoList( isLoaded: controller.isLoadedData,
+                  text: 'Suggested Video',
+                  list: controller.suggestedData,
+                )),
+            Obx(() => RecommendedVideoList( isLoaded: controller.isLoadedData,
+                  text: 'Recommended Video',
+                  list: controller.recommendedData,
+                )),
             PrimaryButton(
                 text: 'All Videos',
                 onTap: () {
