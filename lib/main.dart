@@ -18,8 +18,6 @@ Future<void> main() async {
   );
 }
 
-
-
 final darkNotifier = ValueNotifier<bool>(false);
 
 class RajdhaniTv extends StatefulWidget {
@@ -33,29 +31,30 @@ class _RajdhaniTvState extends State<RajdhaniTv> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-        valueListenable: darkNotifier,
-        builder: (BuildContext context, bool isDark, Widget? child) =>
-            GetMaterialApp(
-              title: 'Rajdhani Tv',
-              debugShowCheckedModeBanner: false,
-              useInheritedMediaQuery: true,
-              locale: DevicePreview.locale(context),
-              builder: DevicePreview.appBuilder,
-              themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
-              darkTheme: ThemeData.dark(),
-              theme: ThemeData(
-                primarySwatch: Colors.red,
-                brightness: Brightness.light,
-                elevatedButtonTheme: ElevatedButtonThemeData(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: kPrimaryColor,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5))),
-                ),
-              ),
-              getPages: getPages(),
-              initialRoute: RouteName.initial,
-              initialBinding: StateHolderBinding(),
-            ),);
+      valueListenable: darkNotifier,
+      builder: (BuildContext context, bool isDark, Widget? child) =>
+          GetMaterialApp(
+        title: 'Rajdhani Tv',
+        debugShowCheckedModeBanner: false,
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+        darkTheme: ThemeData.dark(),
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          brightness: Brightness.light,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: kPrimaryColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5))),
+          ),
+        ),
+        getPages: getPages(),
+        initialRoute: RouteName.initial,
+        initialBinding: StateHolderBinding(),
+      ),
+    );
   }
 }

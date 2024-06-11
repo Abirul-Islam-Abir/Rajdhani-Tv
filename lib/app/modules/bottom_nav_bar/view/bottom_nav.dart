@@ -28,18 +28,18 @@ class BottomNav extends StatelessWidget {
       onPopInvoked: _backButtonPressed,
       child: GetBuilder<HomeScreenController>(
           builder: (controller) => UpgradeAlert(
+                dialogStyle: UpgradeDialogStyle.cupertino,
+                showIgnore: false,
+                showLater: false,
+                showReleaseNotes: true,
+                barrierDismissible: false,
                 upgrader: Upgrader(
-                  dialogStyle: UpgradeDialogStyle.cupertino,
-                  showIgnore: false,
-                  showLater: false,
-                  showReleaseNotes: true,
-                  canDismissDialog: false,
                   durationUntilAlertAgain: const Duration(seconds: 0),
-                  cupertinoButtonTextStyle: const TextStyle(
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
+                ),
+                cupertinoButtonTextStyle: const TextStyle(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
                 ),
                 child: Scaffold(
                   key: _scaffoldKey,
