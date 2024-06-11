@@ -3,8 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
 
-import '../../archive_screen/view/archive_screen.dart';
-import '../../widgets/headline_title.dart';
 import 'get_thumbnail_image.dart';
 import 'headline_text.dart';
 
