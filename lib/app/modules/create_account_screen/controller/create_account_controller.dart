@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -15,12 +14,7 @@ import 'package:untitled/app/api_services/login.dart';
 import 'package:untitled/app/api_services/subscriber.dart';
 import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
-import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
-import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
-import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
 import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
-import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
-import 'package:untitled/app/modules/splash_screen/view/splash_screen.dart';
 
 class CreateAccountController extends GetxController {
   final nameController = TextEditingController();

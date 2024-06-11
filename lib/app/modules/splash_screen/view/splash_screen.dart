@@ -18,8 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   initState() {
     SharedPref.retrieveDarkMode();
-    SharedPref.retrieveIsSubscribed();
-    //TODO token can be retrieved from shared pref
+    SharedPref.retrieveIsSubscribed(); 
     SharedPref.retrieveSubscriberId();
     checkSubscriptionValidity();
     super.initState();

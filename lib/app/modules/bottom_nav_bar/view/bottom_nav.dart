@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:untitled/app/data/constant.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
-import 'package:upgrader/upgrader.dart';
-import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
+ import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 import '../../../data/method.dart';
 import '../../home_screen/component/build_appbar.dart';
@@ -27,21 +26,7 @@ class BottomNav extends StatelessWidget {
       canPop: false,
       onPopInvoked: _backButtonPressed,
       child: GetBuilder<HomeScreenController>(
-          builder: (controller) => UpgradeAlert(
-                upgrader: Upgrader(
-                  dialogStyle: UpgradeDialogStyle.cupertino,
-                  showIgnore: false,
-                  showLater: false,
-                  showReleaseNotes: true,
-                  canDismissDialog: false,
-                  durationUntilAlertAgain: const Duration(seconds: 0),
-                  cupertinoButtonTextStyle: const TextStyle(
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
-                child: Scaffold(
+          builder: (controller) => Scaffold(
                   key: _scaffoldKey,
                   drawer: CustomDrawer(
                     scaffoldKey: _scaffoldKey,
@@ -74,7 +59,7 @@ class BottomNav extends StatelessWidget {
                     builder: (controller) => pages[controller.selectedIndex],
                   ),
                 ),
-              )),
+               ),
     );
   }
 

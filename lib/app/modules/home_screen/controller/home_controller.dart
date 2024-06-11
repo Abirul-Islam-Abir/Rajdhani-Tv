@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:untitled/app/data/subscribed_value_change.dart';
+ import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/model/all_videos_model.dart';
 import 'package:untitled/app/model/category_model.dart';
-import 'package:video_player/video_player.dart';
-
+import 'package:video_player/video_player.dart'; 
 import '../../../../main.dart';
 import '../../../api_services/all_videos.dart';
 import '../../../api_services/api_services.dart';
@@ -91,18 +89,7 @@ void updateMethod(){
     });
   }
 
-  String? appName;
-  String? packageName;
-  String? version;
-  String? buildNumber;
-
-  Future deviceInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    appName = packageInfo.appName;
-    packageName = packageInfo.packageName;
-    version = packageInfo.version;
-    buildNumber = packageInfo.buildNumber;
-  }
+   
 
   List<AllVideosModel> allVideosData = [];
   List<CategoryModel> categoryData = [];
@@ -135,8 +122,7 @@ void updateMethod(){
   void onInit() {
     initialize();
     scrollControll();
-    videoPlayerController();
-    deviceInfo();
+    videoPlayerController(); 
     super.onInit();
   }
 

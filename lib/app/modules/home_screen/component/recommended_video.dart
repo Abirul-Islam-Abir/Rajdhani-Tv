@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
-import 'package:untitled/app/modules/home_screen/component/suggested_video.dart';
 
 import '../../../data/subscribed_value_change.dart';
 import '../../widgets/headline_title.dart';

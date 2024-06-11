@@ -13,6 +13,7 @@ import '../../widgets/common_section_screen.dart';
 import '../../widgets/primary_btn.dart';
 import '../controller/home_controller.dart';
 
+// ignore: must_be_immutable
 class CustomDrawer extends StatefulWidget {
   CustomDrawer({required this.scaffoldKey});
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();

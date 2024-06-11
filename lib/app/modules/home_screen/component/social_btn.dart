@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/app/modules/home_screen/component/circle_tap.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../data/launch_url.dart';
 

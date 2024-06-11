@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../widgets/primary_btn.dart';
 import '../controller/home_controller.dart';
 
+// ignore: must_be_immutable
 class ArchiveAndPremiumButton extends StatelessWidget {
   ArchiveAndPremiumButton({
     super.key,
