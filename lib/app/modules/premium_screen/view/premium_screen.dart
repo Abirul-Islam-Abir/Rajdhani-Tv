@@ -3,9 +3,8 @@ import 'package:get/get.dart';
 import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/data/utils/validate.dart';
+import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
 import 'package:untitled/app/modules/home_screen/controller/home_controller.dart';
-import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
-import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
 import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
 import 'package:untitled/app/modules/widgets/primary_btn.dart';
 import 'package:untitled/app/routes/app_routes.dart';
@@ -14,7 +13,7 @@ import '../../widgets/custom_text_field.dart';
 import '../component/background_box.dart';
 import '../component/remember_box.dart';
 import '../component/submit_btn.dart';
-import '../component/subscribe_btn.dart'; 
+import '../component/subscribe_btn.dart';
 
 class PremiumScreen extends StatefulWidget {
   const PremiumScreen({super.key});
@@ -66,23 +65,23 @@ class UserInfoBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Align(alignment: Alignment.center,
+              Align(
+                alignment: Alignment.center,
                 child: Text(
                   'User Info',
-                  style: TextStyle(fontSize: 30,fontWeight:FontWeight.bold),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
-            SizedBox(height: 10),
-              Text('NAME: ${ resBody['subscriber_name']}',
+              SizedBox(height: 10),
+              Text('NAME: ${resBody['subscriber_name']}',
                   style: TextStyle(fontSize: 18)),
-              Text('EMAIL: ${ resBody['subscriber_email']}',
+              Text('EMAIL: ${resBody['subscriber_email']}',
                   style: TextStyle(fontSize: 18)),
-              Text('MOBILE: ${ resBody['subscriber_mobile']}',
+              Text('MOBILE: ${resBody['subscriber_mobile']}',
                   style: TextStyle(fontSize: 18)),
-              Text('PACKAGE DUration: ${ resBody['package_name']}',
+              Text('PACKAGE DUration: ${resBody['package_name']}',
                   style: TextStyle(fontSize: 18)),
-              Text(
-                  'PACKAGE EXPIRED DATE: ${ resBody['expired_date']}',
+              Text('PACKAGE EXPIRED DATE: ${resBody['expired_date']}',
                   style: TextStyle(fontSize: 18)),
               SizedBox(height: 40),
               Obx(() => homeController.isLogOut
@@ -97,9 +96,7 @@ class UserInfoBody extends StatelessWidget {
                             Future.delayed(Duration(seconds: 3)).then((value) {
                               Get.snackbar('Success!', 'Successfully Log Out');
                               homeController.isLogedOut(false);
-                              Get.find<HomeScreenController>()
-                                  .videoController
-                                  .play();
+                              Get.find<BottomNavController>().changeIndex(0);
                             });
                           });
                         },
