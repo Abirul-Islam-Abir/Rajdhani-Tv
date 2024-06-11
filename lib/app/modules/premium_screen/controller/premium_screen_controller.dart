@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/api_services/subscriber.dart';
 import 'package:untitled/app/data/shared_pref.dart';
 import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/view/bottom_nav.dart';
+import 'package:untitled/app/modules/packages_screen/view/packages_screen.dart';
 
 import '../../../api_services/login.dart';
 import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
@@ -30,9 +32,17 @@ final key = GlobalKey<FormState>();
         await SharedPref.storeMail(emailController.text.toString());
         await SharedPref.storeSubscriberId(response['subscriber_id']);
          await SharedPref.storeMail(emailController.text.toString());
-      await SharedPref.storeIsSubscribed(true); 
+
+         //! New API call
+       final data =  await subscriberDataRequest(response['subscriber_id']);
+       if(data['remaining_days'] == 0 || data['remaining_days'] <= 1  || data['remaining_days'] == null){
+           Get.to(()=>PackagesScreen());
+       }else{
+         await SharedPref.storeIsSubscribed(true); 
         subscribed(true); 
-       isPrem? Get.to(BottomNav()): Get.find<BottomNavController>().changeIndex(0);
+       isPrem? Get.to( ()=> BottomNav()): Get.find<BottomNavController>().changeIndex(0);
+       }
+      
       } else {
         Get.snackbar('inValid!', response['message']);
       }

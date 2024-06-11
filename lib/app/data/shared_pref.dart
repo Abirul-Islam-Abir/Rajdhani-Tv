@@ -31,7 +31,7 @@ abstract class SharedPref {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
      await prefs.setBool('isSubscribe', false);
     final bool? data = prefs.getBool('isSubscribe');
-    subscribed(false);
+    subscribed(data);
     return data;
   }
   static Future<void> storeSubscriberId(data) async {
@@ -57,4 +57,6 @@ abstract class SharedPref {
       final String? data = prefs.getString('mail');
       return data;
   }
+
+  
 }

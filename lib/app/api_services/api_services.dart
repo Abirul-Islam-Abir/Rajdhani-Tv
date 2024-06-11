@@ -7,5 +7,5 @@ abstract class ApiServices{
   static String loginUrl = '$_baseUrl/member_login_api';
   static String youtubeBase = 'https://www.youtube.com/watch?v=';
   static String signUp = '$_baseUrl/member_register_api';
-
+static String subscriber = '$_baseUrl/subscriber_member/data/';
 }
