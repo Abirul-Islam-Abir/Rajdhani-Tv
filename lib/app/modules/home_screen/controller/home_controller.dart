@@ -18,7 +18,7 @@ class HomeScreenController extends GetxController {
   bool showAppbar = true;
   bool isScrollingDown = false;
   double bottomBarHeight = 75;
-  int select = 0;
+  RxInt select = 0.obs;
   RxBool _isLogOut = false.obs;
   bool get isLogOut => _isLogOut.value;
   RxBool _isLoadedData = true.obs;
@@ -58,8 +58,7 @@ class HomeScreenController extends GetxController {
     } else {
       videoController.pause();
     }
-    select = index;
-    update();
+    select.value = index; 
   }
 
   changeDarkMode(value) async {

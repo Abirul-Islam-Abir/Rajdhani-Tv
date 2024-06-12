@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/modules/home_screen/component/primary_text.dart';
 import 'package:untitled/app/modules/home_screen/component/rajdhani_logo.dart';
 
@@ -126,6 +127,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 : PrimaryButton(
                     text: 'Log Out',
                     onTap: () async {
+                      if(isSubscribed==true){
                       controller.isLogedOut(true);
                       await unSubscribedPushData().then((value) {
                         controller.updateMethod();
@@ -138,6 +140,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               .play();
                         });
                       });
+                      }
                     },
                   )),
             const SizedBox(height: 50),

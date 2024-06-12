@@ -57,12 +57,12 @@ class _VideoPlayState extends State<VideoPlay> {
                         FullVideoPlay(controller: controller.videoController));
                     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
                         overlays: [
-                          SystemUiOverlay.bottom,
-                          SystemUiOverlay.top
+                           // SystemUiOverlay.bottom,
+                          // SystemUiOverlay.top
                         ]);
                     SystemChrome.setPreferredOrientations(
                       [
-                        DeviceOrientation.landscapeLeft,
+                          DeviceOrientation.landscapeLeft,
                         DeviceOrientation.landscapeRight,
                       ],
                     );
@@ -105,11 +105,9 @@ class FullVideoPlay extends StatelessWidget {
             builder: (context, orientation) {
               //  var isPortrait = orientation == Orientation.portrait;
               return Center(
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
+                child:
                     AspectRatio(
-                      aspectRatio: controller.value.aspectRatio,
+                      aspectRatio: 16 / 8,
                       child: Stack(
                         fit: StackFit.expand,
                         children: <Widget>[
@@ -159,8 +157,6 @@ class FullVideoPlay extends StatelessWidget {
                         ],
                       ),
                     )
-                  ],
-                ),
               );
             },
           );

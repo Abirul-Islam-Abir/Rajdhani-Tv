@@ -8,6 +8,7 @@ import '../../bottom_nav_bar/controller/bottom_nav_controller.dart';
 import '../../widgets/primary_btn.dart';
 import '../../widgets/video_player.dart';
 import '../component/all_details.dart';
+import '../component/archive_premium_btn.dart';
 import '../component/headline_text.dart';
 import '../component/slider_videos.dart';
 
@@ -29,13 +30,17 @@ class HomeScreen extends StatelessWidget {
         controller: controller.scrollController,
         child: Column(
           children: [
-            Container(
-                height: 280,
-                width: double.infinity,
-                color: Colors.black,
-                child: VideoPlay(url: ApiServices.liveTv)),
+           Obx(() =>  controller.select == 0
+                          ? Container(
+                              height: 280,
+                              width: double.infinity,
+                              color: Colors.black,
+                              child: VideoPlay(url: ApiServices.liveTv))
+                          : controller.select == 1
+                              ? SizedBox(height: 280, child: Center(child: Text('Coming Soon Sports TV')))
+                              : SizedBox(height: 280, child: Center(child: Text('Coming Soon Islamic TV'))),),
             const SizedBox(height: 10),
-            /*  ArchiveAndPremiumButton(),*/
+             ArchiveAndPremiumButton(), 
             const SizedBox(height: 20),
             const Headline(text: 'Videos'),
             const SizedBox(height: 40),
