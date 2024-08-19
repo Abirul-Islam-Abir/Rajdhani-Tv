@@ -36,11 +36,9 @@ class SliderVideo extends StatelessWidget {
                     videoUrl: '${ApiServices.youtubeBase}$embedCode',
                     onTap: () {
                       Get.find<HomeScreenController>().videoController.pause();
-                      isSubscribed
-                          ? Get.to(() => YouTubePlayerScreen(
+                       Get.to(() => YouTubePlayerScreen(
                                 url: embedCode.toString(),
-                              ))
-                          : Get.to(() => PackagesScreen(),arguments: true);
+                              )) ;
                     },
                   );
               },

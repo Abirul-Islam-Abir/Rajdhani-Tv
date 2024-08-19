@@ -65,11 +65,7 @@ class SuggestedVideos extends StatelessWidget {
                     ],
                   ),
                 ),
-           Positioned(
-                top: 5,
-                right: 5,
-                child:  isSubscribed ? Container(): SizedBox(height:60,width:60,child:  Lottie.asset('assets/images/prem.json',)),
-              ) ,
+           
                 Positioned(
                   top: 50,
                   left: 0,

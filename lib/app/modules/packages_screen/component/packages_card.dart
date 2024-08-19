@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glassmorphism_kit/glassmorphism_kit.dart';
 
 import '../../../data/app_image.dart';
 import '../../../data/constant.dart';
@@ -22,95 +23,101 @@ class SubscriptionCard extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.all(28.0),
-      child: Container(
+      child: GlassContainer(
         height: 500,
         width: width,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.red.withOpacity(0.5),
-              blurRadius: 10,
-              spreadRadius: 2,
-              offset: const Offset(0, 3),
-            ),
-          ],
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: gradientColors,
-          ),
-        ),
+      alignment: Alignment.centerLeft,
+      
+        color: Colors.white,
+        colorOpacity: 0.1,
+        blurStrengthX: 10,
+        blurStrengthY: 10,
+        borderRadius: BorderRadius.all(
+                Radius.circular(15,),),
         child: Column(
-          children: [
+          children: [  const SizedBox(
+              height: 10
+            ),
             SizedBox(
               height: 100,
               width: 100,
               child: Image.asset(AppImage.appLogo),
             ),
             const SizedBox(
-              height: 30,
+              height: 10
             ),
-            Text(
-              month,
-              style: const TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
-                fontSize: 40,
+         Align(alignment: Alignment.centerLeft,
+              child: Padding(
+       padding: const EdgeInsets.only(left: 30.0),
+                child: Text(
+                  month,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
+                ),
               ),
+            ),  const SizedBox(
+              height: 10
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'BDT.',
-                  style: TextStyle(
+          Align(alignment: Alignment.centerLeft,
+              child: Padding(
+               padding: const EdgeInsets.only(left: 30.0),
+                child: Text(
+                  '$price\$',
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 50,
+                    fontSize: 60,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: Text(
-                    '$price৳',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 50,
-                    ),
-                  ),
-                ),
-              ],
+              ),
+            ),  const SizedBox(
+              height: 10
             ),
-            const Text(
-              '✔ All Content Access',
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
-                fontSize: 25,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Divider(height: 2,color: Colors.white,),
+            ),
+            Align(alignment: Alignment.centerLeft,
+              child: Padding(
+                       padding: const EdgeInsets.only(left: 30.0),
+                child: const Text(
+                  '○ All Content Access',
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
+                ),
               ),
             ),
-            const Text(
-              '✔ Live Support',
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
-                fontSize: 25,
+              Align(alignment: Alignment.centerLeft,
+              child: Padding(
+               padding: const EdgeInsets.only(left: 30.0),
+                child: const Text(
+                  '○ Live Support',
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),textAlign: TextAlign.start,
+                ),
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 20
             ),
-            MaterialButton(
+            MaterialButton(minWidth: 200,height: 50,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               color: kPrimaryColor,
               onPressed: subscribeOnTap,
               child: const Text(
-                'Subscribe Now!',
+                'Buy Now!',
                 style: TextStyle(color: Colors.white),
               ),
+            ),const SizedBox(
+              height: 10
             ),
           ],
         ),

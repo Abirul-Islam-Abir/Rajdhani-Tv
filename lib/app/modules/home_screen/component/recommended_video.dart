@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lottie/lottie.dart';
-
-import '../../../data/subscribed_value_change.dart';
+import 'package:flutter_svg/svg.dart'; 
 import '../../widgets/headline_title.dart';
 import 'get_thumbnail_image.dart';
 
@@ -65,13 +62,7 @@ class RecommendedVideo extends StatelessWidget {
                             fontWeight: FontWeight.normal)),
                   ],
                 ),
-              ), 
-          
-              Positioned(
-                top: 5,
-                right: 5,
-                child:  isSubscribed ? Container(): SizedBox(height:60,width:60,child:  Lottie.asset('assets/images/prem.json',)),
-              ) ,
+              ),  
               Positioned(
                 top: 50,
                 left: 0,
@@ -87,8 +78,7 @@ class RecommendedVideo extends StatelessWidget {
                     ),
                     SvgPicture.asset(
                         'assets/svg/youtube.svg'
-                    ),
-
+                    ), 
                     const SizedBox(
                       height: 40,
                       width: 40,

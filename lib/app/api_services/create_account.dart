@@ -11,7 +11,7 @@ Future createAccountRequest(resBody) async {
       body: jsonEncode(resBody),
       headers: {'Content-Type': 'application/json'});
   final decodedBody = jsonDecode(response.body);
-  if (response.statusCode == 200 || response.statusCode == 201) {
+   if (response.statusCode == 200 || response.statusCode == 201) {
     return decodedBody;
   } else {
     return decodedBody;

@@ -22,8 +22,8 @@ class PackagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return Scaffold( 
+      appBar: AppBar(title: Text('Our Packages'),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -31,44 +31,48 @@ class PackagesScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const PackagesHeadline(text: 'Our Packages'),
-            GetBuilder<PackagesScreenController>(
-              builder: (controller) => controller.isLoading
-                  ? SizedBox(
-                      height: 300,
-                      child: Center(child: const CircularProgressIndicator()))
-                  : Column(
-                      children: List.generate(
-                        controller.data.length,
-                        (index) {
-                          final color = subscriptionData[index]['color'];
-                          final name = controller.data[index].packageName;
-                          final price = controller.data[index].price;
-                          final packageId = controller.data[index].id;
-                          final days = controller.data[index].duration;
-                          return SubscriptionCard(
-                            gradientColors: color,
-                            month: '$name',
-                            price: price!,
-                            subscribeOnTap: () {
-                              final day = duration(days);
-                              Get.to(() => CreateAccountScreen(
-                                    packageId: packageId!,
-                                    price: price,
-                                    duration: day,
-                                  ));
-                            },
-                          );
-                        },
+      body: Container(decoration: BoxDecoration(image: DecorationImage(
+        fit: BoxFit.fitHeight,
+        image: AssetImage('assets/images/nature.jpg'))),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              //const PackagesHeadline(text: 'Our Packages'),
+              GetBuilder<PackagesScreenController>(
+                builder: (controller) => controller.isLoading
+                    ? SizedBox(
+                        height: 300,
+                        child: Center(child: const CircularProgressIndicator()))
+                    : Column(
+                        children: List.generate(
+                          controller.data.length,
+                          (index) {
+                            final color = subscriptionData[index]['color'];
+                            final name = controller.data[index].packageName;
+                            final price = controller.data[index].price;
+                            final packageId = controller.data[index].id;
+                            final days = controller.data[index].duration;
+                            return SubscriptionCard(
+                              gradientColors: color,
+                              month: '$name',
+                              price: price!,
+                              subscribeOnTap: () {
+                                final day = duration(days);
+                                Get.to(() => CreateAccountScreen(
+                                      packageId: packageId!,
+                                      price: price,
+                                      duration: day,
+                                    ));
+                              },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-            ),
-            const AllDetails()
-          ],
+              ),
+              const AllDetails()
+            ],
+          ),
         ),
       ),
     );

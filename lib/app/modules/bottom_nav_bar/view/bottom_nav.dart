@@ -15,12 +15,16 @@ class BottomNav extends StatelessWidget {
   BottomNav({super.key});
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   final controller = Get.put(BottomNavController());
+
   final iconList = <IconData>[
     Icons.brightness_5,
     Icons.brightness_4,
     Icons.brightness_6,
+    Icons.brightness_3_outlined,
   ];
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -61,10 +65,14 @@ class BottomNav extends StatelessWidget {
                         ),
                         BarItem(
                             filledIcon: Icons.newspaper_outlined,
-                            outlinedIcon: Icons.newspaper_outlined),
+                            outlinedIcon: Icons.subscriptions),
+                             BarItem(
+                          filledIcon: Icons.subscriptions,
+                          outlinedIcon: Icons.newspaper_outlined,
+                        ),
                         BarItem(
                           filledIcon: Icons.subscriptions,
-                          outlinedIcon: Icons.subscriptions,
+                          outlinedIcon: Icons. app_settings_alt_sharp,
                         ),
                       ],
                     ),

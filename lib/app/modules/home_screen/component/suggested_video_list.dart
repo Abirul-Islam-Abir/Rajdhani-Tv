@@ -35,7 +35,7 @@ final bool isLoaded;
         ? const SuggestedVideoShimmer()
         : RecommendedVideo(
               title: '',
-              text: 'Suggested Video ',
+              text: text,
               videoUrl: '${ApiServices.youtubeBase}$data',
               onTap: () {
                 Get.find<HomeScreenController>().videoController.pause();
@@ -76,15 +76,13 @@ final bool isLoaded;
         ? const SuggestedVideoShimmer()
         :  RecommendedVideo(
               title: '',
-              text: 'Suggested Video ',
+              text: text,
               videoUrl: '${ApiServices.youtubeBase}$data',
               onTap: () {
            Get.find<HomeScreenController>().videoController.pause() ;
-              isSubscribed
-                          ? Get.to(() => YouTubePlayerScreen(
+          Get.to(() => YouTubePlayerScreen(
                                 url: data.toString(),
-                              ))
-                          : Get.to(() => PackagesScreen(),arguments: true);
+                              ));
               });
           },
         ),

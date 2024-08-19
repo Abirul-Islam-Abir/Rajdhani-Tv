@@ -36,10 +36,9 @@ class ArchiveScreen extends StatelessWidget {
                     text: controller.categoryData[index].name.toString(),
                     videoUrl: '${ApiServices.youtubeBase}$embedCode',
                     onTap: () {
-                      isSubscribed
-                          ? Get.to(
-                              () => AllVideoScreen(list: video.embedCodes!))
-                          : Get.to(() => PremiumScreen());
+                     Get.to(
+                              () => AllVideoScreen(list: video.embedCodes!)
+                         );
                     },
                   );
                 },

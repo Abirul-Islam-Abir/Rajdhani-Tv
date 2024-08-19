@@ -50,9 +50,7 @@ class CreateAccountController extends GetxController {
       required int packageId,
       required int price,
       required String date}) async {
-    isLoading.value = true;
-    print(date);
-
+    isLoading.value = true;  
     final resBody = {
       "subscriber_name": nameController.text.trim().toString(),
       "subscriber_email": emailController.text.trim().toString(),
@@ -65,11 +63,17 @@ class CreateAccountController extends GetxController {
     final response = await createAccountRequest(resBody);
     if (response['success'] == true &&
         response['message'] == 'Registration successful') {
-      await sslCommerzGeneralCall(price, packageId, trxId);
+       Get.back();
+         Get.back();
+        await login();
+        Get.find<BottomNavController>().changeIndex(0);
     } else if (response['success'] == false &&
         response['message'] == 'Email already exists') {
       Get.snackbar('', 'Email already exists');
-      await sslCommerzGeneralCall(price, packageId, trxId);
+      Get.back();
+         Get.back();
+        await login();
+        Get.find<BottomNavController>().changeIndex(0);
     } else {
       isLoading.value = false;
     }
@@ -106,7 +110,8 @@ class CreateAccountController extends GetxController {
   }
 
   Future<void> sslCommerzGeneralCall(
-      int price, int packageId, String trxId) async {
+      int price, int packageId,String day) async {
+         String trxId = generateTranId();
     Sslcommerz sslcommerz = Sslcommerz(
       initializer: SSLCommerzInitialization(
         //Use the ipn if you have valid one, or it will fail the transaction.
@@ -135,17 +140,20 @@ class CreateAccountController extends GetxController {
           duration: Duration(seconds: 2),
           backgroundColor: Color.fromARGB(255, 229, 206, 204),
         ));
-      } else {
-        Get.back();
+      } else { 
+             await crateAccount(
+            trxId: trxId,
+            status: status,
+            packageId: packageId,
+            price: price,
+            date: day);
         Get.showSnackbar(GetSnackBar(
           message:
               "Transaction is ${result.status} and Amount is ${result.amount}",
           duration: const Duration(seconds: 2),
           backgroundColor: Colors.green,
         ));
-        Get.back();
-        await login();
-        Get.find<BottomNavController>().changeIndex(0);
+       
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -166,12 +174,8 @@ class CreateAccountController extends GetxController {
     if (key.currentState!.validate()) {
       if (passController.text == confirmPassController.text) {
         String trxId = generateTranId();
-        await crateAccount(
-            trxId: trxId,
-            status: status,
-            packageId: packageId,
-            price: price,
-            date: day);
+       await  sslCommerzGeneralCall(price, packageId,day);
+   
       }
     }
   }

@@ -7,7 +7,7 @@ Future subscriberDataRequest(id) async {
   try {
     final response = await http.get(Uri.parse('${ApiServices.subscriber}$id'));
     final decodedResponse = jsonDecode(response.body);
-    if (response.statusCode == 200 || response.statusCode == 201) {
+  if (response.statusCode == 200 || response.statusCode == 201) {
       final resUnsuccess = {
        
         "subscriber_id": 999999999,

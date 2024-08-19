@@ -10,4 +10,5 @@ abstract class ApiServices {
   static String signUp = '$_baseUrl/member_register_api';
   static String subscriber = '$_baseUrl/subscriber_member/data/';
   static String contact = '$_baseUrl/contactapi';
+    static String allPremium = '$_baseUrl/all_premium_Content';
 }

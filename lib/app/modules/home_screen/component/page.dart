@@ -7,5 +7,19 @@ import '../view/home_screen.dart';
 List<Widget> pages = [
   HomeScreen(),
   const ArchiveScreen(),
+  PremiumVideosScreen(),
   const PremiumScreen(),
 ];
+
+class PremiumVideosScreen extends StatelessWidget {
+  const PremiumVideosScreen({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body:Column(children: [
+      Text('hello wolrd')
+    ],),);
+  }
+}

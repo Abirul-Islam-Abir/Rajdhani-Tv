@@ -155,7 +155,7 @@ class LoginBody extends StatelessWidget {
                 tap: () {
                   Get.toNamed(RouteName.packageScreen);
                 },
-                title: 'Don\'n have an account',
+                title: 'Don\'t have an account',
                 btnText: 'Subscribe',
               )
             ],

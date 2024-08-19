@@ -8,7 +8,7 @@ Future categoryRequest() async {
   try {
     final response = await http.get(Uri.parse(ApiServices.categoryUrl));
     final decodedResponse = jsonDecode(response.body);
-    if (response.statusCode == 200) {
+  if (response.statusCode == 200 || response.statusCode == 201) {
       return decodedResponse['categories'];
     } else {
       throw Exception('Failed to load subscription packages');
