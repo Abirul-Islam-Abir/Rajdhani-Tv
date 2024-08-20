@@ -98,7 +98,7 @@ class FullVideoPlay extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         resizeToAvoidBottomInset: false,
         body: StatefulBuilder(builder: (context, setState) {
           return OrientationBuilder(
@@ -107,7 +107,7 @@ class FullVideoPlay extends StatelessWidget {
               return Center(
                 child:
                     AspectRatio(
-                      aspectRatio: 16 / 8.5,
+                      aspectRatio: 16 / 9.5,
                       child: Stack(
                         fit: StackFit.expand,
                         children: <Widget>[
