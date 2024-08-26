@@ -65,7 +65,7 @@ class SubscriptionCard extends StatelessWidget {
               child: Padding(
                padding: const EdgeInsets.only(left: 30.0),
                 child: Text(
-                  '$price\$',
+                  '$price৳',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -113,7 +113,7 @@ class SubscriptionCard extends StatelessWidget {
               color: kPrimaryColor,
               onPressed: subscribeOnTap,
               child: const Text(
-                'Buy Now!',
+                'Subscribe Now!',
                 style: TextStyle(color: Colors.white),
               ),
             ),const SizedBox(

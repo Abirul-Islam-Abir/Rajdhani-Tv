@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/app/modules/premium_videos_screen/view/premium_videos_screen.dart';
 
 import '../../archive_screen/view/archive_screen.dart';
 import '../../premium_screen/view/premium_screen.dart';
@@ -11,15 +12,3 @@ List<Widget> pages = [
   const PremiumScreen(),
 ];
 
-class PremiumVideosScreen extends StatelessWidget {
-  const PremiumVideosScreen({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body:Column(children: [
-      Text('hello wolrd')
-    ],),);
-  }
-}

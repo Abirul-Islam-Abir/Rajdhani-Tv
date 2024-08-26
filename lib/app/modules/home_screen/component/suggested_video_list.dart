@@ -34,16 +34,15 @@ final bool isLoaded;
             return isLoaded
         ? const SuggestedVideoShimmer()
         : RecommendedVideo(
-              title: '',
+              title: list[index].title ?? 'No Data',
               text: text,
               videoUrl: '${ApiServices.youtubeBase}$data',
               onTap: () {
                 Get.find<HomeScreenController>().videoController.pause();
-                    isSubscribed
-                          ? Get.to(() => YouTubePlayerScreen(
-                                url: data.toString(),
+                    Get.to(() => YouTubePlayerScreen(
+                                url: data.toString(),title: list[index].title ?? 'No Data',
                               ))
-                          : Get.to(() => PackagesScreen(),arguments: true);
+                          ;
               },
             );
           },
@@ -75,13 +74,13 @@ final bool isLoaded;
             return isLoaded
         ? const SuggestedVideoShimmer()
         :  RecommendedVideo(
-              title: '',
+              title: list[index].title ?? 'No Data',
               text: text,
               videoUrl: '${ApiServices.youtubeBase}$data',
               onTap: () {
            Get.find<HomeScreenController>().videoController.pause() ;
           Get.to(() => YouTubePlayerScreen(
-                                url: data.toString(),
+                                url: data.toString(),title: list[index].title ?? 'No Data',
                               ));
               });
           },

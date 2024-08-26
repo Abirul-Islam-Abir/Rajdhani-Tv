@@ -14,7 +14,8 @@ Future<void> main() async {
   WakelockPlus.enable();
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+     enabled: !kReleaseMode,
+      //  enabled: kReleaseMode,
       builder: (context) => const RajdhaniTv(), // Wrap your app
     ),
   );

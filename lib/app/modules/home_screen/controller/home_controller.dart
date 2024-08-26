@@ -31,9 +31,9 @@ class HomeScreenController extends GetxController {
     _isLogOut.value = value;
   }
 
-  videoPlayerController() {
+  videoPlayerController(src) {
     videoController = VideoPlayerController.networkUrl(
-      Uri.parse(ApiServices.liveTv),
+      Uri.parse(src),
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
 
@@ -139,7 +139,7 @@ class HomeScreenController extends GetxController {
   void onInit() {
     initialize();
     scrollControll();
-    videoPlayerController();
+    videoPlayerController(ApiServices.liveTv);
     super.onInit();
   }
 

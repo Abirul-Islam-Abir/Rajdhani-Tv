@@ -56,7 +56,7 @@ class _AllVideoScreenState extends State<AllVideoScreen> {
                       child: InkWell(
                           onTap: () {
                             Get.to(() =>
-                                YouTubePlayerScreen(url: embedCode.toString()));
+                                YouTubePlayerScreen(url: embedCode.toString(),title: widget.list[index].title??'',));
                           },
                           child: Stack(
                             children: [
@@ -68,12 +68,26 @@ class _AllVideoScreenState extends State<AllVideoScreen> {
                                   left: 50,
                                   child:
                                       Image.asset('assets/icon/youtube.png')),
+                                       Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                  widget.list[index].title??'',
+                    style: const TextStyle(
+                      fontSize: 24,color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+               
+                const SizedBox(height: 10),
                             ],
                           )),
                     );
                   },
                 ),
               ),
+
+              
             ],
           )),
     );

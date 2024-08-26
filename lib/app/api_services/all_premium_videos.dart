@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 Future allPremiumRequest() async {
   try {
-    final response = await http.get(Uri.parse(ApiServices.allVideos));
+    final response = await http.get(Uri.parse(ApiServices.allPremium));
     final decodedResponse = jsonDecode(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
       return decodedResponse;

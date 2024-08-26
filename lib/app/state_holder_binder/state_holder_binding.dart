@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
 import 'package:untitled/app/modules/premium_screen/controller/premium_screen_controller.dart';
+import 'package:untitled/app/modules/premium_videos_screen/controller/premium_screen_controller.dart';
 
 import '../modules/create_account_screen/controller/create_account_controller.dart';
 import '../modules/home_screen/controller/home_controller.dart';
@@ -14,7 +15,9 @@ class StateHolderBinding extends Bindings {
     Get.lazyPut(() => HomeScreenController(), fenix: true);
       Get.lazyPut(() => PremiumScreenController(), fenix: true); 
     Get.put(PackagesScreenController(), permanent: true);
+     Get.put(PremiumVideosController(), permanent: true);
     Get.put(NetworkController(), permanent: true);
+    
   }
 }
 

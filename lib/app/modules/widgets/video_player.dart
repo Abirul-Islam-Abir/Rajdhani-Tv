@@ -5,9 +5,7 @@ import 'package:untitled/app/modules/home_screen/controller/home_controller.dart
 import 'package:video_player/video_player.dart';
 
 class VideoPlay extends StatefulWidget {
-  final String url;
-
-  const VideoPlay({super.key, required this.url});
+  
 
   @override
   State<VideoPlay> createState() => _VideoPlayState();

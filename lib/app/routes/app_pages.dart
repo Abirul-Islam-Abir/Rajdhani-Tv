@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:untitled/app/modules/home_screen/view/home_screen.dart';
+import 'package:untitled/app/modules/premium_screen/view/premium_screen.dart';
+import 'package:untitled/app/modules/premium_videos_screen/view/premium_videos_screen.dart';
 import 'package:untitled/app/modules/splash_screen/view/splash_screen.dart';
 
 import '../modules/bottom_nav_bar/view/bottom_nav.dart';
@@ -26,5 +28,9 @@ List<GetPage<dynamic>> getPages() => [
       GetPage(
         name: RouteName.homeScreen,
         page: () => HomeScreen(),
+      ),
+       GetPage(
+        name: RouteName.premiumVideosScreen,
+        page: () => PremiumVideosScreen(),
       ),
     ];

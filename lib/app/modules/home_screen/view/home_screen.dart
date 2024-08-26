@@ -32,10 +32,10 @@ class HomeScreen extends StatelessWidget {
           children: [
            Obx(() =>  controller.select == 0
                           ? Container(
-                              height: 280,
+                              height: 220,
                               width: double.infinity,
                               color: Colors.black,
-                              child: VideoPlay(url: ApiServices.liveTv))
+                              child: VideoPlay(  ))
                           : controller.select == 1
                               ? SizedBox(height: 280, child: Center(child: Text('Coming Soon Sports TV')))
                               : SizedBox(height: 280, child: Center(child: Text('Coming Soon Islamic TV'))),),

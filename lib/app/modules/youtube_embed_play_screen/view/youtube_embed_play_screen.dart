@@ -6,8 +6,8 @@ import '../../widgets/video_player.dart';
 
 class YouTubePlayerScreen extends StatefulWidget {
   final String url;
-
-  const YouTubePlayerScreen({super.key, required this.url});
+ final String? title;
+  const YouTubePlayerScreen({super.key, required this.url, this.title});
 
   @override
   _YouTubePlayerScreenState createState() => _YouTubePlayerScreenState();
@@ -43,13 +43,33 @@ class _YouTubePlayerScreenState extends State<YouTubePlayerScreen> {
         setPortraitMode();
         return true;
       },
-      child: Scaffold(
-        appBar: buildAppBar(),
-        body: Center(
-          child: YoutubePlayer(
-            controller: _controller,
-            showVideoProgressIndicator: false,
-            progressIndicatorColor: Colors.blueAccent,
+      child: SafeArea(
+        child: Scaffold(
+         // appBar: buildAppBar(),
+          body: SingleChildScrollView(physics: NeverScrollableScrollPhysics(),
+            child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+            
+              children: [
+                YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: false,
+                  progressIndicatorColor: Colors.blueAccent,
+                ),
+                 Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.title??'',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+               
+                const SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),
