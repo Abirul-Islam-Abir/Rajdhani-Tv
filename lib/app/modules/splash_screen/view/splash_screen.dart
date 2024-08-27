@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Image.asset(AppImage.appLogo)),
               const Spacer(),
               Text('Rajdhani Tv', style: TextStyle(color: Colors.grey)),
-              Text('1.0.0', style: TextStyle(color: Colors.grey)),
+              Text('5.0.0', style: TextStyle(color: Colors.grey)),
             ],
           ),
         ),

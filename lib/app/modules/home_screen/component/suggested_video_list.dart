@@ -12,13 +12,11 @@ import '../../youtube_embed_play_screen/view/youtube_embed_play_screen.dart';
 
 class SuggestedVideoList extends StatelessWidget {
   const SuggestedVideoList({
-    super.key,
-    required this.text, 
+    super.key, 
     this.onTap,
     required this.list, required this.isLoaded,
   });
-
-  final String text;
+ 
   final Function()? onTap;
   final List<EmbedCodes> list;
 final bool isLoaded;
@@ -34,8 +32,7 @@ final bool isLoaded;
             return isLoaded
         ? const SuggestedVideoShimmer()
         : RecommendedVideo(
-              title: list[index].title ?? 'No Data',
-              text: text,
+              title: list[index].title ?? 'No Data', 
               videoUrl: '${ApiServices.youtubeBase}$data',
               onTap: () {
                 Get.find<HomeScreenController>().videoController.pause();
@@ -75,7 +72,7 @@ final bool isLoaded;
         ? const SuggestedVideoShimmer()
         :  RecommendedVideo(
               title: list[index].title ?? 'No Data',
-              text: text,
+              
               videoUrl: '${ApiServices.youtubeBase}$data',
               onTap: () {
            Get.find<HomeScreenController>().videoController.pause() ;

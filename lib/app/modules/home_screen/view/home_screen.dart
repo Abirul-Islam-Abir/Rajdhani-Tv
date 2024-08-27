@@ -11,7 +11,7 @@ import '../component/all_details.dart';
 import '../component/archive_premium_btn.dart';
 import '../component/headline_text.dart';
 import '../component/slider_videos.dart';
-
+import '../../widgets/headline_title.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
@@ -47,11 +47,13 @@ class HomeScreen extends StatelessWidget {
             Obx(() => SliderVideo(
                   isLoaded: controller.isLoadedData,
                   list: controller.allVideosData,
-                )),
-            Obx(() => SuggestedVideoList( isLoaded: controller.isLoadedData,
-                  text: 'Suggested Video',
+                )), 
+          HeadlineTitle(text: 'Suggested Video'),
+            Obx(() => SuggestedVideoList( isLoaded: controller.isLoadedData, 
                   list: controller.suggestedData,
                 )),
+                 const SizedBox(height: 12),
+          HeadlineTitle(text: 'Recommended Video'),
             Obx(() => RecommendedVideoList( isLoaded: controller.isLoadedData,
                   text: 'Recommended Video',
                   list: controller.recommendedData,

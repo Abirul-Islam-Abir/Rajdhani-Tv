@@ -29,17 +29,20 @@ class ArchiveScreen extends StatelessWidget {
                   final embedCode = video.embedCodes?.isNotEmpty ?? false
                       ? video.embedCodes![0].embed
                       : '';
-                  return RecommendedVideo(
-                    height: 220,
-                    fit: BoxFit.fitWidth,
-                    title: video.name ?? 'No Data',
-                    text: controller.categoryData[index].name.toString(),
-                    videoUrl: '${ApiServices.youtubeBase}$embedCode',
-                    onTap: () {
-                     Get.to(
-                              () => AllVideoScreen(list: video.embedCodes!)
-                         );
-                    },
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical:8.0),
+                    child: RecommendedVideo(
+                      height: 220,
+                      fit: BoxFit.fitWidth,
+                      title: video.name ?? 'No Data',
+                                     //   text: controller.categoryData[index].name.toString(),
+                      videoUrl: '${ApiServices.youtubeBase}$embedCode',
+                      onTap: () {
+                       Get.to(
+                                () => AllVideoScreen(list: video.embedCodes!)
+                           );
+                      },
+                    ),
                   );
                 },
               ),

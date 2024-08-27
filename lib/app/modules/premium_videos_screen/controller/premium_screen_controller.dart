@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:untitled/app/api_services/all_premium_videos.dart';
+import 'package:untitled/app/data/subscribed_value_change.dart';
 import 'package:untitled/app/model/all_premium_model.dart';
+import 'package:untitled/app/modules/bottom_nav_bar/controller/bottom_nav_controller.dart';
+import 'package:untitled/app/modules/premium_screen/view/premium_screen.dart';
 import 'package:untitled/app/modules/widgets/video_player.dart';
+import 'package:untitled/app/routes/app_routes.dart';
 import 'package:video_player/video_player.dart';
 
 class PremiumVideosController extends GetxController {
@@ -29,7 +33,7 @@ class PremiumVideosController extends GetxController {
     });
     videoController.setLooping(false);
     videoController.initialize().then((_) {
-      videoController.play();
+      videoController.pause();
       update();
     });
   }
@@ -76,9 +80,10 @@ class _VideoPlaysState extends State<VideoPlays> {
             ),
             GestureDetector(
               onTap: () {
+                isSubscribed?
                 controller.videoController.value.isPlaying
                     ? controller.videoController.pause()
-                    : controller.videoController.play();
+                    : controller.videoController.play(): Get.toNamed(RouteName.packageScreen);
               },
             ),
             Padding(

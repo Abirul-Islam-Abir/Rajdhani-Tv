@@ -105,7 +105,7 @@ class FullVideoPlay extends StatelessWidget {
               return Center(
                 child:
                     AspectRatio(
-                      aspectRatio: 16 / 9.5,
+                      aspectRatio: 16 / 8.5,
                       child: Stack(
                         fit: StackFit.expand,
                         children: <Widget>[

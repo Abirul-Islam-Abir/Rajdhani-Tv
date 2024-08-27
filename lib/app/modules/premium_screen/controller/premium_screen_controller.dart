@@ -34,10 +34,10 @@ class PremiumScreenController extends GetxController {
           //  Get.snackbar('Success!', response['message']);
           await SharedPref.storeMail(emailController.text.toString());
           await SharedPref.storeSubscriberId(response['subscriber_id']);
-          await SharedPref.storeMail(emailController.text.toString());
-
+          await SharedPref.storeMail(emailController.text.toString()); 
           //! New API call
           final data = await subscriberDataRequest(response['subscriber_id']);
+           subscribedPushData();
           SubscriberModel subscriber = SubscriberModel.fromJson(data);
           resBody = data;
           if (subscriber.remainingDays == 0 ||

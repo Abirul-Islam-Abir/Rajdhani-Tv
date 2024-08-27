@@ -13,11 +13,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WakelockPlus.enable();
   runApp(
-    DevicePreview(
-     enabled: !kReleaseMode,
-      //  enabled: kReleaseMode,
-      builder: (context) => const RajdhaniTv(), // Wrap your app
-    ),
+     
+    RajdhaniTv(),
   );
 }
 

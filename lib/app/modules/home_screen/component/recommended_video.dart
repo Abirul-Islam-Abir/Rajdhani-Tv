@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart'; 
-import '../../widgets/headline_title.dart';
+
 import 'get_thumbnail_image.dart';
 
 class RecommendedVideo extends StatelessWidget {
@@ -8,13 +8,12 @@ class RecommendedVideo extends StatelessWidget {
     super.key,
     required this.videoUrl,
     required this.title,
-    this.onTap,
-    this.text = '',
+    this.onTap, 
     this.fit = BoxFit.cover,
     this.height = 180,
   });
 
-  final String videoUrl, title, text;
+  final String videoUrl, title;
   final Function()? onTap;
   final BoxFit fit;
   final double height;
@@ -30,9 +29,7 @@ class RecommendedVideo extends StatelessWidget {
       onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Ensure left alignment
-        children: [
-          const SizedBox(height: 12),
-          HeadlineTitle(text: text),
+        children: [  
           Stack(
             children: [
               Center(
@@ -87,8 +84,7 @@ class RecommendedVideo extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          const SizedBox(height: 12),
+          ), 
         ],
       ),
     );
